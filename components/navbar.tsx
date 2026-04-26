@@ -1,0 +1,349 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X, ChevronDown, ChevronRight, ShoppingBag } from "lucide-react"
+import { useCart } from "@/context/CartContext"
+
+const navItems = [
+  { href: "/about", label: "About Us" },
+  { 
+    href: "#", 
+    label: "Face",
+    dropdown: [
+      { label: "SkinVive", href: "/face/skinvive" },
+      { label: "Face Skin Lesion Removal", href: "/face/skin-lesion-removal" },
+      { label: "Exilis® Radiofrequency Facial Tightening", href: "/face/exilis" },
+      { label: "Sunekos® Skin Booster", href: "/face/sunekos" },
+      { label: "Profhilo® Skin Booster", href: "/face/profhilo" },
+      { label: "Polynucleotides", href: "/face/polynucleotides" },
+      { label: "Cosmelan – Professional Melasma Treatment", href: "/face/cosmelan" },
+      { label: "HydraFacial – Deep Cleansing & Skin Renewal", href: "/face/hydrafacial" },
+      { label: "Chemical Peels – Medical Skin Resurfacing", href: "/face/peels" },
+      { label: "PRP Facial Rejuvenation", href: "/face/prp-facial" },
+      { label: "Anti-Wrinkle Neuromodulator Treatments", href: "/face/anti-wrinkle" },
+      { label: "Acne & Rosacea", href: "/face/acne-rosacea" },
+    ]
+  },
+  { 
+    href: "#", 
+    label: "Body",
+    dropdown: [
+      { label: "Vanquish ME® Body Contouring", href: "/body/vanquish" },
+      { label: "Fat Reduction – DesoBody Injectables", href: "/body/desobody" },
+      { label: "Cellulite Treatment – Subcision & Sunekos Cell 15", href: "/body/cellulite" },
+      { label: "Pigmentation Treatment", href: "/body/pigmentation" },
+      { label: "Exilis Body Skin Tightening", href: "/body/exilis-body" },
+      { label: "Postpartum Scar Treatment", href: "/body/postpartum-scar" },
+      { label: "Body Skin Lesion Removal", href: "/body/lesion-removal" }
+    ]
+  },
+  { 
+    href: "#", 
+    label: "Hair & Nail",
+    dropdown: [
+      { label: "Hair Loss Restoration", href: "/hair-loss-treatments" },
+      { label: "Hydrafacial Scalp", href: "/hydrafacial-scalp" },
+      { label: "Nail Disorders Treatments", href: "/nail" }
+    ]
+  },
+  // NEW ITEM: NATURAL AESTHETICS
+  { href: "/peptide-skin-regeneration-therapy", label: "Peptide Skin Regeneration Therapy" },
+  
+  // GROUPED FOR DESKTOP - FLATTENED FOR MOBILE
+  { 
+    href: "#", 
+    label: "Rejuvenation",
+    isRejuvenationGroup: true,
+    dropdown: [
+      { label: "Hand Rejuvenation", href: "/hand-rejuvenation" },
+      { label: "Earlobe Rejuvenation", href: "/earlobe-rejuvenation-lobuloplasty" },
+    ]
+  },
+  { 
+    href: "#", 
+    label: "Women's Health",
+    isSectioned: true,
+    sections: [
+      {
+        title: "Medical / Vulval Health",
+        items: [
+           { label: "Private Smear Test Dublin", href: "/womens-health/private-smear-test-dublin" },
+          { label: "Vulval Lichen Specialist Care", href: "/womens-health/vulval-lichen" },
+          { label: "Vaginal Dryness & Genitourinary Syndrome Support", href: "/womens-health/vaginal-dryness" }
+        ]
+      },
+      {
+        title: "Functional",
+        items: [
+          { label: "Emsella® Chair Pelvic Floor Treatment", href: "/womens-health/emsella" },
+          { label: "Vaginal PRP Treatment", href: "/womens-health/prp" },
+          { label: "O-Shot® & P-Shot® (Sexual Wellness)", href: "/womens-health/oshot-pshot" },
+          { label: "Vaginismus: Advanced Specialist Treatment", href: "/womens-health/vaginismus" }
+        ]
+      },
+      {
+        title: "Aesthetic / Surgical",
+        items: [
+          { label: "Postpartum Scar Treatment", href: "/womens-health/postpartum-scar" },
+          { label: "Exilis Ultra Femme® Vaginal Tightening", href: "/womens-health/exilis-ultra-femme" },
+          { label: "Hymenoplasty (Surgical)", href: "/womens-health/hymenoplasty" },
+          { label: "Labiaplasty (Surgical)", href: "/womens-health/labiaplasty" },
+          { label: "Intimate Area Lesion Removal", href: "/womens-health/intimate-lesion-removal" },
+        ]
+      }
+    ]
+  },
+  { href: "/shop", label: "Shop" },
+  { href: "/clinical-outcomes", label: "Clinical Outcomes" },
+]
+
+export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
+  const pathname = usePathname()
+  const { cartCount } = useCart()
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    setIsOpen(false)
+    setActiveDropdown(null) // Ensure highlight clears on route change
+  }, [pathname])
+
+  return (
+    <nav
+      onMouseLeave={() => setActiveDropdown(null)}
+      className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
+        scrolled || activeDropdown || isOpen
+          ? "bg-white border-b border-zinc-100 py-3 shadow-md" 
+          : "bg-white/95 backdrop-blur-md py-4 md:py-6"
+      }`}
+    >
+      <div className="max-w-[1700px] mx-auto px-4 md:px-6 flex items-center justify-between gap-1">
+        
+        {/* LOGO AREA */}
+        <Link href="/" className="flex items-center gap-2 group shrink-0 relative z-[101]">
+          <div className="relative w-8 h-8 md:w-8 md:h-8 lg:w-10 lg:h-10">
+            <Image src="/icon2.png" alt="Gerka Clinic" fill className="object-contain" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[12px] md:text-sm font-light tracking-[0.1em] text-zinc-800 uppercase leading-tight">
+              Gerka Clinic
+            </span>
+            <span className="text-[6px] md:text-[7px] tracking-[0.1em] text-zinc-400 uppercase font-medium">
+              Aesthetic & Intimate Health
+            </span>
+          </div>
+        </Link>
+
+        {/* DESKTOP NAV - Enhanced Spacing to prevent overlap */}
+        <div className="hidden min-[1380px]:flex items-center gap-x-0.5 2xl:gap-x-2">
+          {navItems.map((item) => {
+            const hasDropdown = item.dropdown || item.sections
+            // Strict equality check for highlight to prevent "always highlighted" issue
+            const isActive = item.href !== "#" && pathname === item.href
+
+            return (
+              <div 
+                key={item.label}
+                className="relative py-2"
+                onMouseEnter={() => hasDropdown ? setActiveDropdown(item.label) : setActiveDropdown(null)}
+              >
+                <Link
+                  href={item.href}
+                  className="group flex items-center gap-0.5 whitespace-nowrap px-1.5 2xl:px-2.5"
+                >
+                  <span className={`text-[10px] 2xl:text-[11px] font-semibold tracking-normal transition-colors duration-300 uppercase ${
+                    isActive || activeDropdown === item.label ? "text-zinc-900 underline underline-offset-4 decoration-zinc-300" : "text-zinc-500 hover:text-zinc-900"
+                  }`}>
+                    {item.label}
+                  </span>
+                  {hasDropdown && <ChevronDown size={10} className={`text-zinc-300 transition-transform ${activeDropdown === item.label ? "rotate-180 text-zinc-900" : ""}`} />}
+                </Link>
+
+                <AnimatePresence>
+                  {activeDropdown === item.label && hasDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-full left-0 pt-4"
+                    >
+                      <div className="bg-white border border-zinc-100 shadow-2xl rounded-2xl p-6 min-w-[280px] max-h-[70vh] overflow-y-auto custom-scrollbar">
+                        {item.isSectioned ? (
+                          <div className="space-y-6">
+                            {item.sections?.map((section) => (
+                              <div key={section.title}>
+                                <h4 className="text-[10px] uppercase tracking-widest font-bold text-zinc-400 mb-3 border-b pb-1">
+                                  {section.title}
+                                </h4>
+                                <ul className="space-y-2">
+                                  {section.items.map((sub) => (
+                                    <li key={sub.label}>
+                                      <Link href={sub.href} className="text-[12px] text-zinc-600 hover:text-zinc-900 block py-1">
+                                        {sub.label}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <ul className="space-y-2">
+                            {item.dropdown?.map((sub) => (
+                              <li key={sub.label}>
+                                <Link href={sub.href} className="text-[12px] text-zinc-600 hover:text-zinc-900 block py-1">
+                                  {sub.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* ACTION BUTTONS (Bag near Contact) */}
+        <div className="flex items-center gap-2 shrink-0 relative z-[101]">
+          {/* DESKTOP/MOBILE CART */}
+          <Link href="/shop/cart" className="relative p-2 text-zinc-800 hover:text-zinc-500 transition-colors">
+            <ShoppingBag size={18} strokeWidth={1.5} />
+            {cartCount > 0 && (
+              <span className="absolute top-0 right-0 bg-[#002D40] text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </Link>
+
+          <div className="hidden min-[1380px]:block ml-1">
+            <Link href="/#contact">
+              <button className="bg-zinc-900 hover:bg-zinc-800 text-white text-[9px] 2xl:text-[10px] font-bold tracking-[0.2em] uppercase px-5 py-3 rounded-full transition-all shadow-md active:scale-95 whitespace-nowrap">
+                Contact
+              </button>
+            </Link>
+          </div>
+
+          <button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="min-[1380px]:hidden p-2 text-zinc-800 hover:bg-zinc-50 rounded-lg transition-colors"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 top-0 bg-white z-[100] min-[1380px]:hidden flex flex-col pt-24 overflow-y-auto no-scrollbar"
+          >
+            <div className="p-6 space-y-2 pb-32">
+              {navItems.map((item) => {
+                // FLATTEN REJUVENATION FOR MOBILE
+                if (item.isRejuvenationGroup && item.dropdown) {
+                  return item.dropdown.map((sub) => (
+                    <Link 
+                      key={sub.label} 
+                      href={sub.href} 
+                      className="block py-4 border-b border-zinc-50 text-sm font-medium tracking-widest text-zinc-900 uppercase"
+                    >
+                      {sub.label}
+                    </Link>
+                  ))
+                }
+
+                const hasSub = item.dropdown || item.sections
+                const isExpanded = mobileExpanded === item.label
+
+                return (
+                  <div key={item.label} className="border-b border-zinc-50 last:border-0">
+                    {hasSub ? (
+                      <button 
+                        onClick={() => setMobileExpanded(isExpanded ? null : item.label)}
+                        className="w-full flex justify-between items-center py-4 text-left"
+                      >
+                        <span className="text-sm font-medium tracking-widest text-zinc-900 uppercase">
+                           {item.label}
+                        </span>
+                        <ChevronRight className={`transition-transform duration-300 text-zinc-400 ${isExpanded ? "rotate-90" : ""}`} size={16} />
+                      </button>
+                    ) : (
+                      <Link href={item.href} className="block py-4 text-sm font-medium tracking-widest text-zinc-900 uppercase">
+                        {item.label}
+                      </Link>
+                    )}
+
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden bg-zinc-50/50 px-4 rounded-xl mt-1 mb-4"
+                        >
+                          <div className="py-4 space-y-4">
+                            {item.isSectioned ? (
+                              item.sections?.map(sec => (
+                                <div key={sec.title} className="space-y-2">
+                                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{sec.title}</p>
+                                  <div className="flex flex-col gap-2 border-l border-zinc-200 pl-3">
+                                    {sec.items.map(sub => (
+                                      <Link key={sub.label} href={sub.href} className="text-xs text-zinc-600 active:text-zinc-900 py-1">
+                                        {sub.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              ))
+                            ) : (
+                              <div className="flex flex-col gap-4 border-l border-zinc-200 pl-3">
+                                {item.dropdown?.map(sub => (
+                                  <Link key={sub.label} href={sub.href} className="text-xs text-zinc-600 active:text-zinc-900 py-1">
+                                    {sub.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )
+              })}
+              
+              <div className="pt-8">
+                <Link href="/#contact">
+                  <button className="w-full bg-zinc-900 text-white py-5 rounded-full tracking-[0.2em] uppercase text-[11px] font-bold shadow-lg">
+                    Book Consultation
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  )
+}
