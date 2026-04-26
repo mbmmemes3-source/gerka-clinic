@@ -22,9 +22,9 @@ import { HairHeroBanner } from "@/components/hairBanner"
 const hairTreatments = [
   {
     id: "prp",
-    title: "PRP",
+    title: "PRP Pain Free",
     subtitle: "Platelet-Rich Plasma",
-    price: "€350",
+    price: "€450",
     image: "/prp.webp",
     description: "The procedure uses the patient’s own plasma, which is rich in growth factors, to stimulate dormant hair follicles and improve scalp vascularisation.",
     benefits: [
