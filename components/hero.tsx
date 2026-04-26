@@ -39,6 +39,12 @@ export function HeroSection() {
             <span className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-zinc-400 font-semibold mb-4 sm:mb-6 block">
               Welcome to Gerka Clinic
             </span>
+
+            {/* Language Support Line */}
+            <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-700 font-medium mb-4 block">
+              We speak: English / Español / فارسی
+            </span>
+
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-zinc-800 leading-[1.1] sm:leading-[1.1]">
               Elevating your <br />
               <span className="italic font-serif text-zinc-500">natural</span> beauty.
@@ -65,24 +71,23 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 pt-4 sm:pt-6"
           >
             <Link href="/#services" className="w-full sm:w-auto">
-  <button className="group relative w-full sm:w-auto bg-zinc-900 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full overflow-hidden transition-all duration-300 hover:pr-14 active:scale-95">
-    <span className="relative z-10 text-[11px] sm:text-[12px] tracking-[0.2em] uppercase font-medium sm:whitespace-nowrap">
-      Explore Services
-    </span>
+              <button className="group relative w-full sm:w-auto bg-zinc-900 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full overflow-hidden transition-all duration-300 hover:pr-14 active:scale-95">
+                <span className="relative z-10 text-[11px] sm:text-[12px] tracking-[0.2em] uppercase font-medium sm:whitespace-nowrap">
+                  Explore Services
+                </span>
 
-    <ArrowRight className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 w-4 h-4" />
-  </button>
-</Link>
+                <ArrowRight className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 w-4 h-4" />
+              </button>
+            </Link>
             
-           <Link
-  href="/about"
-  className="group flex items-center justify-center gap-3 py-2 w-full"
->
-  <span className="text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-zinc-400 group-hover:text-zinc-800 transition-colors duration-300">
-    Our Philosophy
-  </span>
-
-</Link>
+            <Link
+              href="/about"
+              className="group flex items-center justify-center gap-3 py-2 w-full"
+            >
+              <span className="text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-zinc-400 group-hover:text-zinc-800 transition-colors duration-300">
+                Our Philosophy
+              </span>
+            </Link>
           </motion.div>
         </div>
       </div>
