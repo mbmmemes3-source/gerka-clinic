@@ -25,7 +25,7 @@ const scalpModalities = [
     id: "cleansing",
     title: "Step 01",
     subtitle: "Cleansing & Exfoliation",
-    image: "/clean.jpg", 
+    image: "/scalp1.jpg", 
     description: "The scalp is gently exfoliated using vortex technology to remove dead skin cells, residue, and deep-seated impurities that standard washing cannot reach.",
     benefits: [
       "Remove surface dead skin cells",
@@ -39,7 +39,7 @@ const scalpModalities = [
     id: "extraction",
     title: "Step 02",
     subtitle: "Deep Extraction & Detox",
-    image: "/detox.webp", 
+    image: "/scalp2.jpg", 
     description: "Using painless suction, excess oil, debris, and stubborn product build-up are lifted from the scalp and follicular openings.",
     benefits: [
       "Clear clogged hair follicles",
@@ -67,7 +67,7 @@ const scalpModalities = [
     id: "revitalisation",
     title: "Step 04",
     subtitle: "Scalp Revitalisation",
-    image: "/scal.jpg", 
+    image: "/scalp3.webp", 
     description: "The final step leaves the scalp cleaner and fresher, providing the ideal foundation for hair growth and ongoing care.",
     benefits: [
       "Enhanced scalp vitality",
