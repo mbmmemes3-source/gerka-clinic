@@ -13,7 +13,8 @@ import {
   Heart,
   ChevronRight,
   Info,
-  Microscope
+  Microscope,
+  Clock
 } from "lucide-react"
 import Link from "next/link"
 import { ServiceSidebar } from "@/components/ServiceSidebar"
@@ -39,9 +40,9 @@ const trustFactors = [
     desc: "Exclusive use of advanced PRP systems for optimal concentration and safety."
   },
   {
-    icon: <Euro className="text-zinc-900" size={20} />,
-    title: "Competitive Pricing",
-    desc: "High-quality medical excellence at the most accessible price points in Ireland."
+    icon: <ShieldCheck className="text-zinc-900" size={20} />,
+    title: "Internationally Recognised",
+    desc: "Protocols aligned with global standards for regenerative intimate medicine."
   }
 ]
 
@@ -71,25 +72,44 @@ export default function OShotPShotPage() {
             
             {/* HERO SECTION */}
             <section className="space-y-12">
-              <div className="space-y-6">
-                <motion.div 
-                   initial={{ opacity: 0, y: 10 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-white text-[9px] font-bold uppercase tracking-[0.2em]"
-                >
-                  <ShieldCheck size={12} /> Ireland's First Certified Provider
-                </motion.div>
-                <h1 className="text-4xl md:text-6xl font-light text-zinc-900 tracking-tight leading-tight">
-                  O-Shot® & P-Shot® <br />
-                  <span className="italic font-serif text-zinc-500 font-light text-3xl md:text-5xl">Regenerative Intimate Wellness</span>
-                </h1>
-                <div className="flex flex-wrap gap-4 border-b border-zinc-200 pb-8">
-                  <span className="text-xs font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2">
-                    <Award size={14} className="text-zinc-400" /> Dr Charles Runels Certified
-                  </span>
-                  <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest italic border-l border-zinc-200 pl-4">
-                    Dublin Specialist Clinic
-                  </span>
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <motion.div 
+                     initial={{ opacity: 0, y: 10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-white text-[9px] font-bold uppercase tracking-[0.2em]"
+                  >
+                    <ShieldCheck size={12} /> Ireland's First Certified Provider
+                  </motion.div>
+                  <h1 className="text-4xl md:text-6xl font-light text-zinc-900 tracking-tight leading-tight">
+                    O-Shot®, G-Shot® & P-Shot® <br />
+                    <span className="italic font-serif text-zinc-500 font-light text-3xl md:text-5xl">Regenerative Intimate Wellness</span>
+                  </h1>
+                </div>
+
+                {/* PRICING GRID */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-y border-zinc-200 py-10">
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">O-Shot®</p>
+                    <p className="text-xl font-bold text-zinc-900 flex items-center gap-2">
+                      <Euro size={16} className="text-zinc-400" /> €800
+                    </p>
+                    <p className="text-[10px] text-zinc-500 italic">Single Procedure</p>
+                  </div>
+                  <div className="space-y-2 border-l border-zinc-200 pl-6">
+                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">O-Shot® & G-Shot®</p>
+                    <p className="text-xl font-bold text-zinc-900 flex items-center gap-2">
+                      <Euro size={16} className="text-zinc-400" /> €1,200
+                    </p>
+                    <p className="text-[10px] text-zinc-500 italic">Combined Protocol</p>
+                  </div>
+                  <div className="space-y-2 border-l border-zinc-200 pl-6">
+                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">P-Shot® (Men)</p>
+                    <p className="text-xl font-bold text-zinc-900 flex items-center gap-2">
+                      <Euro size={16} className="text-zinc-400" /> €950
+                    </p>
+                    <p className="text-[10px] text-zinc-500 italic">Regen Lab® Certified</p>
+                  </div>
                 </div>
               </div>
 
@@ -99,21 +119,20 @@ export default function OShotPShotPage() {
                     At Gerka Clinic, we offer advanced regenerative intimate treatments designed to support sexual wellness, tissue health and confidence in both women and men.
                   </p>
                   <p>
-                    We are proud to be the <span className="text-zinc-900 font-medium italic underline decoration-zinc-200 underline-offset-4">first clinic in Ireland</span> certified to perform the O-Shot® and P-Shot® by their inventor, Dr Charles Runels, bringing internationally recognised training and expertise to our patients in Dublin.
+                    We are proud to be the <span className="text-zinc-900 font-medium italic underline decoration-zinc-200 underline-offset-4">first clinic in Ireland</span> certified to perform these procedures by their inventor, Dr Charles Runels, bringing internationally recognised expertise to our patients in Dublin.
                   </p>
                   <p>
-                    Our approach combines medical excellence with accessibility, ensuring high-quality treatments at highly competitive prices without compromising on safety or clinical results.
+                    By exclusively using <span className="font-medium text-zinc-900">Regen Lab®</span> technology, we ensure the highest concentration of autologous growth factors, ensuring safety, consistency, and premium clinical results.
                   </p>
                 </div>
                 <div className="aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-2xl border-white border-8 relative">
-                   {/* Recommendation: Use a professional clinical image or aesthetic silhouette */}
                   <img src="/oshot.jpg" alt="Gerka Clinic Regenerative Medicine" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-zinc-900/5" />
                 </div>
               </div>
             </section>
 
-            {/* TRUST BAR: REGEN LAB & CERTIFICATION */}
+            {/* TRUST BAR */}
             <section className="bg-white border border-zinc-100 rounded-[3rem] p-10 md:p-16 shadow-sm">
                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                   {trustFactors.map((factor, i) => (
@@ -125,11 +144,6 @@ export default function OShotPShotPage() {
                        <p className="text-sm text-zinc-500 font-light leading-relaxed">{factor.desc}</p>
                     </div>
                   ))}
-               </div>
-               <div className="mt-12 pt-8 border-t border-zinc-50">
-                  <p className="text-xs text-zinc-400 font-light leading-relaxed italic">
-                    We exclusively work with <strong className="text-zinc-600 font-medium">Regen Lab®</strong>, using advanced PRP systems and protocol kits aligned with the highest international standards used by Dr Charles Runels.
-                  </p>
                </div>
             </section>
 
@@ -151,18 +165,17 @@ export default function OShotPShotPage() {
 
             {/* WHY CHOOSE US: BENTO GRID */}
             <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Highlight Card */}
               <div className="bg-zinc-900 text-white p-12 rounded-[3.5rem] space-y-8 shadow-xl relative overflow-hidden flex flex-col justify-between">
                 <div className="space-y-6 relative z-10">
                   <h3 className="text-2xl md:text-3xl font-light leading-tight">
-                    What makes us <span className="italic font-serif text-zinc-400">different?</span>
+                    Our <span className="italic font-serif text-zinc-400">Clinical Approach</span>
                   </h3>
                   <ul className="space-y-4">
                     {[
                       "Training direct from the source (Dr Runels)",
                       "Internationally aligned protocol systems",
                       "Highly personalised medical assessment",
-                      "Competitive pricing in the Irish market"
+                      "Dublin's leading regenerative specialist"
                     ].map(text => (
                       <li key={text} className="flex items-start gap-3 text-sm text-zinc-400 font-light">
                         <CheckCircle2 size={18} className="text-zinc-500 mt-0.5 shrink-0" /> {text}
@@ -173,7 +186,6 @@ export default function OShotPShotPage() {
                 <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-white/5 blur-3xl rounded-full" />
               </div>
 
-              {/* Privacy/Discretion Card */}
               <div className="bg-[#EAEAE6] p-12 rounded-[3.5rem] space-y-8 flex flex-col justify-center border border-zinc-200/50">
                 <div className="space-y-6">
                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm">
@@ -181,7 +193,7 @@ export default function OShotPShotPage() {
                    </div>
                    <h3 className="text-2xl font-light text-zinc-900 tracking-tight">Discretion & Professionalism</h3>
                    <p className="text-sm text-zinc-600 font-light leading-relaxed">
-                     We understand that intimate concerns affect confidence and overall wellbeing. Our clinic provides a judgement-free, respectful, and confidential environment where patients feel properly cared for.
+                     Intimate concerns are deeply personal. We provide a non-judgemental and confidential environment where patients feel safe to discuss and receive advanced regenerative care.
                    </p>
                 </div>
                 <div className="pt-6 border-t border-zinc-300 flex items-center gap-3">
@@ -194,9 +206,9 @@ export default function OShotPShotPage() {
             {/* FINAL CTA */}
             <section className="bg-zinc-900 rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl relative overflow-hidden">
               <div className="space-y-3 text-center md:text-left relative z-10 max-w-xl">
-                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">Certified Expertise</p>
-                <h2 className="text-3xl md:text-4xl font-light text-white leading-tight">Start your wellness journey</h2>
-                <p className="text-sm text-zinc-400 font-light">Join the first Dublin clinic certified in Dr Runels' protocols.</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">Expert Certification</p>
+                <h2 className="text-3xl md:text-4xl font-light text-white leading-tight">Book a private consultation</h2>
+                <p className="text-sm text-zinc-400 font-light">Discover how regenerative medicine can support your intimate wellbeing.</p>
               </div>
               <Link href="/#contact" className="w-full md:w-auto relative z-10">
                 <button className="w-full md:w-auto bg-white text-zinc-900 px-12 py-5 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] hover:scale-105 transition-all active:scale-95 shadow-lg">
