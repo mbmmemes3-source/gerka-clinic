@@ -258,7 +258,7 @@ export default function HairLossTreatmentPage() {
             <div className="bg-zinc-50 border border-zinc-100 p-8 md:p-12 rounded-[2.5rem] space-y-8">
                <h3 className="text-2xl md:text-3xl font-light text-zinc-900">The Treatment Plan</h3>
                <p className="text-zinc-500 font-light text-sm md:text-base leading-relaxed">
-                 Therapies are performed as a series of sessions. All primary restoration treatments are standardised at <strong>€350 per session</strong>. Combined protocols may include:
+                 Therapies are performed as a series of sessions. All primary restoration treatments are standardised at <strong>€450 per session</strong>. Combined protocols may include:
                </p>
                <div className="space-y-4">
                   <div className="flex items-center gap-3">

@@ -50,10 +50,7 @@ const navItems = [
       { label: "Nail Disorders Treatments", href: "/nail" }
     ]
   },
-  // NEW ITEM: NATURAL AESTHETICS
-  { href: "/peptide-skin-regeneration-therapy", label: "Peptide Skin Regeneration Therapy" },
-  
-  // GROUPED FOR DESKTOP - FLATTENED FOR MOBILE
+  { href: "/peptide-skin-regeneration-therapy", label: "Peptide Therapy" },
   { 
     href: "#", 
     label: "Rejuvenation",
@@ -98,7 +95,7 @@ const navItems = [
     ]
   },
   { href: "/shop", label: "Shop" },
-  { href: "/clinical-outcomes", label: "Clinical Outcomes" },
+  { href: "/clinical-outcomes", label: "Outcomes" },
 ]
 
 export function Navbar() {
@@ -112,12 +109,16 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handleScroll)
+    // Prevent scroll when mobile menu is open
+    if (isOpen) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = "unset"
+    
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [isOpen])
 
   useEffect(() => {
     setIsOpen(false)
-    setActiveDropdown(null) // Ensure highlight clears on route change
+    setActiveDropdown(null)
   }, [pathname])
 
   return (
@@ -129,28 +130,27 @@ export function Navbar() {
           : "bg-white/95 backdrop-blur-md py-4 md:py-6"
       }`}
     >
-      <div className="max-w-[1700px] mx-auto px-4 md:px-6 flex items-center justify-between gap-1">
+      <div className="max-w-[1750px] mx-auto px-4 md:px-8 flex items-center justify-between gap-1">
         
         {/* LOGO AREA */}
-        <Link href="/" className="flex items-center gap-2 group shrink-0 relative z-[101]">
-          <div className="relative w-8 h-8 md:w-8 md:h-8 lg:w-10 lg:h-10">
+        <Link href="/" className="flex items-center gap-2 group shrink-0 relative z-[110]">
+          <div className="relative w-8 h-8 md:w-9 md:h-9 lg:w-11 lg:h-11">
             <Image src="/icon2.png" alt="Gerka Clinic" fill className="object-contain" />
           </div>
           <div className="flex flex-col">
-            <span className="text-[12px] md:text-sm font-light tracking-[0.1em] text-zinc-800 uppercase leading-tight">
+            <span className="text-[13px] md:text-sm lg:text-base font-light tracking-[0.1em] text-zinc-800 uppercase leading-tight">
               Gerka Clinic
             </span>
-            <span className="text-[6px] md:text-[7px] tracking-[0.1em] text-zinc-400 uppercase font-medium">
+            <span className="text-[7px] tracking-[0.15em] text-zinc-400 uppercase font-medium">
               Aesthetic & Intimate Health
             </span>
           </div>
         </Link>
 
-        {/* DESKTOP NAV - Enhanced Spacing to prevent overlap */}
-        <div className="hidden min-[1380px]:flex items-center gap-x-0.5 2xl:gap-x-2">
+        {/* DESKTOP NAV (Visible > 1400px for Tablets/Laptops) */}
+        <div className="hidden min-[1400px]:flex items-center gap-x-0.5 2xl:gap-x-2">
           {navItems.map((item) => {
             const hasDropdown = item.dropdown || item.sections
-            // Strict equality check for highlight to prevent "always highlighted" issue
             const isActive = item.href !== "#" && pathname === item.href
 
             return (
@@ -164,7 +164,7 @@ export function Navbar() {
                   className="group flex items-center gap-0.5 whitespace-nowrap px-1.5 2xl:px-2.5"
                 >
                   <span className={`text-[10px] 2xl:text-[11px] font-semibold tracking-normal transition-colors duration-300 uppercase ${
-                    isActive || activeDropdown === item.label ? "text-zinc-900 underline underline-offset-4 decoration-zinc-300" : "text-zinc-500 hover:text-zinc-900"
+                    isActive || activeDropdown === item.label ? "text-zinc-900 border-b border-zinc-900" : "text-zinc-500 hover:text-zinc-900"
                   }`}>
                     {item.label}
                   </span>
@@ -179,7 +179,7 @@ export function Navbar() {
                       exit={{ opacity: 0, y: 10 }}
                       className="absolute top-full left-0 pt-4"
                     >
-                      <div className="bg-white border border-zinc-100 shadow-2xl rounded-2xl p-6 min-w-[280px] max-h-[70vh] overflow-y-auto custom-scrollbar">
+                      <div className="bg-white border border-zinc-100 shadow-2xl rounded-2xl p-6 min-w-[280px] max-h-[75vh] overflow-y-auto custom-scrollbar">
                         {item.isSectioned ? (
                           <div className="space-y-6">
                             {item.sections?.map((section) => (
@@ -219,11 +219,12 @@ export function Navbar() {
           })}
         </div>
 
-        {/* ACTION BUTTONS (Bag near Contact) */}
-        <div className="flex items-center gap-2 shrink-0 relative z-[101]">
-          {/* DESKTOP/MOBILE CART */}
+        {/* ACTION BUTTONS (Bag + Contact + Hamburger) */}
+        <div className="flex items-center gap-2 md:gap-4 shrink-0 relative z-[110]">
+          
+          {/* SHOPPING BAG */}
           <Link href="/shop/cart" className="relative p-2 text-zinc-800 hover:text-zinc-500 transition-colors">
-            <ShoppingBag size={18} strokeWidth={1.5} />
+            <ShoppingBag size={20} strokeWidth={1.5} />
             {cartCount > 0 && (
               <span className="absolute top-0 right-0 bg-[#002D40] text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {cartCount}
@@ -231,7 +232,8 @@ export function Navbar() {
             )}
           </Link>
 
-          <div className="hidden min-[1380px]:block ml-1">
+          {/* CONTACT - HIDDEN ON TAB/MOBILE */}
+          <div className="hidden min-[1400px]:block">
             <Link href="/#contact">
               <button className="bg-zinc-900 hover:bg-zinc-800 text-white text-[9px] 2xl:text-[10px] font-bold tracking-[0.2em] uppercase px-5 py-3 rounded-full transition-all shadow-md active:scale-95 whitespace-nowrap">
                 Contact
@@ -239,16 +241,17 @@ export function Navbar() {
             </Link>
           </div>
 
+          {/* HAMBURGER - VISIBLE ON TAB/MOBILE */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
-            className="min-[1380px]:hidden p-2 text-zinc-800 hover:bg-zinc-50 rounded-lg transition-colors"
+            className="min-[1400px]:hidden p-2.5 text-zinc-800 hover:bg-zinc-50 rounded-xl transition-colors"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* SIDEBAR MOBILE MENU */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -256,17 +259,17 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 top-0 bg-white z-[100] min-[1380px]:hidden flex flex-col pt-24 overflow-y-auto no-scrollbar"
+            className="fixed inset-0 top-0 bg-white z-[105] min-[1400px]:hidden flex flex-col pt-24 overflow-y-auto"
           >
-            <div className="p-6 space-y-2 pb-32">
+            <div className="p-6 space-y-1 pb-32">
               {navItems.map((item) => {
-                // FLATTEN REJUVENATION FOR MOBILE
+                // LOGIC: FLATTEN HAND & EAR REJUVENATION OUT OF GROUP
                 if (item.isRejuvenationGroup && item.dropdown) {
                   return item.dropdown.map((sub) => (
                     <Link 
                       key={sub.label} 
                       href={sub.href} 
-                      className="block py-4 border-b border-zinc-50 text-sm font-medium tracking-widest text-zinc-900 uppercase"
+                      className="block py-4 border-b border-zinc-50 text-[13px] font-medium tracking-widest text-zinc-900 uppercase"
                     >
                       {sub.label}
                     </Link>
@@ -279,63 +282,64 @@ export function Navbar() {
                 return (
                   <div key={item.label} className="border-b border-zinc-50 last:border-0">
                     {hasSub ? (
-                      <button 
-                        onClick={() => setMobileExpanded(isExpanded ? null : item.label)}
-                        className="w-full flex justify-between items-center py-4 text-left"
-                      >
-                        <span className="text-sm font-medium tracking-widest text-zinc-900 uppercase">
-                           {item.label}
-                        </span>
-                        <ChevronRight className={`transition-transform duration-300 text-zinc-400 ${isExpanded ? "rotate-90" : ""}`} size={16} />
-                      </button>
-                    ) : (
-                      <Link href={item.href} className="block py-4 text-sm font-medium tracking-widest text-zinc-900 uppercase">
-                        {item.label}
-                      </Link>
-                    )}
-
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden bg-zinc-50/50 px-4 rounded-xl mt-1 mb-4"
+                      <div className="py-1">
+                        <button 
+                          onClick={() => setMobileExpanded(isExpanded ? null : item.label)}
+                          className="w-full flex justify-between items-center py-4 text-left"
                         >
-                          <div className="py-4 space-y-4">
-                            {item.isSectioned ? (
-                              item.sections?.map(sec => (
-                                <div key={sec.title} className="space-y-2">
-                                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{sec.title}</p>
-                                  <div className="flex flex-col gap-2 border-l border-zinc-200 pl-3">
-                                    {sec.items.map(sub => (
-                                      <Link key={sub.label} href={sub.href} className="text-xs text-zinc-600 active:text-zinc-900 py-1">
+                          <span className="text-[13px] font-medium tracking-widest text-zinc-900 uppercase">
+                             {item.label}
+                          </span>
+                          <ChevronRight className={`transition-transform duration-300 text-zinc-400 ${isExpanded ? "rotate-90" : ""}`} size={18} />
+                        </button>
+                        <AnimatePresence>
+                          {isExpanded && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden bg-zinc-50/50 px-4 rounded-2xl mb-2"
+                            >
+                              <div className="py-4 space-y-4">
+                                {item.isSectioned ? (
+                                  item.sections?.map(sec => (
+                                    <div key={sec.title} className="space-y-3">
+                                      <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">{sec.title}</p>
+                                      <div className="flex flex-col gap-3 border-l border-zinc-200 pl-4">
+                                        {sec.items.map(sub => (
+                                          <Link key={sub.label} href={sub.href} className="text-xs text-zinc-600 active:text-zinc-900">
+                                            {sub.label}
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))
+                                ) : (
+                                  <div className="flex flex-col gap-4 border-l border-zinc-200 pl-4">
+                                    {item.dropdown?.map(sub => (
+                                      <Link key={sub.label} href={sub.href} className="text-xs text-zinc-600 active:text-zinc-900">
                                         {sub.label}
                                       </Link>
                                     ))}
                                   </div>
-                                </div>
-                              ))
-                            ) : (
-                              <div className="flex flex-col gap-4 border-l border-zinc-200 pl-3">
-                                {item.dropdown?.map(sub => (
-                                  <Link key={sub.label} href={sub.href} className="text-xs text-zinc-600 active:text-zinc-900 py-1">
-                                    {sub.label}
-                                  </Link>
-                                ))}
+                                )}
                               </div>
-                            )}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link href={item.href} className="block py-5 text-[13px] font-medium tracking-widest text-zinc-900 uppercase">
+                        {item.label}
+                      </Link>
+                    )}
                   </div>
                 )
               })}
               
-              <div className="pt-8">
+              <div className="pt-10 space-y-4">
                 <Link href="/#contact">
-                  <button className="w-full bg-zinc-900 text-white py-5 rounded-full tracking-[0.2em] uppercase text-[11px] font-bold shadow-lg">
+                  <button className="w-full bg-zinc-900 text-white py-5 rounded-full tracking-[0.25em] uppercase text-[11px] font-bold shadow-xl">
                     Book Consultation
                   </button>
                 </Link>
