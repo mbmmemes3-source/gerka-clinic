@@ -150,10 +150,10 @@ export function Navbar() {
               <Image src="/icon2.png" alt="Gerka Clinic" fill className="object-contain" />
             </div>
             <div className="flex flex-col">
-              <span className="text-[13px] md:text-sm lg:text-base font-light tracking-[0.1em] text-zinc-800 uppercase leading-tight">
+              <span className="text-[17px] md:text-xl lg:text-base font-light tracking-[0.1em] text-zinc-800 uppercase leading-tight">
                 Gerka Clinic
               </span>
-              <span className="text-[7px] tracking-[0.15em] text-zinc-400 uppercase font-medium">
+              <span className="text-[9px] tracking-[0.15em] text-zinc-400 uppercase font-medium">
                 Aesthetic & Intimate Health
               </span>
             </div>
