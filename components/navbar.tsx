@@ -13,7 +13,10 @@ function LanguageSwitcher() {
   const [lang, setLang] = useState("en")
 
   useEffect(() => {
-    const match = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/)
+    // Check for the cookie on mount
+    const decodeCookie = decodeURIComponent(document.cookie);
+    const match = decodeCookie.match(/googtrans=\/[^/]+\/([^;]+)/)
+    
     if (match?.[1] === "es") {
       setLang("es")
     } else {
@@ -22,23 +25,47 @@ function LanguageSwitcher() {
   }, [])
 
   const toggleLanguage = () => {
+    const hostname = window.location.hostname;
+    // Extract the main domain (e.g., 'gerkaclinic.com' from 'www.gerkaclinic.com')
+    const dotDomain = hostname.substring(hostname.lastIndexOf(".", hostname.lastIndexOf(".") - 1));
+
     if (lang === "en") {
-      // set Spanish
+      // SET SPANISH
+      // We set it for both the specific domain and the root path to be safe
       document.cookie = "googtrans=/en/es; path=/";
+      document.cookie = `googtrans=/en/es; path=/; domain=${hostname}`;
+      if (dotDomain.includes(".")) {
+        document.cookie = `googtrans=/en/es; path=/; domain=${dotDomain}`;
+      }
+      setLang("es");
     } else {
-      // remove cookie → back to English
-      document.cookie =
-        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      // SET BACK TO ENGLISH (Original)
+      // 1. Set to English/English path
+      document.cookie = "googtrans=/en/en; path=/";
+      document.cookie = `googtrans=/en/en; path=/; domain=${hostname}`;
+      
+      // 2. Force delete the cookie across possible domains
+      const expireStr = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = expireStr;
+      document.cookie = `${expireStr} domain=${hostname}`;
+      if (dotDomain.includes(".")) {
+        document.cookie = `${expireStr} domain=${dotDomain}`;
+      }
+      setLang("en");
     }
 
-    // small delay helps Google script pick it up more reliably
+    // Refresh the page so Google Translate picks up the change
     setTimeout(() => {
-      window.location.reload()
-    }, 50)
+      window.location.reload();
+    }, 100);
   }
 
   return (
-    <button onClick={toggleLanguage}>
+    <button 
+      onClick={toggleLanguage}
+      className="flex items-center gap-1 text-[11px] font-bold tracking-widest text-zinc-800 hover:text-zinc-500 transition-colors border border-zinc-200 px-2 py-1 rounded"
+    >
+      <Globe size={14} />
       {lang === "en" ? "ES" : "EN"}
     </button>
   )

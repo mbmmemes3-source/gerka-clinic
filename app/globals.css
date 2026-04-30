@@ -212,3 +212,10 @@ body {
 .goog-te-gadget span {
   display: none !important;
 }
+/* Hide the Google Translate top bar */
+.goog-te-banner-frame {
+    display: none !important;
+}
+body {
+    top: 0 !important;
+}
