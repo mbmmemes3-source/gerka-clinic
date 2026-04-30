@@ -10,6 +10,7 @@ import { CartProvider } from '@/context/CartContext';
 // Import your components
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -113,6 +114,27 @@ export default function RootLayout({
             This allows Navbar, the Product page, and any future Cart sidebar 
             to share the same state.
         */}
+        <Script
+          id="google-translate-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                  pageLanguage: 'en',
+                  includedLanguages: 'en,es',
+                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                  autoDisplay: false
+                }, 'google_translate_element');
+              }
+            `,
+          }}
+        />
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+        
         <CartProvider>
           <Navbar />
           

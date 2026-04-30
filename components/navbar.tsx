@@ -6,8 +6,44 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, ChevronRight, ShoppingBag } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronRight, ShoppingBag, Globe } from "lucide-react"
 import { useCart } from "@/context/CartContext"
+
+function LanguageSwitcher() {
+  const [lang, setLang] = useState('en')
+  
+  useEffect(() => {
+    if (document.cookie.includes('googtrans=/en/es') || document.cookie.includes('googtrans=/auto/es')) {
+      setLang('es')
+    } else {
+      setLang('en')
+    }
+  }, [])
+
+  const toggleLanguage = () => {
+    if (lang === 'en') {
+      document.cookie = "googtrans=/en/es; path=/";
+      document.cookie = "googtrans=/en/es; path=/; domain=" + location.hostname;
+    } else {
+      document.cookie = "googtrans=/en/en; path=/";
+      document.cookie = "googtrans=/en/en; path=/; domain=" + location.hostname;
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.hostname;
+    }
+    window.location.reload();
+  }
+
+  return (
+    <button 
+      onClick={toggleLanguage}
+      className="flex items-center gap-1 p-2 text-zinc-800 hover:text-zinc-500 transition-colors"
+      title="Toggle Language"
+    >
+      <Globe size={18} strokeWidth={1.5} />
+      <span className="text-[10px] font-bold mt-0.5">{lang === 'en' ? 'ES' : 'EN'}</span>
+    </button>
+  )
+}
 
 const navItems = [
   { href: "/about", label: "About Us" },
@@ -160,7 +196,7 @@ export function Navbar() {
           </Link>
 
           {/* DESKTOP NAV */}
-          <div className="hidden min-[1400px]:flex items-center gap-x-0.5 2xl:gap-x-2">
+          <div className="hidden min-[1600px]:flex items-center justify-center gap-x-0 min-[1700px]:gap-x-1 2xl:gap-x-2 flex-1 min-w-0">
             {navItems.map((item) => {
               const hasDropdown = item.dropdown || item.sections
               const isActive = item.href !== "#" && pathname === item.href
@@ -173,9 +209,9 @@ export function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    className="group flex items-center gap-0.5 whitespace-nowrap px-1.5 2xl:px-2.5"
+                    className="group flex items-center gap-0.5 whitespace-nowrap px-1 min-[1700px]:px-2"
                   >
-                    <span className={`text-[10px] 2xl:text-[11px] font-semibold tracking-normal transition-colors duration-300 uppercase ${
+                    <span className={`text-[9px] min-[1700px]:text-[10px] font-semibold tracking-tight min-[1700px]:tracking-normal transition-colors duration-300 uppercase ${
                       isActive || activeDropdown === item.label ? "text-zinc-900 border-b border-zinc-900" : "text-zinc-500 hover:text-zinc-900"
                     }`}>
                       {item.label}
@@ -234,6 +270,10 @@ export function Navbar() {
           {/* ACTION BUTTONS */}
           <div className="flex items-center gap-2 md:gap-4 shrink-0">
             
+            {/* GOOGLE TRANSLATE CUSTOM SWITCHER */}
+            <LanguageSwitcher />
+            <div id="google_translate_element" className="hidden absolute"></div>
+
             {/* SHOPPING BAG */}
             <Link href="/shop/cart" className="relative p-2 text-zinc-800 hover:text-zinc-500 transition-colors">
               <ShoppingBag size={20} strokeWidth={1.5} />
@@ -245,7 +285,7 @@ export function Navbar() {
             </Link>
 
             {/* CONTACT - DESKTOP ONLY */}
-            <div className="hidden min-[1400px]:block">
+            <div className="hidden min-[1600px]:block">
               <Link href="/#contact">
                 <button className="bg-zinc-900 hover:bg-zinc-800 text-white text-[9px] 2xl:text-[10px] font-bold tracking-[0.2em] uppercase px-5 py-3 rounded-full transition-all shadow-md active:scale-95 whitespace-nowrap">
                   Contact
@@ -256,7 +296,7 @@ export function Navbar() {
             {/* HAMBURGER */}
             <button 
               onClick={() => setIsOpen(!isOpen)} 
-              className="min-[1400px]:hidden p-2.5 text-zinc-800 hover:bg-zinc-50 rounded-xl transition-colors"
+              className="min-[1600px]:hidden p-2.5 text-zinc-800 hover:bg-zinc-50 rounded-xl transition-colors"
               aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               {isOpen ? <X size={26} /> : <Menu size={26} />}
@@ -279,7 +319,7 @@ export function Navbar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setIsOpen(false)}
-                className="fixed inset-0 bg-black/20 z-[199] min-[1400px]:hidden"
+                className="fixed inset-0 bg-black/20 z-[199] min-[1600px]:hidden"
               />
 
               {/* Sidebar panel */}
@@ -289,7 +329,7 @@ export function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed inset-0 top-0 bg-white z-[200] min-[1400px]:hidden flex flex-col pt-24 overflow-y-auto"
+                className="fixed inset-0 top-0 bg-white z-[200] min-[1600px]:hidden flex flex-col pt-24 overflow-y-auto"
               >
                 {/* Close button at top-right */}
                 <button
