@@ -21,17 +21,15 @@ function LanguageSwitcher() {
   }, [])
 
   const toggleLanguage = () => {
-    if (lang === 'en') {
-      document.cookie = "googtrans=/en/es; path=/";
-      document.cookie = "googtrans=/en/es; path=/; domain=" + location.hostname;
-    } else {
-      document.cookie = "googtrans=/en/en; path=/";
-      document.cookie = "googtrans=/en/en; path=/; domain=" + location.hostname;
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.hostname;
-    }
-    window.location.reload();
+  if (lang === "en") {
+    document.cookie = "googtrans=/en/es; path=/";
+  } else {
+    document.cookie =
+      "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }
+
+  window.location.reload();
+};
 
   return (
     <button 
