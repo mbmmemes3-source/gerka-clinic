@@ -10,35 +10,36 @@ import { Menu, X, ChevronDown, ChevronRight, ShoppingBag, Globe } from "lucide-r
 import { useCart } from "@/context/CartContext"
 
 function LanguageSwitcher() {
-  const [lang, setLang] = useState('en')
-  
+  const [lang, setLang] = useState("en")
+
   useEffect(() => {
-    if (document.cookie.includes('googtrans=/en/es') || document.cookie.includes('googtrans=/auto/es')) {
-      setLang('es')
+    const match = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/)
+    if (match?.[1] === "es") {
+      setLang("es")
     } else {
-      setLang('en')
+      setLang("en")
     }
   }, [])
 
   const toggleLanguage = () => {
-  if (lang === "en") {
-    document.cookie = "googtrans=/en/es; path=/";
-  } else {
-    document.cookie =
-      "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    if (lang === "en") {
+      // set Spanish
+      document.cookie = "googtrans=/en/es; path=/";
+    } else {
+      // remove cookie → back to English
+      document.cookie =
+        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    // small delay helps Google script pick it up more reliably
+    setTimeout(() => {
+      window.location.reload()
+    }, 50)
   }
 
-  window.location.reload();
-};
-
   return (
-    <button 
-      onClick={toggleLanguage}
-      className="flex items-center gap-1 p-2 text-zinc-800 hover:text-zinc-500 transition-colors"
-      title="Toggle Language"
-    >
-      <Globe size={18} strokeWidth={1.5} />
-      <span className="text-[10px] font-bold mt-0.5">{lang === 'en' ? 'ES' : 'EN'}</span>
+    <button onClick={toggleLanguage}>
+      {lang === "en" ? "ES" : "EN"}
     </button>
   )
 }
