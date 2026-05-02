@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   ChevronRight, 
@@ -37,6 +38,8 @@ const services = [
 ]
 
 export default function AppointmentBooking() {
+  const searchParams = useSearchParams()
+
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -46,6 +49,31 @@ export default function AppointmentBooking() {
     email: "",
     message: ""
   })
+
+  // ✅ ADDED: Auto select service from URL
+  useEffect(() => {
+    const serviceFee = searchParams.get("service")
+
+    if (serviceFee) {
+      const selected = services.find(s => s.fee === Number(serviceFee))
+
+      if (selected) {
+        setFormData(prev => ({
+          ...prev,
+          service: selected
+        }))
+
+        setStep(2)
+
+        // scroll to booking section
+        setTimeout(() => {
+          document.getElementById("booking")?.scrollIntoView({
+            behavior: "smooth"
+          })
+        }, 100)
+      }
+    }
+  }, [searchParams])
 
   const handleNext = () => setStep(s => s + 1)
   const handleBack = () => setStep(s => s - 1)
@@ -93,7 +121,7 @@ export default function AppointmentBooking() {
             transition={{ delay: 0.2 }}
             className="text-zinc-500 font-light max-w-xl mx-auto text-xs md:text-base leading-relaxed"
           >
-            Schedule your private assessment with Dr. Evelyn Alba. <br className="hidden md:block"/> A secure deposit is required to confirm your session.
+            Schedule your private assessment with Dr. Evelyn Alba.
           </motion.p>
         </div>
 
