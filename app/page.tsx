@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import dynamic from "next/dynamic"
 import Head from "next/head"
 import { motion } from "framer-motion"
+
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { HeroSection } from "@/components/hero"
@@ -12,10 +14,14 @@ import { FAQSection } from "@/components/faq"
 import { ContactSection } from "@/components/contact"
 import { PaymentPlan } from "@/components/payment"
 import { TrustedBrands } from "@/components/logo"
-import  AppointmentBooking  from "@/components/appoint"
+
+// ✅ FIX: Disable SSR for booking component
+const AppointmentBooking = dynamic(
+  () => import("@/components/appoint"),
+  { ssr: false }
+)
 
 export default function HomePage() {
-  // Structured Data for SEO (MedicalBusiness is better for clinics than Organization)
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
@@ -33,7 +39,7 @@ export default function HomePage() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "53.2986", // Example coordinates for Stillorgan
+      "latitude": "53.2986",
       "longitude": "-6.1956"
     },
     "telephone": "+353-87-888-8087",
@@ -61,24 +67,24 @@ export default function HomePage() {
     <>
       <Head>
         <title>Gerka Clinic | Premier Women's Wellness & Aesthetics Dublin</title>
+
         <meta
           name="description"
           content="Gerka Clinic offers advanced aesthetic treatments and intimate women's wellness solutions. Specializing in BTL Emsella, Skin Tightening, and Bio-identical hormones in Stillorgan, Dublin."
         />
+
         <meta
           name="keywords"
           content="Women's Wellness Dublin, Aesthetic Clinic Stillorgan, BTL Emsella Ireland, Skin Lesion Removal, Labiaplasty Dublin, Skin Tightening, Gerka Clinic"
         />
+
         <meta name="author" content="Gerka Clinic" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
-        {/* Open Graph / Facebook */}
+
+        {/* Open Graph */}
         <meta property="og:title" content="Gerka Clinic | Premier Women's Wellness & Aesthetics" />
-        <meta
-          property="og:description"
-          content="Experience exclusive care at Gerka Clinic. Advanced medical aesthetics and feminine wellness treatments in a private, professional setting."
-        />
+        <meta property="og:description" content="Experience exclusive care at Gerka Clinic. Advanced medical aesthetics and feminine wellness treatments in a private, professional setting." />
         <meta property="og:image" content="/og-image.jpg" />
         <meta property="og:url" content="https://www.gerkaclinic.com" />
         <meta property="og:type" content="website" />
@@ -86,49 +92,42 @@ export default function HomePage() {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Gerka Clinic | Women's Wellness" />
-        <meta
-          name="twitter:description"
-          content="Expert led aesthetic and intimate health treatments in Dublin."
-        />
-        
-        <script 
-          type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} 
+        <meta name="twitter:description" content="Expert led aesthetic and intimate health treatments in Dublin." />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
 
       <div className="min-h-screen bg-white">
-        {/* Navigation is fixed at the top */}
         <Navbar />
 
         <main>
-          {/* Hero Section */}
           <HeroSection />
 
-          {/* Treatments / Services Grid with ID for navigation */}
           <section id="services" className="scroll-mt-20">
             <TreatmentGrid />
           </section>
 
-          {/* Mission / About Section */}
           <MissionSection />
 
-          <PaymentPlan/>
+          <PaymentPlan />
 
+          {/* ✅ Booking section (same UI, now safe) */}
           <section id="booking" className="scroll-mt-20">
-          <AppointmentBooking/>
+            <AppointmentBooking />
           </section>
 
-          {/* FAQ Section */}
           <FAQSection />
 
-
-          {/* Contact Section with ID for navigation from Navbar/Footer */}
           <section id="contact" className="scroll-mt-20">
             <ContactSection />
-            <TrustedBrands/>
+            <TrustedBrands />
           </section>
         </main>
+
+        <Footer />
       </div>
     </>
   )
