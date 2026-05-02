@@ -158,25 +158,43 @@ export function ContactSection() {
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* TREATMENT SELECTION */}
-              <div className="flex flex-col space-y-2">
-                <label htmlFor="treatment" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Desired Treatment</label>
-                <div className="relative">
-                  <select 
-                    id="treatment" name="treatment" 
-                    className="w-full bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light cursor-pointer appearance-none text-sm md:text-base"
-                  >
-                    <option value="General Inquiry">General Inquiry</option>
-                    <option value="BTL Emsella">BTL Emsella</option>
-                    <option value="BTL Vanquish">BTL Vanquish ME</option>
-                    <option value="Skin Lesion Removal">Skin Lesion Removal</option>
-                    <option value="PRP Intimate">PRP Intimate</option>
-                    <option value="Exilis Ultra 360">Exilis Ultra 360</option>
-                  </select>
-                  <div className="absolute right-0 bottom-3 pointer-events-none opacity-40">
-                    <ChevronDown size={14} />
+                {/* TREATMENT SELECTION */}
+                <div className="flex flex-col space-y-2">
+                  <label htmlFor="treatment" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Desired Treatment</label>
+                  <div className="relative">
+                    <select 
+                      id="treatment" name="treatment" 
+                      className="w-full bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light cursor-pointer appearance-none text-sm md:text-base"
+                    >
+                      <option value="General Inquiry">General Inquiry</option>
+                      <option value="BTL Emsella">BTL Emsella</option>
+                      <option value="BTL Vanquish">BTL Vanquish ME</option>
+                      <option value="Skin Lesion Removal">Skin Lesion Removal</option>
+                      <option value="PRP Intimate">PRP Intimate</option>
+                      <option value="Exilis Ultra 360">Exilis Ultra 360</option>
+                    </select>
+                    <div className="absolute right-0 bottom-3 pointer-events-none opacity-40">
+                      <ChevronDown size={14} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* PREFERRED LANGUAGE */}
+                <div className="flex flex-col space-y-2">
+                  <label htmlFor="language" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Preferred Language</label>
+                  <div className="relative">
+                    <select 
+                      id="language" name="language" 
+                      className="w-full bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light cursor-pointer appearance-none text-sm md:text-base"
+                    >
+                      <option value="English">English</option>
+                      <option value="Spanish">Spanish</option>
+                      <option value="Persian">Persian (فارسی)</option>
+                    </select>
+                    <div className="absolute right-0 bottom-3 pointer-events-none opacity-40">
+                      <ChevronDown size={14} />
+                    </div>
                   </div>
                 </div>
               </div>
