@@ -21,7 +21,7 @@ interface ServiceSidebarProps {
 const faceServices: Service[] = [
   { name: "SkinVive", href: "/face/skinvive" },
   { name: "Face Skin Lesion Removal", href: "/face/skin-lesion-removal" },
-  { name: "Exilis® Radiofrequency Facial Tightening", href: "/face/exilis-facial" },
+  { name: "Exilis® Radiofrequency Facial Tightening", href: "/face/exilis" },
   { name: "Sunekos® Skin Booster", href: "/face/sunekos" },
   { name: "Profhilo® Skin Booster", href: "/face/profhilo" },
   { name: "Polynucleotide Skin Regeneration", href: "/face/polynucleotides" },
@@ -71,6 +71,7 @@ const womensHealthServices: ServiceSection[] = [
       { name: "Hymenoplasty (Surgical)", href: "/womens-health/hymenoplasty" },
       { name: "Labiaplasty (Surgical)", href: "/womens-health/labiaplasty" },
       { name: "Intimate Area Lesion Removal", href: "/womens-health/intimate-lesion-removal" },
+      { name: "Labial Rejuvenation (HA)", href: "/womens-health/labial-rejuvenation-hyaluronic-acid" },
     ]
   }
 ]

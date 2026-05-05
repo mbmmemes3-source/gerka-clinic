@@ -1,0 +1,285 @@
+"use client"
+
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { 
+  ArrowLeft, 
+  ShieldCheck, 
+  Droplets, 
+  Sparkles, 
+  Target, 
+  ArrowRight, 
+  Activity, 
+  Heart,
+  Stethoscope,
+  Dna,
+  RefreshCw,
+  Clock,
+  Euro,
+  Info,
+  UserCheck,
+  CheckCircle2
+} from "lucide-react"
+import Link from "next/link"
+import { ServiceSidebar } from "@/components/ServiceSidebar"
+
+const treatmentModalities = [
+  {
+    id: "procedure",
+    title: "The Procedure",
+    subtitle: "Non-Surgical Sculpting",
+    image: "/lab2.webp", // Ensure you have relevant medical/abstract imagery
+    description: "A specialized dermal filler is carefully injected into the labia majora to restore youthful volume and protect the vaginal entrance.",
+    benefits: [
+      "Local anaesthetic for total comfort",
+      "Immediate visible improvement",
+      "Medical-grade Hyaluronic Acid",
+      "30–45 minute treatment time"
+    ],
+    approach: "Precision sculpting to achieve a natural, balanced and subtle aesthetic result."
+  },
+  {
+    id: "causes",
+    title: "Volume Loss",
+    subtitle: "Why it occurs",
+    image: "/labi2.webp",
+    description: "Intimate tissue changes are a natural part of life, often resulting in a deflated or sagging appearance of the labia majora.",
+    benefits: [
+      "Natural ageing process",
+      "Menopause & hormonal shifts",
+      "Significant weight loss",
+      "Post-pregnancy changes"
+    ],
+    approach: "Addressing the underlying structural changes that impact both comfort and confidence."
+  },
+  {
+    id: "recovery",
+    title: "Recovery",
+    subtitle: "Results & Aftercare",
+    image: "/labi3.webp",
+    description: "Minimal downtime allows for a quick return to daily activities, with results that typically last between 9 and 18 months.",
+    benefits: [
+      "Immediate restoration of volume",
+      "Minimal downtime required",
+      "Long-lasting (up to 18 months)",
+      "Improved biological barrier"
+    ],
+    approach: "Progressive improvement in skin quality and tissue hydration over the following weeks."
+  }
+]
+
+export default function LabialRejuvenationPage() {
+  const [activeTab, setActiveTab] = useState(treatmentModalities[0])
+
+  return (
+    <main className="bg-white">
+      
+      {/* 1. TOP NAVIGATION */}
+      <div className="pt-32 pb-8 px-6 md:px-10 max-w-7xl mx-auto">
+        <Link href="/" className="group inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-900 transition-colors">
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Back to women's health</span>
+        </Link>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-20">
+          
+          {/* 2. REUSABLE SIDEBAR */}
+          <ServiceSidebar 
+            activeService="Labial Rejuvenation" 
+            categoryTitle="Women's Health" 
+          />
+
+          {/* 3. MAIN CONTENT AREA */}
+          <div className="lg:col-span-9 space-y-16 md:space-y-24 pb-20">
+            
+            {/* HERO SECTION */}
+            <section className="space-y-12">
+              <div className="space-y-6">
+                <motion.div 
+                   initial={{ opacity: 0, y: 10 }}
+                   animate={{ opacity: 1, y: 0 }}
+                   className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 text-white text-[9px] font-bold uppercase tracking-[0.2em]"
+                >
+                  <Sparkles size={12} /> Non-Surgical Aesthetic
+                </motion.div>
+                <h1 className="text-4xl md:text-6xl font-light text-zinc-900 tracking-tight leading-tight">
+                  Labial Rejuvenation <br />
+                  <span className="italic font-serif text-zinc-500 font-light text-3xl md:text-5xl">with Hyaluronic Acid</span>
+                </h1>
+                <div className="flex flex-wrap gap-4 border-b border-zinc-200 pb-8">
+                  <span className="text-xs font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2">
+                    <Euro size={14} className="text-zinc-400" /> €100 Deposit Required
+                  </span>
+                  <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest italic border-l border-zinc-200 pl-4">
+                    Restore Volume & Hydration
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div className="space-y-6 text-zinc-600 font-light leading-relaxed text-[17px]">
+                  <p>
+                    At Gerka Clinic, we offer advanced labial rejuvenation using hyaluronic acid—a treatment designed to restore volume, improve hydration, and enhance the appearance of the labia majora in a natural and subtle way.
+                  </p>
+                  <p>
+                    As part of our regenerative and aesthetic gynaecology approach, this treatment is tailored to each patient, respecting both <span className="text-zinc-900 font-medium italic underline decoration-zinc-200 underline-offset-4">function and aesthetics</span>.
+                  </p>
+                </div>
+                <div className="aspect-[5/5] rounded-[3.5rem] overflow-hidden shadow-2xl border-white border-8 relative">
+                  <img src="/labi.jpg" alt="Labial Rejuvenation Consultation" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            </section>
+
+            {/* WHAT IS IT SECTION */}
+            <section className="bg-[#FAF9F6] rounded-[3rem] p-10 md:p-16 border border-zinc-100 shadow-sm space-y-10">
+               <div className="max-w-3xl space-y-6">
+                  <h2 className="text-3xl font-light text-zinc-900">What is <span className="italic font-serif text-zinc-500 font-light">Labial Rejuvenation?</span></h2>
+                  <p className="text-zinc-500 font-light leading-relaxed">
+                    This procedure involves the careful injection of a specialised dermal filler into the labia majora to restore lost volume due to ageing, menopause, or weight loss. Beyond aesthetics, it improves the natural barrier of the vaginal entrance and enhances intimate comfort.
+                  </p>
+               </div>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-zinc-200">
+                  <div className="flex gap-4">
+                     <Droplets size={24} className="text-zinc-400 shrink-0" />
+                     <p className="text-sm text-zinc-600 font-light leading-relaxed">Enhance hydration, softness, and skin elasticity in the intimate area.</p>
+                  </div>
+                  <div className="flex gap-4">
+                     <ShieldCheck size={24} className="text-zinc-400 shrink-0" />
+                     <p className="text-sm text-zinc-600 font-light leading-relaxed">Protect the vaginal entrance by improving the natural tissue barrier.</p>
+                  </div>
+               </div>
+            </section>
+
+            {/* INTERACTIVE TABS SECTION */}
+            <section className="py-12">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+                <div className="lg:col-span-4 flex flex-col space-y-3">
+                  {treatmentModalities.map((modal) => (
+                    <button
+                      key={modal.id}
+                      onClick={() => setActiveTab(modal)}
+                      className={`text-left px-6 py-5 rounded-2xl transition-all duration-500 border flex justify-between items-center group ${
+                        activeTab.id === modal.id 
+                        ? "bg-zinc-900 border-zinc-900 text-white shadow-xl translate-x-2" 
+                        : "bg-white border-zinc-100 text-zinc-400 hover:border-zinc-300"
+                      }`}
+                    >
+                      <span className="text-base font-medium tracking-tight">{modal.title}</span>
+                      <ArrowRight className={`w-4 h-4 transition-transform duration-500 ${activeTab.id === modal.id ? "translate-x-0" : "-translate-x-4 opacity-0"}`} />
+                    </button>
+                  ))}
+                </div>
+
+                <div className="lg:col-span-8">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTab.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.4 }}
+                      className="space-y-8"
+                    >
+                      <div className="aspect-video rounded-[2.5rem] overflow-hidden shadow-xl border border-zinc-100">
+                        <img src={activeTab.image} alt={activeTab.title} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="space-y-6">
+                        <h3 className="text-2xl md:text-3xl font-light text-zinc-900">{activeTab.subtitle}</h3>
+                        <p className="text-zinc-500 text-lg font-light leading-relaxed">{activeTab.description}</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                           <ul className="space-y-3">
+                             {activeTab.benefits.map(b => (
+                               <li key={b} className="flex items-center gap-3 text-sm text-zinc-600 font-light">
+                                 <CheckCircle2 size={16} className="text-emerald-500" /> {b}
+                               </li>
+                             ))}
+                           </ul>
+                           <div className="p-6 bg-zinc-50 rounded-2xl border border-zinc-100 italic text-zinc-500 text-sm font-light">
+                             <span className="font-bold uppercase tracking-widest text-[9px] block mb-2 text-zinc-400">Clinical Focus</span>
+                             {activeTab.approach}
+                           </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </section>
+
+            {/* SUITABILITY & COMBINED APPROACH */}
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-zinc-900 text-white p-12 rounded-[3.5rem] space-y-8 shadow-xl relative overflow-hidden flex flex-col justify-between">
+                <div className="space-y-6 relative z-10">
+                  <h3 className="text-2xl md:text-3xl font-light leading-tight">
+                    The Gerka <br/><span className="italic font-serif text-zinc-400">Philosophy</span>
+                  </h3>
+                  <p className="text-zinc-400 font-light leading-relaxed text-sm">
+                    We go beyond aesthetics by combining aesthetic medicine with regenerative treatments. To enhance tissue regeneration, we may combine this treatment with:
+                  </p>
+                  <ul className="space-y-4 pt-4">
+                    {[
+                      "Platelet-Rich Plasma (PRP)",
+                      "Cellular Matrix (Regen Lab)",
+                      "Energy-based devices (Radiofrequency)"
+                    ].map(text => (
+                      <li key={text} className="flex items-center gap-3 text-xs uppercase tracking-widest font-bold text-zinc-200">
+                        <div className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> {text}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-white/5 blur-3xl rounded-full" />
+              </div>
+
+              <div className="bg-white border border-zinc-200 p-12 rounded-[3.5rem] space-y-8 flex flex-col justify-center shadow-sm">
+                <div className="space-y-6">
+                   <div className="w-12 h-12 rounded-full bg-[#FAF9F6] flex items-center justify-center border border-zinc-100">
+                      <UserCheck size={20} className="text-zinc-900" />
+                   </div>
+                   <h3 className="text-2xl font-light text-zinc-900 tracking-tight">Who is it for?</h3>
+                   <ul className="space-y-3">
+                     {[
+                       "Visible volume loss or sagging",
+                       "Dryness or reduced tissue quality",
+                       "Seeking non-surgical alternatives",
+                       "Desire for increased intimate confidence"
+                     ].map(item => (
+                       <li key={item} className="text-sm text-zinc-500 font-light flex gap-3">
+                          <span className="text-zinc-900">▪</span> {item}
+                       </li>
+                     ))}
+                   </ul>
+                </div>
+                <div className="pt-6 border-t border-zinc-100 flex items-center gap-3">
+                   <ShieldCheck size={16} className="text-zinc-400" />
+                   <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Premium Medically Approved Products</span>
+                </div>
+              </div>
+            </section>
+
+            {/* FINAL CTA */}
+            <section className="bg-zinc-900 rounded-[3rem] p-10 md:p-20 flex flex-col items-center text-center space-y-8 shadow-2xl relative overflow-hidden">
+              <div className="space-y-3 relative z-10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">Restore Confidence</p>
+                <h2 className="text-3xl md:text-5xl font-light text-white leading-tight">Start your rejuvenation <br/> journey</h2>
+                <p className="text-zinc-400 text-sm font-light max-w-lg mx-auto">
+                  A €100 booking deposit is required, which is fully deductible from the total cost of your treatment.
+                </p>
+              </div>
+              <Link href="/#contact" className="relative z-10">
+                <button className="bg-white text-zinc-900 px-12 py-5 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-xl">
+                  Book A Consultation
+                </button>
+              </Link>
+              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-zinc-100/5 blur-[120px] rounded-full" />
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}

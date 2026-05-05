@@ -133,7 +133,7 @@ const navItems = [
         items: [
            { label: "Private Smear Test Dublin", href: "/womens-health/private-smear-test-dublin" },
           { label: "Vulval Lichen Specialist Care", href: "/womens-health/vulval-lichen" },
-          { label: "Vaginal Dryness & Genitourinary Syndrome Support", href: "/womens-health/vaginal-dryness" }
+          { label: "Vaginal Dryness & Genitourinary Syndrome Support", href: "/womens-health/vaginal-dryness" },
         ]
       },
       {
@@ -153,6 +153,7 @@ const navItems = [
           { label: "Hymenoplasty (Surgical)", href: "/womens-health/hymenoplasty" },
           { label: "Labiaplasty (Surgical)", href: "/womens-health/labiaplasty" },
           { label: "Intimate Area Lesion Removal", href: "/womens-health/intimate-lesion-removal" },
+          { label: "Labial Rejuvenation (HA)", href: "/womens-health/labial-rejuvenation-hyaluronic-acid" },
         ]
       }
     ]
