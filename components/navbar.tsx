@@ -153,7 +153,7 @@ const navItems = [
           { label: "Hymenoplasty (Surgical)", href: "/womens-health/hymenoplasty" },
           { label: "Labiaplasty (Surgical)", href: "/womens-health/labiaplasty" },
           { label: "Intimate Area Lesion Removal", href: "/womens-health/intimate-lesion-removal" },
-          { label: "Labial Rejuvenation (HA)", href: "/womens-health/labial-rejuvenation-hyaluronic-acid" },
+          { label: "Labia Rejuvenation (HA)", href: "/womens-health/labia-rejuvenation-hyaluronic-acid" },
         ]
       }
     ]

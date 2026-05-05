@@ -28,7 +28,7 @@ const treatmentModalities = [
     id: "procedure",
     title: "The Procedure",
     subtitle: "Non-Surgical Sculpting",
-    image: "/lab2.webp", // Ensure you have relevant medical/abstract imagery
+    image: "/labi.png", // Ensure you have relevant medical/abstract imagery
     description: "A specialized dermal filler is carefully injected into the labia majora to restore youthful volume and protect the vaginal entrance.",
     benefits: [
       "Local anaesthetic for total comfort",
@@ -87,7 +87,7 @@ export default function LabialRejuvenationPage() {
           
           {/* 2. REUSABLE SIDEBAR */}
           <ServiceSidebar 
-            activeService="Labial Rejuvenation" 
+            activeService="Labia Rejuvenation" 
             categoryTitle="Women's Health" 
           />
 
@@ -105,7 +105,7 @@ export default function LabialRejuvenationPage() {
                   <Sparkles size={12} /> Non-Surgical Aesthetic
                 </motion.div>
                 <h1 className="text-4xl md:text-6xl font-light text-zinc-900 tracking-tight leading-tight">
-                  Labial Rejuvenation <br />
+                  Labia Rejuvenation <br />
                   <span className="italic font-serif text-zinc-500 font-light text-3xl md:text-5xl">with Hyaluronic Acid</span>
                 </h1>
                 <div className="flex flex-wrap gap-4 border-b border-zinc-200 pb-8">
@@ -121,14 +121,14 @@ export default function LabialRejuvenationPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div className="space-y-6 text-zinc-600 font-light leading-relaxed text-[17px]">
                   <p>
-                    At Gerka Clinic, we offer advanced labial rejuvenation using hyaluronic acid—a treatment designed to restore volume, improve hydration, and enhance the appearance of the labia majora in a natural and subtle way.
+                    At Gerka Clinic, we offer advanced labia rejuvenation using hyaluronic acid—a treatment designed to restore volume, improve hydration, and enhance the appearance of the labia majora in a natural and subtle way.
                   </p>
                   <p>
                     As part of our regenerative and aesthetic gynaecology approach, this treatment is tailored to each patient, respecting both <span className="text-zinc-900 font-medium italic underline decoration-zinc-200 underline-offset-4">function and aesthetics</span>.
                   </p>
                 </div>
                 <div className="aspect-[5/5] rounded-[3.5rem] overflow-hidden shadow-2xl border-white border-8 relative">
-                  <img src="/labi.jpg" alt="Labial Rejuvenation Consultation" className="w-full h-full object-cover" />
+                  <img src="/labi.jpg" alt="Labia Rejuvenation Consultation" className="w-full h-full object-cover" />
                 </div>
               </div>
             </section>
@@ -136,7 +136,7 @@ export default function LabialRejuvenationPage() {
             {/* WHAT IS IT SECTION */}
             <section className="bg-[#FAF9F6] rounded-[3rem] p-10 md:p-16 border border-zinc-100 shadow-sm space-y-10">
                <div className="max-w-3xl space-y-6">
-                  <h2 className="text-3xl font-light text-zinc-900">What is <span className="italic font-serif text-zinc-500 font-light">Labial Rejuvenation?</span></h2>
+                  <h2 className="text-3xl font-light text-zinc-900">What is <span className="italic font-serif text-zinc-500 font-light">Labia Rejuvenation?</span></h2>
                   <p className="text-zinc-500 font-light leading-relaxed">
                     This procedure involves the careful injection of a specialised dermal filler into the labia majora to restore lost volume due to ageing, menopause, or weight loss. Beyond aesthetics, it improves the natural barrier of the vaginal entrance and enhances intimate comfort.
                   </p>

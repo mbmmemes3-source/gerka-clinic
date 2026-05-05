@@ -71,7 +71,7 @@ const womensHealthServices: ServiceSection[] = [
       { name: "Hymenoplasty (Surgical)", href: "/womens-health/hymenoplasty" },
       { name: "Labiaplasty (Surgical)", href: "/womens-health/labiaplasty" },
       { name: "Intimate Area Lesion Removal", href: "/womens-health/intimate-lesion-removal" },
-      { name: "Labial Rejuvenation (HA)", href: "/womens-health/labial-rejuvenation-hyaluronic-acid" },
+      { name: "Labia Rejuvenation (HA)", href: "/womens-health/labia-rejuvenation-hyaluronic-acid" },
     ]
   }
 ]
