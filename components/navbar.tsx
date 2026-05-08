@@ -142,7 +142,8 @@ const navItems = [
           { label: "Emsella® Chair Pelvic Floor Treatment", href: "/womens-health/emsella" },
           { label: "Vaginal PRP Treatment", href: "/womens-health/prp" },
           { label: "O-Shot® & P-Shot® (Sexual Wellness)", href: "/womens-health/oshot-pshot" },
-          { label: "Vaginismus: Advanced Specialist Treatment", href: "/womens-health/vaginismus" }
+          { label: "Vaginismus: Advanced Specialist Treatment", href: "/womens-health/vaginismus" },
+          { label: "Fraxx™ Vaginal Rejuvenation", href: "/womens-health/fraxx-vaginal-rejuvenation" },
         ]
       },
       {
