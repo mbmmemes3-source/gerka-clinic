@@ -150,13 +150,9 @@ export function ContactSection() {
                       required 
                       className="w-full bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light appearance-none text-sm md:text-base cursor-pointer"
                     >
-                      <option value="">Select Language</option>
                       <option value="English">English</option>
-                      <option value="Irish">Irish (Gaeilge)</option>
-                      <option value="Polish">Polish</option>
-                      <option value="French">French</option>
                       <option value="Spanish">Spanish</option>
-                      <option value="Other">Other</option>
+                      <option value="Persian">Persian (فارسی)</option>
                     </select>
                     <ChevronDown size={14} className="absolute right-0 bottom-3 pointer-events-none opacity-40" />
                   </div>
