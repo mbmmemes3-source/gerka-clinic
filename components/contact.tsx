@@ -9,9 +9,7 @@ import { CldUploadWidget } from 'next-cloudinary'
 export function ContactSection() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string>("")
-  const formRef = useState<HTMLFormElement>(null)
 
-  // Restore scroll (Cloudinary widget sometimes breaks it)
   const restoreScroll = () => {
     document.body.style.overflow = 'auto'
     document.body.style.paddingRight = '0px'
@@ -24,9 +22,7 @@ export function ContactSection() {
     }
   }
 
-  const removeImage = () => {
-    setUploadedImageUrl("")
-  }
+  const removeImage = () => setUploadedImageUrl("")
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -54,7 +50,7 @@ export function ContactSection() {
         phone: formData.get("phone") || "",
         contact_method: formData.get("contact_method") || "",
         treatment: formData.get("treatment") || "",
-        language: formData.get("language") || "",
+        language: formData.get("language") || "",           // ← Now properly captured
         message: formData.get("message") || "",
         file_url: uploadedImageUrl || "",
         time: new Date().toLocaleString(),
@@ -71,7 +67,6 @@ export function ContactSection() {
         setStatus("success")
         form.reset()
         setUploadedImageUrl("")
-
         setTimeout(() => setStatus("idle"), 3000)
       } else {
         throw new Error("EmailJS failed")
@@ -99,7 +94,7 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-20 items-start">
           
-          {/* LEFT SIDE: INFO */}
+          {/* LEFT SIDE - IMAGE */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -116,7 +111,7 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* RIGHT SIDE: FORM */}
+          {/* RIGHT SIDE - FORM */}
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -124,43 +119,74 @@ export function ContactSection() {
             viewport={{ once: true }}
             className="flex flex-col order-1 lg:order-2"
           >
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 md:space-y-10">
+            <form onSubmit={handleSubmit} className="space-y-8 md:space-y-10">
               <input type="text" name="company" className="hidden" tabIndex={-1} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                {/* Name */}
                 <div className="flex flex-col space-y-2">
                   <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Full Name</label>
                   <input required name="name" type="text" placeholder="Sophie" className="bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 placeholder:text-zinc-300 font-light text-sm md:text-base" />
                 </div>
                 
+                {/* Email */}
                 <div className="flex flex-col space-y-2">
                   <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Email Address</label>
                   <input required name="email" type="email" placeholder="sophie@example.com" className="bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 placeholder:text-zinc-300 font-light text-sm md:text-base" />
                 </div>
 
+                {/* Phone */}
                 <div className="flex flex-col space-y-2">
                   <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Phone Number</label>
                   <input required name="phone" type="tel" placeholder="+353..." className="bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 placeholder:text-zinc-300 font-light text-sm md:text-base" />
                 </div>
 
-                {/* === MODERN CLOUDINARY UPLOAD === */}
+                {/* Preferred Language - NEW FIELD */}
                 <div className="flex flex-col space-y-2">
+                  <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Preferred Language</label>
+                  <div className="relative">
+                    <select 
+                      name="language" 
+                      required 
+                      className="w-full bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light appearance-none text-sm md:text-base cursor-pointer"
+                    >
+                      <option value="">Select Language</option>
+                      <option value="English">English</option>
+                      <option value="Irish">Irish (Gaeilge)</option>
+                      <option value="Polish">Polish</option>
+                      <option value="French">French</option>
+                      <option value="Spanish">Spanish</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <ChevronDown size={14} className="absolute right-0 bottom-3 pointer-events-none opacity-40" />
+                  </div>
+                </div>
+
+                {/* Photo Upload */}
+                                {/* Photo Upload - Compact Version */}
+                <div className="flex flex-col space-y-2 md:col-span-2">
                   <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Upload Photo (Optional)</label>
                   
                   {uploadedImageUrl ? (
-                    <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-50">
-                      <button
-                        type="button"
+                    <div className="relative flex items-center gap-4 bg-zinc-50 border border-zinc-200 rounded-2xl p-3">
+                      <div className="w-16 h-16 rounded-xl overflow-hidden border border-zinc-100 flex-shrink-0">
+                        <img 
+                          src={uploadedImageUrl} 
+                          alt="Uploaded" 
+                          className="w-full h-full object-cover" 
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-zinc-700 truncate">Image uploaded successfully</p>
+                        <p className="text-[10px] text-zinc-400">Click the X to remove</p>
+                      </div>
+                      <button 
+                        type="button" 
                         onClick={removeImage}
-                        className="absolute top-3 right-3 z-10 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                        className="p-2 text-zinc-400 hover:text-red-500 transition-colors"
                       >
-                        <X size={16} />
+                        <X size={18} />
                       </button>
-                      <img 
-                        src={uploadedImageUrl} 
-                        alt="Uploaded" 
-                        className="w-full h-full object-cover" 
-                      />
                     </div>
                   ) : (
                     <CldUploadWidget 
@@ -171,21 +197,20 @@ export function ContactSection() {
                       {({ open }) => (
                         <div 
                           onClick={() => open?.()}
-                          className="w-full aspect-[4/3] bg-[#FAF9F6] border-2 border-dashed border-zinc-200 rounded-2xl flex flex-col items-center justify-center space-y-4 group cursor-pointer hover:border-zinc-400 transition-all active:scale-[0.985]"
+                          className="border border-dashed border-zinc-300 hover:border-zinc-400 transition-colors rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-zinc-50 hover:bg-white group"
                         >
-                          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                            <Upload size={20} className="text-zinc-400" />
+                          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm mb-3 group-hover:scale-110 transition-transform">
+                            <Upload size={18} className="text-zinc-400" />
                           </div>
-                          <div className="text-center">
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Click to Upload Image</p>
-                            <p className="text-[9px] text-zinc-300">Photo of concern area</p>
-                          </div>
+                          <p className="text-sm font-medium text-zinc-600">Click to upload image</p>
+                          <p className="text-[10px] text-zinc-400 mt-1">Photo of concern area (optional)</p>
                         </div>
                       )}
                     </CldUploadWidget>
                   )}
                 </div>
 
+                {/* Treatment */}
                 <div className="flex flex-col space-y-2">
                   <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Desired Treatment</label>
                   <div className="relative">
@@ -199,8 +224,9 @@ export function ContactSection() {
                   </div>
                 </div>
 
+                {/* Contact Method */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Reach you via?</label>
+                  <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Preferred Contact Method</label>
                   <div className="relative">
                     <select name="contact_method" className="w-full bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light appearance-none text-sm md:text-base cursor-pointer">
                       <option value="Email">Email</option>
@@ -212,9 +238,10 @@ export function ContactSection() {
                 </div>
               </div>
 
+              {/* Message */}
               <div className="flex flex-col space-y-2">
                 <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Message</label>
-                <textarea required name="message" rows={3} placeholder="How can we help you?" className="bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light resize-none text-sm md:text-base" />
+                <textarea required name="message" rows={4} placeholder="How can we help you?" className="bg-transparent border-b border-zinc-200 py-2 focus:outline-none focus:border-zinc-900 transition-colors text-zinc-800 font-light resize-none text-sm md:text-base" />
               </div>
 
               <div className="pt-2">
@@ -229,20 +256,8 @@ export function ContactSection() {
                   {status === "loading" ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
                 </button>
 
-                {status === "success" && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 text-green-600 text-[12px] font-medium tracking-wide">
-                    Thank you! Your inquiry has been sent.
-                  </motion.p>
-                )}
-                {status === "error" && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 text-red-500 text-[12px] font-medium tracking-wide">
-                    Something went wrong. Please try again.
-                  </motion.p>
-                )}
-                
-                <p className="text-[9px] md:text-[10px] text-zinc-400 mt-8 tracking-widest leading-relaxed max-w-[280px]">
-                  By submitting this form, you agree to our privacy policy and data protection guidelines.
-                </p>
+                {status === "success" && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 text-green-600 text-sm">Thank you! Your inquiry has been sent.</motion.p>}
+                {status === "error" && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 text-red-500 text-sm">Something went wrong. Please try again.</motion.p>}
               </div>
             </form>
           </motion.div>
