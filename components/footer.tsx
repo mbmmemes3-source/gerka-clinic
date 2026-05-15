@@ -18,7 +18,6 @@ const services = [
   { name: "Body", color: "bg-[#D4C2C2]", href: "/body/cellulite" },
   { name: "Nails", color: "bg-[#F3E5F5]", href: "/nail" },
   { name: "Women's health", color: "bg-[#D1B68C]", href: "/womens-health/emsella" },
-  /* Added 4 Major Services below */
   { name: "Hand Rejuvenation", color: "bg-[#E2E2E2]", href: "/hand-rejuvenation" },
   { name: "Hair Loss", color: "bg-[#C9D6C9]", href: "/hair-loss-treatments" },
   { name: "Earlobe Rejuvenation", color: "bg-[#E8D7CF]", href: "/earlobe-rejuvenation-lobuloplasty" },
@@ -36,6 +35,13 @@ const navLinks = {
     { label: "Terms & Conditions", href: "/terms" },
   ]
 }
+
+const socialIcons = [
+  { Icon: Instagram, href: "#" },
+  { Icon: Facebook, href: "#" },
+  { Icon: Twitter, href: "#" },
+  { Icon: MessageCircle, href: "https://wa.me/919772187400" }, // WhatsApp Link
+]
 
 export function Footer() {
   const scrollToTop = () => {
@@ -82,10 +88,12 @@ export function Footer() {
             </Link>
 
             <div className="flex items-center gap-4 md:gap-5">
-              {[Instagram, Facebook, Twitter, MessageCircle].map((Icon, i) => (
+              {socialIcons.map(({ Icon, href }, i) => (
                 <motion.a
                   key={i}
-                  href="#"
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5, scale: 1.1 }}
                   className="w-10 h-10 rounded-full border border-zinc-300 flex items-center justify-center text-zinc-600 hover:bg-zinc-800 hover:text-white hover:border-zinc-800 transition-all duration-300 shadow-sm"
                 >
@@ -117,14 +125,15 @@ export function Footer() {
                   A94NH31
                 </p>
               </a>
-              <a href="tel:0878888087" className="flex items-center gap-4 group cursor-pointer">
+              {/* Added WhatsApp to Phone Click as well */}
+              <a href="https://wa.me/919772187400" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
                 <Phone size={18} className="text-zinc-400 group-hover:text-zinc-800 transition-colors flex-shrink-0" />
-                <p className="text-xs md:text-sm tracking-widest text-zinc-600">0878888087</p>
+                <p className="text-xs md:text-sm tracking-widest text-zinc-600">+91 9772187400</p>
               </a>
             </div>
           </div>
 
-          {/* SECTION 3: SERVICES (Now with 8 items) */}
+          {/* SECTION 3: SERVICES */}
           <div className="lg:col-span-2 space-y-6 md:space-y-8">
             <h4 className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-zinc-400">Services</h4>
             <div className="flex flex-wrap lg:flex-col gap-3 items-start">
@@ -166,9 +175,15 @@ export function Footer() {
 
         {/* BOTTOM BAR */}
         <div className="pt-8 md:pt-12 flex flex-col-reverse md:flex-row justify-between items-center gap-8 md:gap-6">
-          <p className="text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] uppercase text-zinc-400 font-medium text-center md:text-left">
-            © {new Date().getFullYear()} Gerka Clinic. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p className="text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] uppercase text-zinc-400 font-medium text-center md:text-left">
+              © {new Date().getFullYear()} Gerka Clinic. All rights reserved.
+            </p>
+            <span className="hidden md:block text-zinc-300">|</span>
+            <p className="text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] uppercase text-zinc-500 font-bold">
+              Designed by <span className="text-zinc-800">Jinesh Mehta</span>
+            </p>
+          </div>
           
           <motion.button
             onClick={scrollToTop}
