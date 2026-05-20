@@ -63,7 +63,7 @@ export default function VaginalPRPPage() {
                 </h1>
                 <div className="flex flex-wrap gap-6 border-b border-zinc-200 pb-8">
                   <span className="text-xs font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2">
-                    <Euro size={14} className="text-zinc-400" /> Cost: €550 per session
+                    <Euro size={14} className="text-zinc-400" /> Cost: From €550 per session
                   </span>
                   <span className="text-xs font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2">
                     <Clock size={14} className="text-zinc-400" /> Duration: 45-60 min
@@ -177,7 +177,7 @@ export default function VaginalPRPPage() {
                 <div className="space-y-4">
                    <h3 className="text-2xl font-light text-white uppercase tracking-tight leading-tight">Treatment Protocol</h3>
                    <p className="text-sm text-zinc-400 font-light leading-relaxed">
-                    Treatment plans are personalised. Some patients benefit from a <span className="text-white font-bold">single session (€550)</span>, while others may require a series of treatments depending on clinical assessment.
+                    Treatment plans are personalised. Some patients benefit from a <span className="text-white font-bold">single session (From €550)</span>, while others may require a series of treatments depending on clinical assessment.
                    </p>
                 </div>
                 <div className="p-6 bg-white/5 rounded-2xl border border-white/10 flex items-center gap-4">
