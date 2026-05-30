@@ -129,21 +129,7 @@ export default function GiftCardPage() {
                <AddToCartSection product={virtualProduct as any} />
             </div>
 
-            {/* INFO ACCORDIONS */}
-            <div className="space-y-1">
-                <details className="group border-b border-zinc-100 last:border-0">
-                  <summary className="flex justify-between items-center py-6 cursor-pointer list-none">
-                    <div className="flex items-center gap-3">
-                       <span className="text-zinc-300"><Info size={16}/></span>
-                       <span className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-800">Redemption Details</span>
-                    </div>
-                    <ChevronRight size={16} className="group-open:rotate-90 transition-transform text-zinc-400" />
-                  </summary>
-                  <div className="pb-8 text-zinc-500 font-light text-[15px] leading-relaxed pl-7">
-                    Digital vouchers are issued immediately upon successful payment. The recipient will receive an email with a unique 16-digit code. To use, simply enter this code in the "Gift Card" field during the checkout process.
-                  </div>
-                </details>
-            </div>
+            
 
             {/* TERMS MARKER */}
             <div className="mt-12 p-6 bg-zinc-50 rounded-2xl border border-zinc-100 flex items-center gap-4">
