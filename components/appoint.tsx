@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
+import emailjs from "@emailjs/browser"
 import { 
   ChevronRight, 
   ChevronLeft, 
   User, 
-  CheckCircle2, 
   Stethoscope, 
   Sparkles, 
   ShieldCheck,
@@ -17,6 +17,11 @@ import {
   Lock,
   CreditCard
 } from "lucide-react"
+
+// --- CONSTANTS ---
+const EMAILJS_SERVICE_ID = "service_b76ckpf"; 
+const EMAILJS_TEMPLATE_ID = "template_hz7w4le";
+const EMAILJS_PUBLIC_KEY = "Zy58hFATigNeLEvW-";
 
 const services = [
   { 
@@ -50,26 +55,16 @@ export default function AppointmentBooking() {
     message: ""
   })
 
-  // ✅ ADDED: Auto select service from URL
+  // ✅ Auto select service from URL
   useEffect(() => {
     const serviceFee = searchParams.get("service")
-
     if (serviceFee) {
       const selected = services.find(s => s.fee === Number(serviceFee))
-
       if (selected) {
-        setFormData(prev => ({
-          ...prev,
-          service: selected
-        }))
-
+        setFormData(prev => ({ ...prev, service: selected }))
         setStep(2)
-
-        // scroll to booking section
         setTimeout(() => {
-          document.getElementById("booking")?.scrollIntoView({
-            behavior: "smooth"
-          })
+          document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })
         }, 100)
       }
     }
@@ -78,18 +73,50 @@ export default function AppointmentBooking() {
   const handleNext = () => setStep(s => s + 1)
   const handleBack = () => setStep(s => s - 1)
 
+  // ✅ Send Email via EmailJS
+  const sendEmailNotification = async () => {
+    const templateParams = {
+      to_name: "Dr. Evelyn Alba",
+      patient_name: formData.name,
+      patient_email: formData.email,
+      patient_phone: formData.phone,
+      service_requested: formData.service.title,
+      booking_fee: `€${formData.service.fee}`,
+      preferred_time: formData.message || "Not specified",
+    };
+
+    return emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      templateParams,
+      EMAILJS_PUBLIC_KEY
+    );
+  }
+
   const handleStripePayment = async () => {
     setLoading(true)
     try {
+      // 1. Send Email Notification
+      await sendEmailNotification();
+
+      // 2. Call your internal API to save to DB & Create Stripe Session
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      
       const data = await response.json();
-      if (data.url) window.location.href = data.url;
+      
+      if (data.url) {
+        // Redirect to Stripe
+        window.location.href = data.url;
+      } else {
+        throw new Error("Failed to create checkout session");
+      }
     } catch (err) {
-      alert("System error. Please contact the clinic directly.");
+      console.error("Booking Error:", err);
+      alert("There was an issue processing your booking. Please try again or contact us directly.");
       setLoading(false);
     }
   }
@@ -125,7 +152,7 @@ export default function AppointmentBooking() {
           </motion.p>
         </div>
 
-        {/* --- PROGRESS INDICATOR (Responsive Dots) --- */}
+        {/* --- PROGRESS INDICATOR --- */}
         <div className="mb-8 md:mb-12 flex justify-center items-center gap-3">
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex items-center">
@@ -140,7 +167,7 @@ export default function AppointmentBooking() {
           <div className="p-6 md:p-14 flex-1">
             <AnimatePresence mode="wait">
               
-              {/* STEP 1: SERVICE */}
+              {/* STEP 1: SERVICE SELECTION */}
               {step === 1 && (
                 <motion.div 
                   key="step1" 
@@ -183,7 +210,7 @@ export default function AppointmentBooking() {
                 </motion.div>
               )}
 
-              {/* STEP 2: DETAILS */}
+              {/* STEP 2: PATIENT DETAILS */}
               {step === 2 && (
                 <motion.div 
                   key="step2" 
@@ -220,21 +247,19 @@ export default function AppointmentBooking() {
                       </div>
                     </div>
                     <div className="space-y-1.5 md:col-span-2">
-                      <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-400 ml-1">
-  Preferred Day & Time
-</label>
-
-<textarea
-  className="w-full p-4 rounded-xl md:rounded-2xl bg-zinc-50 border border-transparent focus:border-zinc-200 focus:bg-white outline-none transition-all h-24 resize-none text-sm font-light"
-  placeholder="E.g. Monday morning, Friday after 5 PM..."
-  value={formData.message}
-  onChange={e => setFormData({ ...formData, message: e.target.value })}
-/></div>
+                      <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-400 ml-1">Preferred Day & Time</label>
+                      <textarea
+                        className="w-full p-4 rounded-xl md:rounded-2xl bg-zinc-50 border border-transparent focus:border-zinc-200 focus:bg-white outline-none transition-all h-24 resize-none text-sm font-light"
+                        placeholder="E.g. Monday morning, Friday after 5 PM..."
+                        value={formData.message}
+                        onChange={e => setFormData({ ...formData, message: e.target.value })}
+                      />
+                    </div>
                   </div>
                 </motion.div>
               )}
 
-              {/* STEP 3: CONFIRMATION */}
+              {/* STEP 3: FINAL REVIEW */}
               {step === 3 && (
                 <motion.div 
                   key="step3" 
