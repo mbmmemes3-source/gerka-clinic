@@ -26,12 +26,32 @@ export default function CheckoutPage() {
     if (cart.length === 0) return
     setLoading(true)
 
-    // IMPORTANT: Ensure keys match exactly with the API route
+    // --- STRIPE IMAGE FIX FOR GERKACLINIC.COM ---
+    const domain = "https://gerkaclinic.com"
+
+    const sanitizedCart = cart.map(item => {
+        let stripeImageUrl = item.image;
+
+        // 1. If the path is relative (e.g. /gift.png), prepend the full domain
+        if (stripeImageUrl.startsWith('/')) {
+            stripeImageUrl = `${domain}${stripeImageUrl}`;
+        }
+
+        // 2. Safety Check: Stripe only accepts public URLs starting with http/https
+        // We also filter out localhost to prevent the 500 error during local testing
+        const isValid = stripeImageUrl.startsWith('http') && !stripeImageUrl.includes('localhost');
+
+        return {
+            ...item,
+            image: isValid ? stripeImageUrl : "" // Use empty string if invalid; Stripe ignores empty, but crashes on invalid.
+        };
+    });
+
     const payload = {
-      customerDetails: formData, // Object containing address/phone
-      customerEmail: formData.email, // String
-      items: cart, // Array of products
-      amount: subtotal // Number
+      customerDetails: formData,
+      customerEmail: formData.email,
+      items: sanitizedCart, // Sending the data with absolute URLs
+      amount: subtotal
     }
 
     try {
