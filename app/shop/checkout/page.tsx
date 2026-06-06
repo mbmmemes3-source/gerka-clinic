@@ -5,6 +5,12 @@ import { useCart } from "@/context/CartContext"
 import { motion } from "framer-motion"
 import { ArrowLeft, ShieldCheck, Loader2, Lock } from "lucide-react"
 import Link from "next/link"
+import emailjs from "@emailjs/browser"
+
+// --- EMAILJS CONFIG ---
+const EMAILJS_SERVICE_ID = "service_b76ckpf"; 
+const EMAILJS_TEMPLATE_ID = "template_hz7w4le";
+const EMAILJS_PUBLIC_KEY = "Zy58hFATigNeLEvW-";
 
 export default function CheckoutPage() {
   const { cart, cartCount } = useCart()
@@ -21,40 +27,75 @@ export default function CheckoutPage() {
     country: "Ireland"
   })
 
+  // ✅ Send Email Notification via EmailJS (Same template)
+  const sendEmailNotification = async () => {
+    // Format cart items for email
+    const itemsList = cart.map(item => 
+      `${item.name} × ${item.quantity} - €${(item.price * item.quantity).toFixed(2)}`
+    ).join("\n");
+
+    const shippingAddress = `${formData.address}, ${formData.city}, ${formData.postcode}, ${formData.country}`;
+
+    const templateParams = {
+      to_name: "Dr. Evelyn Alba",
+      patient_name: formData.name,
+      patient_email: formData.email,
+      patient_phone: formData.phone,
+      service_requested: "Shop Order", // Using same field name
+      booking_fee: `€${subtotal.toFixed(2)}`, // Using same field name (Total Amount)
+      preferred_time: `Shipping Address: ${shippingAddress}\n\nItems:\n${itemsList}`, // Using same field name
+    };
+
+    try {
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+      console.log("Order confirmation email sent:", response.status, response.text);
+      return response;
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      throw error;
+    }
+  };
+
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault()
     if (cart.length === 0) return
     setLoading(true)
 
-    // --- STRIPE IMAGE FIX FOR GERKACLINIC.COM ---
-    const domain = "https://gerkaclinic.com"
-
-    const sanitizedCart = cart.map(item => {
-        let stripeImageUrl = item.image;
-
-        // 1. If the path is relative (e.g. /gift.png), prepend the full domain
-        if (stripeImageUrl.startsWith('/')) {
-            stripeImageUrl = `${domain}${stripeImageUrl}`;
-        }
-
-        // 2. Safety Check: Stripe only accepts public URLs starting with http/https
-        // We also filter out localhost to prevent the 500 error during local testing
-        const isValid = stripeImageUrl.startsWith('http') && !stripeImageUrl.includes('localhost');
-
-        return {
-            ...item,
-            image: isValid ? stripeImageUrl : "" // Use empty string if invalid; Stripe ignores empty, but crashes on invalid.
-        };
-    });
-
-    const payload = {
-      customerDetails: formData,
-      customerEmail: formData.email,
-      items: sanitizedCart, // Sending the data with absolute URLs
-      amount: subtotal
-    }
-
     try {
+      // 1. Send Email Notification First
+      await sendEmailNotification();
+
+      // --- STRIPE IMAGE FIX FOR GERKACLINIC.COM ---
+      const domain = "https://gerkaclinic.com"
+
+      const sanitizedCart = cart.map(item => {
+          let stripeImageUrl = item.image;
+
+          if (stripeImageUrl.startsWith('/')) {
+              stripeImageUrl = `${domain}${stripeImageUrl}`;
+          }
+
+          const isValid = stripeImageUrl.startsWith('http') && !stripeImageUrl.includes('localhost');
+
+          return {
+              ...item,
+              image: isValid ? stripeImageUrl : ""
+          };
+      });
+
+      const payload = {
+        customerDetails: formData,
+        customerEmail: formData.email,
+        items: sanitizedCart,
+        amount: subtotal
+      }
+
+      // 2. Create Stripe Checkout Session
       const response = await fetch("/api/shop/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -69,8 +110,9 @@ export default function CheckoutPage() {
         throw new Error(data.error || "Checkout Session Failed")
       }
     } catch (err: any) {
-      console.error("Frontend Error:", err)
-      alert(err.message || "Error processing order.")
+      console.error("Checkout Error:", err)
+      alert(err.message || "Error processing your order. Please try again.")
+    } finally {
       setLoading(false)
     }
   }
@@ -96,27 +138,65 @@ export default function CheckoutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2 space-y-1.5">
                 <label className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest ml-2">Full Name</label>
-                <input required placeholder="Enter your full name" className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                <input 
+                  required 
+                  placeholder="Enter your full name" 
+                  className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" 
+                  value={formData.name} 
+                  onChange={e => setFormData({...formData, name: e.target.value})} 
+                />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest ml-2">Email</label>
-                <input required type="email" placeholder="email@example.com" className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
+                <input 
+                  required 
+                  type="email" 
+                  placeholder="email@example.com" 
+                  className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" 
+                  value={formData.email} 
+                  onChange={e => setFormData({...formData, email: e.target.value})} 
+                />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest ml-2">Phone</label>
-                <input required type="tel" placeholder="+353" className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
+                <input 
+                  required 
+                  type="tel" 
+                  placeholder="+353" 
+                  className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" 
+                  value={formData.phone} 
+                  onChange={e => setFormData({...formData, phone: e.target.value})} 
+                />
               </div>
               <div className="md:col-span-2 space-y-1.5">
                 <label className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest ml-2">Street Address</label>
-                <input required placeholder="House number and street name" className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} />
+                <input 
+                  required 
+                  placeholder="House number and street name" 
+                  className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" 
+                  value={formData.address} 
+                  onChange={e => setFormData({...formData, address: e.target.value})} 
+                />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest ml-2">City</label>
-                <input required placeholder="e.g. Dublin" className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} />
+                <input 
+                  required 
+                  placeholder="e.g. Dublin" 
+                  className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" 
+                  value={formData.city} 
+                  onChange={e => setFormData({...formData, city: e.target.value})} 
+                />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest ml-2">Eircode / Postcode</label>
-                <input required placeholder="e.g. A94 NH31" className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" value={formData.postcode} onChange={e => setFormData({...formData, postcode: e.target.value})} />
+                <input 
+                  required 
+                  placeholder="e.g. A94 NH31" 
+                  className="w-full p-4 bg-white border border-zinc-200 rounded-2xl outline-none focus:border-zinc-900 transition-all text-sm" 
+                  value={formData.postcode} 
+                  onChange={e => setFormData({...formData, postcode: e.target.value})} 
+                />
               </div>
             </div>
 
@@ -125,7 +205,11 @@ export default function CheckoutPage() {
               disabled={loading || cart.length === 0}
               className="w-full bg-zinc-900 text-white py-6 rounded-full font-bold uppercase tracking-[0.3em] text-[11px] shadow-2xl flex items-center justify-center gap-4 active:scale-[0.98] disabled:bg-zinc-200 transition-all"
             >
-              {loading ? <Loader2 className="animate-spin" size={18} /> : <>Confirm & Pay €{subtotal.toFixed(2)} <Lock size={14}/></>}
+              {loading ? (
+                <>Processing... <Loader2 className="animate-spin" size={18} /></>
+              ) : (
+                <>Confirm & Pay €{subtotal.toFixed(2)} <Lock size={14}/></>
+              )}
             </button>
           </form>
         </div>
