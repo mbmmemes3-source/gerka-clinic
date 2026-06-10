@@ -150,7 +150,7 @@ export default function FaceTreatmentsPage() {
     {
       icon: Syringe,
       category: "Injectables",
-      title: "Anti-Wrinkle and Injections",
+      title: "Anti-Wrinkle Injections",
       desc: "Precision placement of botulinum toxin to relax expression lines, soften forehead creases, and restore a naturally rested, refreshed appearance.",
       bullets: ["Forehead lines, frown lines & crow's feet", "Results visible within 3–5 days", "Natural-looking, lasting 3–4 months", "15–30 minute in-clinic appointment"],
       image: "/botox.png",
