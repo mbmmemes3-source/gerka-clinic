@@ -150,7 +150,7 @@ export default function FaceTreatmentsPage() {
     {
       icon: Syringe,
       category: "Injectables",
-      title: "Anti-Wrinkle & Botox Injections",
+      title: "Anti-Wrinkle and Injections",
       desc: "Precision placement of botulinum toxin to relax expression lines, soften forehead creases, and restore a naturally rested, refreshed appearance.",
       bullets: ["Forehead lines, frown lines & crow's feet", "Results visible within 3–5 days", "Natural-looking, lasting 3–4 months", "15–30 minute in-clinic appointment"],
       image: "/botox.png",
@@ -204,7 +204,7 @@ export default function FaceTreatmentsPage() {
   ]
 
   const testimonials = [
-    { name: "Sarah M.", location: "Dublin 4", review: "I was nervous about Botox for the first time, but the practitioner explained everything so clearly. Three weeks on and I look refreshed — not different. Exactly what I wanted.", treatment: "Anti-Wrinkle Treatment" },
+    { name: "Sarah M.", location: "Dublin 4", review: "I was nervous about injections for the first time, but the practitioner explained everything so clearly. Three weeks on and I look refreshed — not different. Exactly what I wanted.", treatment: "Anti-Wrinkle Treatment" },
     { name: "Claire B.", location: "Blackrock", review: "My skin has never looked this good. The HydraFacial left me genuinely glowing for weeks. I've already booked my next session.", treatment: "HydraFacial MD" },
     { name: "Emma T.", location: "South Dublin", review: "After years of struggling with acne I finally feel confident without makeup. The tailored programme made all the difference — I wish I'd come sooner.", treatment: "Clinical Acne Treatment" },
   ]
