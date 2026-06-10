@@ -574,7 +574,7 @@ export default function SkinScalpLandingPage() {
       {/* ── FINAL CTA ───────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 text-center bg-[#FAF9F6]">
         <div className="max-w-3xl mx-auto px-6">
-          <Badge className="mb-8">Limited slots this month</Badge>
+          <Badge className="mb-8">Consultations Available</Badge>
           <h2 className="section-h2 font-light tracking-tighter text-zinc-900">Ready for clearer skin?</h2>
           <p className="mt-5 text-xl text-zinc-500 font-light">Book your no-obligation consultation today.</p>
           <motion.a
