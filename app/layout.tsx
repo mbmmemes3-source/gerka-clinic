@@ -88,19 +88,21 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
 
         {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-EM6G0VZMJ5"
-          strategy="afterInteractive"
-        />
+       {/* Google Ads Tag */}
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id=AW-18205338617"
+  strategy="afterInteractive"
+/>
 
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-EM6G0VZMJ5');
-          `}
-        </Script>
+<Script id="google-ads" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-18205338617');
+  `}
+</Script>
 
         {/* JSON-LD Structured Data for Medical Clinic */}
         <script
