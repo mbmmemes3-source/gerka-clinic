@@ -9,6 +9,7 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import emailjs from "emailjs-com"
+import { useRouter } from "next/navigation" // Add this
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 const Badge = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -101,6 +102,7 @@ const TestimonialCard = ({ name, location, review, treatment, index }: any) => (
 
 // ─── Main Page ───────────────────────────────────────────────────────────────
 export default function FaceTreatmentsPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -112,9 +114,12 @@ export default function FaceTreatmentsPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Safety checks: stop if honeypot is filled or already loading
     if (honeypot || status === "loading") return
+    
     setStatus("loading")
 
     try {
@@ -136,12 +141,31 @@ export default function FaceTreatmentsPage() {
       )
 
       if (result.text === "OK") {
+        // 1. Show success state in the UI
         setStatus("success")
-        setFormData({ name: "", phone: "", email: "", treatment: "", contact_method: "Phone Call" })
-        setTimeout(() => setStatus("idle"), 6000)
-      } else throw new Error()
-    } catch {
+        
+        // 2. Clear the form data
+        setFormData({ 
+          name: "", 
+          phone: "", 
+          email: "", 
+          treatment: "", 
+          contact_method: "Phone Call" 
+        })
+
+        // 3. Wait 1.5 seconds, then redirect to the thank you page
+        // This allows the user to see the "Request Received" UI feedback first
+        setTimeout(() => {
+          router.push("/thank-you")
+        }, 1500)
+        
+      } else {
+        throw new Error("EmailJS responded with an error")
+      }
+    } catch (error) {
+      console.error("Submission error:", error)
       setStatus("error")
+      // Reset error state after 4 seconds so they can try again
       setTimeout(() => setStatus("idle"), 4000)
     }
   }

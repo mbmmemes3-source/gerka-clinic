@@ -10,6 +10,7 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 import emailjs from "emailjs-com"
+import { useRouter } from "next/navigation" // Add this
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 const Badge = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -74,6 +75,7 @@ const TestimonialCard = ({ name, review, date, stars, role }: any) => (
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 export default function SkinScalpLandingPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "",
     treatment: "General Inquiry",
@@ -84,11 +86,16 @@ export default function SkinScalpLandingPage() {
   const [honeypot, setHoneypot] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // 1. Prevent bot spam and double clicks
     if (honeypot || status === "loading") return
+    
     setStatus("loading")
+
     try {
+      // 2. Send the email via EmailJS
       const result = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
@@ -105,13 +112,35 @@ export default function SkinScalpLandingPage() {
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
+
       if (result.text === "OK") {
+        // 3. Update UI to show the success checkmark
         setStatus("success")
-        setFormData({ name: "", phone: "", email: "", treatment: "General Inquiry", contact_method: "Email", language: "English", message: "" })
-        setTimeout(() => setStatus("idle"), 5000)
-      } else throw new Error()
-    } catch {
+        
+        // 4. Reset form fields
+        setFormData({ 
+          name: "", 
+          phone: "", 
+          email: "", 
+          treatment: "General Inquiry", 
+          contact_method: "Email", 
+          language: "English", 
+          message: "" 
+        })
+
+        // 5. Redirect to the Thank You page after 1.5 seconds
+        // We use a delay so the user sees the "Inquiry received!" message first
+        setTimeout(() => {
+          router.push("/thank-you")
+        }, 1500)
+
+      } else {
+        throw new Error("Failed to send email")
+      }
+    } catch (error) {
+      console.error("Submission Error:", error)
       setStatus("error")
+      // Re-enable the form after 4 seconds if there was an error
       setTimeout(() => setStatus("idle"), 4000)
     }
   }
