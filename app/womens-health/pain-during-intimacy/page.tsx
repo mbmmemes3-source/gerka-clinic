@@ -39,7 +39,7 @@ export default function PainDuringIntimacyPage() {
     <main className="bg-white min-h-screen overflow-x-hidden">
       
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-28 pb-16 md:pt-40 md:pb-32 lg:pt-48 lg:pb-32 bg-[#FAF9F6] overflow-hidden">
+      <section className="relative pt-28 pb-16 md:pt-40 md:pb-32 lg:pt-18 lg:pb-12 bg-[#FAF9F6] overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-10 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
