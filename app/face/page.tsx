@@ -156,7 +156,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         // 3. Wait 1.5 seconds, then redirect to the thank you page
         // This allows the user to see the "Request Received" UI feedback first
         setTimeout(() => {
-          router.push("/thank-you")
+          router.push("/face/thank-you")
         }, 1500)
         
       } else {

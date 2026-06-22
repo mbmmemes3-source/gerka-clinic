@@ -131,7 +131,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         // 5. Redirect to the Thank You page after 1.5 seconds
         // We use a delay so the user sees the "Inquiry received!" message first
         setTimeout(() => {
-          router.push("/thank-you")
+          router.push("/skin/thank-you")
         }, 1500)
 
       } else {
