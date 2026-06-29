@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react" // Added useEffect
 import { motion, AnimatePresence } from "framer-motion"
 import {
   ShieldCheck, Microscope, Sparkles, Sun, Sprout,
@@ -10,7 +10,7 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 import emailjs from "emailjs-com"
-import { useRouter } from "next/navigation" // Add this
+import { useRouter } from "next/navigation"
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 const Badge = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -76,6 +76,16 @@ const TestimonialCard = ({ name, review, date, stars, role }: any) => (
 // ─── Page ────────────────────────────────────────────────────────────────────
 export default function SkinScalpLandingPage() {
   const router = useRouter()
+
+  // 1. Handle SEO inside the Client Component since export const metadata is disallowed here
+  useEffect(() => {
+    document.title = "Dermatology Dublin | Dublin Laser & Skin Clinic | Gerka Clinic";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Looking for dermatology Dublin services? Gerka Clinic is a trusted Dublin laser and skin clinic offering advanced treatments for pigmentation, rosacea, skin rejuvenation and more.");
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "",
     treatment: "General Inquiry",
@@ -86,16 +96,12 @@ export default function SkinScalpLandingPage() {
   const [honeypot, setHoneypot] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
-const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    // 1. Prevent bot spam and double clicks
     if (honeypot || status === "loading") return
-    
     setStatus("loading")
 
     try {
-      // 2. Send the email via EmailJS
       const result = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
@@ -114,33 +120,17 @@ const handleSubmit = async (e: React.FormEvent) => {
       )
 
       if (result.text === "OK") {
-        // 3. Update UI to show the success checkmark
         setStatus("success")
-        
-        // 4. Reset form fields
-        setFormData({ 
-          name: "", 
-          phone: "", 
-          email: "", 
-          treatment: "General Inquiry", 
-          contact_method: "Email", 
-          language: "English", 
-          message: "" 
-        })
-
-        // 5. Redirect to the Thank You page after 1.5 seconds
-        // We use a delay so the user sees the "Inquiry received!" message first
+        setFormData({ name: "", phone: "", email: "", treatment: "General Inquiry", contact_method: "Email", language: "English", message: "" })
         setTimeout(() => {
           router.push("/skin/thank-you")
         }, 1500)
-
       } else {
         throw new Error("Failed to send email")
       }
     } catch (error) {
       console.error("Submission Error:", error)
       setStatus("error")
-      // Re-enable the form after 4 seconds if there was an error
       setTimeout(() => setStatus("idle"), 4000)
     }
   }
