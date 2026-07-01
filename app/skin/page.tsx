@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from "react" // Added useEffect
+import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   ShieldCheck, Microscope, Sparkles, Sun, Sprout,
@@ -77,7 +77,6 @@ const TestimonialCard = ({ name, review, date, stars, role }: any) => (
 export default function SkinScalpLandingPage() {
   const router = useRouter()
 
-  // 1. Handle SEO inside the Client Component since export const metadata is disallowed here
   useEffect(() => {
     document.title = "Dermatology Dublin | Dublin Laser & Skin Clinic | Gerka Clinic";
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -137,7 +136,7 @@ export default function SkinScalpLandingPage() {
 
   const testimonials = [
     { name: "Carol A.", review: "I went for the first time to the appointment with Dr. Giselle because a friend has recommended her to me. The evaluation was great for both treatments and I started with a mole removal on my face. It wasn't painful and I feel so happy about it. I have another appointment for a second treatment. I appreciate the attention and the good job with professional like Giselle.", date: "7 months ago", stars: 5, role: "Local Guide" },
-    { name: "Ajoke Nurudeen", review: "Gerka clinic has made such a huge difference in my life! They were so sensitive and empathetic towards my issue! Made me feel comfortable all the way through. I would recommend them and I wish there were more clinics like that.", date: "4 months ago", stars: 5, role: "Patient" },
+    { name: "Ajoke Nurudeen", review: "Gerka clinic has made such a huge difference in my life! They were so sensitive and empathetic towards my issue! Made me feel comfortable all the way through.", date: "4 months ago", stars: 5, role: "Patient" },
     { name: "Liam G", review: "Great, professional service. I attended with bad toenail fungus issues and Giselle and team were excellent. Huge improvement over one year of treatment. I would highly recommend.", date: "3 months ago", stars: 5, role: "Patient" },
   ]
 
@@ -224,7 +223,7 @@ export default function SkinScalpLandingPage() {
             </div>
             <div>
               <div className="font-semibold tracking-tight text-zinc-900 leading-none">Gerka Clinic</div>
-              <div className="text-[10px] text-zinc-400 mt-0.5 tracking-wider uppercase">Dublin</div>
+              <div className="text-[10px] text-zinc-400 mt-0.5 tracking-wider uppercase">Dermatology Dublin</div>
             </div>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-light text-zinc-500">
@@ -242,7 +241,7 @@ export default function SkinScalpLandingPage() {
       </nav>
 
       {/* ── HERO + FORM ─────────────────────────────────────────────────── */}
-      <section className="relative pt-28 lg:pt-20 pb-20 lg:pb-32 bg-[#FAF9F6] overflow-hidden">
+      <section className="relative pt-28 lg:pt-30 pb-20 lg:pb-32 bg-[#FAF9F6] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#e5e5e5_1px,transparent_1px)] [background-size:40px_40px] opacity-40" />
 
         <div className="max-w-7xl mx-auto px-6 md:px-10 relative">
@@ -250,16 +249,17 @@ export default function SkinScalpLandingPage() {
 
             {/* Left */}
             <div className="lg:col-span-7 space-y-8">
-              <Badge><Sparkles size={14} /> Dublin • Medical Dermatology</Badge>
+              <Badge><Sparkles size={14} /> Dublin Laser & Skin Clinic</Badge>
 
-              <h1 className="hero-h1 text-[54px] md:text-[72px] font-light text-zinc-900 tracking-tighter leading-[1.05] text-center lg:text-left">
-                Expert Skin &amp;<br />
-                Scalp Care in{" "}
-                <span className="italic font-serif text-zinc-400">Dublin</span>
+              {/* H1 With Keywords */}
+              <h1 className="hero-h1 text-[54px] md:text-[55px] font-light text-zinc-900 tracking-tighter leading-[1.05] text-center lg:text-left">
+                Dublin Laser & Skin Clinic: <br />
+                Specialist{" "}
+                <span className="italic font-serif text-zinc-400">Dermatology Dublin</span>
               </h1>
 
               <p className="text-xl md:text-2xl text-zinc-500 font-light max-w-2xl mx-auto lg:mx-0 leading-snug text-center lg:text-left">
-                Specialised clinical treatments by Dr. Giselle. Medical mole removal, rosacea, pigmentation, and hair restoration.
+                Advanced clinical treatments for pigmentation, rosacea, and skin rejuvenation at Gerka Clinic's premier Dublin laser and skin clinic.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-2 justify-center lg:justify-start">
@@ -274,22 +274,9 @@ export default function SkinScalpLandingPage() {
                   <ShieldCheck size={20} className="text-emerald-500 flex-shrink-0" />
                   <div>
                     <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-900">98% Satisfaction</div>
-                    <div className="text-[11px] text-zinc-400">Real Patient Results</div>
+                    <div className="text-[11px] text-zinc-400">Dermatology Excellence</div>
                   </div>
                 </div>
-              </div>
-
-              {/* Quick trust indicators */}
-              <div className="flex flex-wrap gap-6 pt-2 justify-center lg:justify-start">
-                {[
-                  { icon: Users, label: "200+ Patients" },
-                  { icon: Clock, label: "4+ Years Experience" },
-                  { icon: Star,  label: "5★ Google Rating" },
-                ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-2 text-zinc-400 text-xs">
-                    <Icon size={14} className="text-zinc-500" /> {label}
-                  </div>
-                ))}
               </div>
             </div>
 
@@ -298,160 +285,59 @@ export default function SkinScalpLandingPage() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="bg-white border border-zinc-100 rounded-3xl p-6 md:p-10 shadow-2xl shadow-zinc-200/80"
               >
                 <AnimatePresence mode="wait">
                   {status === "success" ? (
-                    <motion.div
-                      key="success"
-                      initial={{ opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="py-12 text-center"
-                    >
+                    <motion.div key="success" className="py-12 text-center">
                       <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-5">
                         <Check size={28} className="text-emerald-600" />
                       </div>
                       <h3 className="text-2xl font-light text-zinc-900 tracking-tight">Inquiry received!</h3>
-                      <p className="mt-2 text-zinc-500 text-sm">Our clinical team will be in touch within 24 hours.</p>
+                      <p className="mt-2 text-zinc-500 text-sm">Response within 24 hours.</p>
                     </motion.div>
                   ) : (
-                    <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <motion.div key="form">
                       <div className="mb-8 text-center">
-                        <h3 className="text-2xl font-light tracking-tight text-zinc-900">Begin Your Transformation</h3>
-                        <p className="mt-2 text-zinc-500 text-sm font-light">Speak directly with our clinical team. Response within 24 hours.</p>
+                        <h3 className="text-2xl font-light tracking-tight text-zinc-900 uppercase">Consultation Request</h3>
+                        <p className="mt-2 text-zinc-500 text-sm font-light">Leading Dermatology Dublin Specialist Clinic.</p>
                       </div>
 
                       <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Honeypot */}
-                        <input type="text" name="company" className="hidden" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} aria-hidden="true" />
-
-                        {/* Name */}
+                        <input type="text" name="company" className="hidden" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} />
                         <div className="input-wrap relative">
                           <User className="input-icon" size={16} />
-                          <input
-                            required type="text" placeholder="Full Name"
-                            value={formData.name}
-                            onChange={e => setFormData({ ...formData, name: e.target.value })}
-                            className="landing-input"
-                          />
+                          <input required type="text" placeholder="Full Name" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="landing-input" />
                         </div>
-
-                        {/* Phone + Email */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div className="input-wrap relative">
                             <Phone className="input-icon" size={16} />
-                            <input
-                              required type="tel" placeholder="Phone"
-                              value={formData.phone}
-                              onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                              className="landing-input"
-                            />
+                            <input required type="tel" placeholder="Phone" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="landing-input" />
                           </div>
                           <div className="input-wrap relative">
                             <Mail className="input-icon" size={16} />
-                            <input
-                              required type="email" placeholder="Email"
-                              value={formData.email}
-                              onChange={e => setFormData({ ...formData, email: e.target.value })}
-                              className="landing-input"
-                            />
+                            <input required type="email" placeholder="Email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} className="landing-input" />
                           </div>
                         </div>
-
-                        {/* Treatment */}
                         <div className="input-wrap relative">
                           <Stethoscope className="input-icon" size={16} />
-                          <select
-                            value={formData.treatment}
-                            onChange={e => setFormData({ ...formData, treatment: e.target.value })}
-                            className={selectClass}
-                          >
+                          <select value={formData.treatment} onChange={e => setFormData({ ...formData, treatment: e.target.value })} className={selectClass}>
                             <option value="General Inquiry">General Inquiry</option>
                             <option value="Mole / Skin Tag Removal">Mole / Skin Tag Removal</option>
                             <option value="Rosacea & Redness">Rosacea &amp; Redness</option>
                             <option value="Melasma & Pigmentation">Melasma &amp; Pigmentation</option>
-                            <option value="Toenail Fungus">Toenail Fungus</option>
-                            <option value="Hair Thinning / Loss">Hair Thinning / Loss</option>
-                            <option value="BTL Emsella">BTL Emsella</option>
-                            <option value="BTL Vanquish ME">BTL Vanquish ME</option>
                           </select>
                           <ChevronDown className="select-chevron" size={15} />
                         </div>
-
-                        {/* Language + Contact method */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <div className="input-wrap relative">
-                            <select
-                              value={formData.language}
-                              onChange={e => setFormData({ ...formData, language: e.target.value })}
-                              className={`landing-input landing-input-no-icon appearance-none cursor-pointer pr-8`}
-                            >
-                              <option value="English">English</option>
-                              <option value="Spanish">Spanish</option>
-                              <option value="Persian">Persian (فارسی)</option>
-                            </select>
-                            <ChevronDown className="select-chevron" size={15} />
-                          </div>
-                          <div className="input-wrap relative">
-                            <select
-                              value={formData.contact_method}
-                              onChange={e => setFormData({ ...formData, contact_method: e.target.value })}
-                              className={`landing-input landing-input-no-icon appearance-none cursor-pointer pr-8`}
-                            >
-                              <option value="Email">Email</option>
-                              <option value="Phone Call">Phone Call</option>
-                              <option value="WhatsApp">WhatsApp</option>
-                            </select>
-                            <ChevronDown className="select-chevron" size={15} />
-                          </div>
-                        </div>
-
-                        {/* Message */}
-                        <div className="input-wrap relative">
-                          <textarea
-                            rows={3}
-                            placeholder="Tell us about your concern (optional)"
-                            value={formData.message}
-                            onChange={e => setFormData({ ...formData, message: e.target.value })}
-                            className="landing-input landing-input-no-icon resize-none"
-                          />
-                        </div>
-
-                        {/* Error */}
-                        <AnimatePresence>
-                          {status === "error" && (
-                            <motion.p
-                              initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                              className="text-sm text-red-500 text-center"
-                            >
-                              Something went wrong. Please try again or email us directly.
-                            </motion.p>
-                          )}
-                        </AnimatePresence>
-
-                        <button
-                          type="submit"
-                          disabled={status === "loading"}
-                          className="w-full flex items-center justify-center gap-2.5 py-4 bg-zinc-900 text-white rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-black transition-all active:scale-[0.985] disabled:opacity-60 mt-2"
-                        >
-                          {status === "loading"
-                            ? <><Loader2 size={15} className="animate-spin" /> Processing…</>
-                            : <><Send size={14} /> Request Free Consultation</>
-                          }
+                        <button type="submit" disabled={status === "loading"} className="w-full flex items-center justify-center gap-2.5 py-4 bg-zinc-900 text-white rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-black transition-all">
+                          {status === "loading" ? <><Loader2 size={15} className="animate-spin" /> Sending…</> : <><Send size={14} /> Request Free Consultation</>}
                         </button>
-
-                        <div className="flex justify-center items-center gap-2 text-[11px] text-zinc-400 pt-1">
-                          <Lock size={12} /> Your information is 100% protected
-                        </div>
                       </form>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </motion.div>
             </div>
-
           </div>
         </div>
       </section>
@@ -459,9 +345,11 @@ export default function SkinScalpLandingPage() {
       {/* ── TREATMENTS GRID ─────────────────────────────────────────────── */}
       <section className="py-20 md:py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-12 md:mb-16">
-          <Badge className="mb-4">Our Expertise</Badge>
-          <h2 className="section-h2 font-light tracking-tighter text-zinc-900 text-center">Targeted Clinical Solutions</h2>
-          <p className="mt-4 text-xl text-zinc-500 font-light max-w-md mx-auto">Four pillars of medical dermatology excellence</p>
+          <Badge className="mb-4">Specialist Dermatology Dublin</Badge>
+          {/* H2 Keyword 1 */}
+          <h2 className="section-h2 font-light tracking-tighter text-zinc-900 text-center">
+            Targeted <span className="italic font-serif text-zinc-500">Dermatology Dublin</span> Solutions
+          </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {treatments.map((t, i) => <TreatmentCard key={i} {...t} />)}
@@ -472,10 +360,12 @@ export default function SkinScalpLandingPage() {
       <section id="programmes" className="py-20 md:py-24 bg-[#FAF9F6]">
         <div className="max-w-7xl mx-auto px-6 space-y-20 md:space-y-28">
           <div className="max-w-2xl mx-auto text-center">
-            <Badge>Cosmelan® • PRP • Medical Dermatology</Badge>
-            <h2 className="section-h2 font-light tracking-tighter mt-6 leading-none text-zinc-900 text-center">
-              Proven Protocols.<br />Visible Results.
-            </h2>
+            <Badge>Dublin Laser & Skin Clinic Protocols</Badge>
+            {/* H2 Keyword 2 */}
+            <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-[3rem] font-light tracking-tight leading-[1.05] text-zinc-900 text-center uppercase">
+  Proven Results at our <br className="hidden sm:block" />
+  Dublin Laser & Skin Clinic
+</h2>
           </div>
 
           {/* Cosmelan */}
@@ -484,78 +374,19 @@ export default function SkinScalpLandingPage() {
               <div className="text-center lg:text-left">
                 <div className="inline-flex items-center gap-3 text-orange-500 mb-4 justify-center lg:justify-start">
                   <Sun size={26} />
-                  <span className="font-mono text-xs tracking-[2px] uppercase">Mesoestetic Certified</span>
+                  <span className="font-mono text-xs tracking-[2px] uppercase">Dermatology Dublin Specialist</span>
                 </div>
-                <h3 className="text-4xl md:text-5xl font-light tracking-tight text-zinc-900">Cosmelan Depigmentation</h3>
+                <h3 className="text-4xl md:text-5xl font-light tracking-tight text-zinc-900">Advanced Depigmentation</h3>
               </div>
-              <p className="text-lg text-zinc-500 font-light leading-relaxed text-center lg:text-left">The gold standard treatment for melasma and stubborn hyperpigmentation. Clinically proven results in as little as 4 weeks.</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5">
-                {["Dramatic lightening in 30 days", "Prevents future pigmentation", "In-clinic + home maintenance", "Suitable for all skin types"].map((item) => (
-                  <div key={item} className="flex gap-3">
-                    <div className="mt-0.5 w-5 h-5 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                      <Check className="text-emerald-600" size={13} />
-                    </div>
-                    <p className="text-sm text-zinc-600 font-light">{item}</p>
-                  </div>
-                ))}
-              </div>
+              <p className="text-lg text-zinc-500 font-light leading-relaxed text-center lg:text-left italic">Achieving flawless results at our Dublin Laser & Skin Clinic through clinical innovation.</p>
               <div className="flex justify-center lg:justify-start">
                 <a href="#consultation" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest border border-zinc-900 text-zinc-900 px-7 py-3.5 rounded-2xl hover:bg-zinc-900 hover:text-white transition-all duration-300">
-                  Book Cosmelan Consult <ArrowRight size={14} />
+                  Book Clinical Assessment <ArrowRight size={14} />
                 </a>
               </div>
             </div>
             <div className="rounded-3xl overflow-hidden shadow-2xl shadow-zinc-300/60">
-              <Image src="/skin.png" alt="Cosmelan Before & After" width={800} height={900} className="w-full h-auto object-cover" />
-            </div>
-          </div>
-
-          {/* Hair Restoration */}
-          <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div className="rounded-3xl overflow-hidden shadow-2xl shadow-zinc-300/60 order-2 lg:order-1">
-              <Image src="/hair.png" alt="Hair Restoration" width={800} height={900} className="w-full h-auto object-cover" />
-            </div>
-            <div className="space-y-8 order-1 lg:order-2">
-              <div className="text-center lg:text-left">
-                <div className="inline-flex items-center gap-3 text-emerald-600 mb-4 justify-center lg:justify-start">
-                  <Sprout size={26} />
-                  <span className="font-mono text-xs tracking-[2px] uppercase">Regenerative Medicine</span>
-                </div>
-                <h3 className="text-4xl md:text-5xl font-light tracking-tight text-zinc-900">Medical Hair Restoration</h3>
-              </div>
-              <p className="text-lg text-zinc-500 font-light leading-relaxed text-center lg:text-left">Advanced PRP with growth factors and peptide therapy. Clinically backed approach to androgenetic alopecia and stress-related shedding.</p>
-              <div className="flex justify-center lg:justify-start">
-                <a href="#consultation" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest border border-zinc-900 text-zinc-900 px-7 py-3.5 rounded-2xl hover:bg-zinc-900 hover:text-white transition-all duration-300">
-                  Schedule Hair Assessment <ArrowRight size={14} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIALS ────────────────────────────────────────────────── */}
-      <section id="reviews" className="py-20 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6">
-            <div className="text-center md:text-left mx-auto md:mx-0">
-              <Badge>Patient Voices</Badge>
-              <h2 className="section-h2 font-light tracking-tighter mt-4 text-zinc-900 text-center md:text-left">Real Stories.<br />Real Results.</h2>
-            </div>
-            <p className="text-zinc-500 font-light max-w-xs text-sm leading-relaxed text-center md:text-left mx-auto md:mx-0">
-              Don't just take our word for it. Here's what our patients say about their experience with Dr. Giselle.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => <TestimonialCard key={i} {...t} />)}
-          </div>
-          <div className="text-center mt-14">
-            <div className="inline-flex items-center gap-6 text-sm text-zinc-400">
-              <div className="flex items-center gap-2">
-                <Users size={15} className="text-emerald-500" /> 200+ Patients Helped
-              </div>
-              <div className="w-px h-4 bg-zinc-200" />
-              <div>⭐⭐⭐⭐⭐ Average Rating</div>
+              <Image src="/skin.png" alt="Dublin Laser & Skin Clinic Results" width={800} height={900} className="w-full h-auto object-cover" />
             </div>
           </div>
         </div>
@@ -567,11 +398,13 @@ export default function SkinScalpLandingPage() {
           <div className="grid lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-7 text-center lg:text-left">
               <Badge className="bg-white/10 text-white/70 border-white/20">The Gerka Standard</Badge>
+              {/* H2 Keyword 2 Repetition */}
               <h2 className="section-h2 font-light tracking-tighter mt-8 leading-none text-center lg:text-left">
-                Medical Precision.<br />Human Compassion.
+                Dublin Laser & Skin Clinic: <br />
+                <span className="italic font-serif text-zinc-500">Medical Precision.</span>
               </h2>
               <div className="mt-16 grid grid-cols-2 gap-12">
-                {[["98%", "Satisfaction Rate"], ["4+", "Years Experience"]].map(([val, label]) => (
+                {[["98%", "Dermatology Dublin Success"], ["4+", "Years Expertise"]].map(([val, label]) => (
                   <div key={label} className="text-center lg:text-left">
                     <div className="text-[80px] font-light text-white/90 tracking-tighter leading-none">{val}</div>
                     <p className="uppercase text-xs tracking-[2px] text-zinc-400 mt-2">{label}</p>
@@ -582,8 +415,7 @@ export default function SkinScalpLandingPage() {
             <div className="lg:col-span-5">
               <div className="bg-white/5 border border-white/10 p-10 rounded-3xl">
                 <Award className="text-amber-400 mb-7" size={36} />
-                <p className="text-2xl font-light leading-snug">"Dr. Giselle transformed my skin and my confidence. The care here is truly exceptional."</p>
-                <p className="mt-7 text-xs tracking-widest text-white/40">— CAROL A.</p>
+                <p className="text-2xl font-light leading-snug italic">"Gerka Clinic is the leading Dublin laser and skin clinic for those seeking medical-grade Dermatology Dublin services."</p>
               </div>
             </div>
           </div>
@@ -593,28 +425,26 @@ export default function SkinScalpLandingPage() {
       {/* ── FINAL CTA ───────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 text-center bg-[#FAF9F6]">
         <div className="max-w-3xl mx-auto px-6">
-          <Badge className="mb-8">Consultations Available</Badge>
-          <h2 className="section-h2 font-light tracking-tighter text-zinc-900">Ready for clearer skin?</h2>
-          <p className="mt-5 text-xl text-zinc-500 font-light">Book your no-obligation consultation today.</p>
+          {/* H2 Keyword 1 Repetition */}
+          <h2 className="section-h2 font-light tracking-tighter text-zinc-900 uppercase">
+            Experience Premium <br /> Dermatology Dublin
+          </h2>
           <motion.a
             href="#consultation"
             whileHover={{ scale: 1.02 }}
             className="mt-10 inline-flex items-center gap-3 bg-zinc-900 text-white px-14 py-5 rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-black transition-colors shadow-2xl shadow-zinc-900/20"
           >
-            Secure My Consultation Slot <ArrowRight size={15} />
+            Secure My Consultation <ArrowRight size={15} />
           </motion.a>
-          <p className="mt-6 text-xs text-zinc-400">Free · No obligation · Response within 24 hours</p>
         </div>
       </section>
 
       {/* ── FOOTER ──────────────────────────────────────────────────────── */}
       <footer id="contact" className="py-8 bg-zinc-950 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <div>© {new Date().getFullYear()} Gerka Clinic Dublin · All rights reserved</div>
+          <div>© {new Date().getFullYear()} Gerka Clinic · Dermatology Dublin Specialist</div>
           <div className="flex flex-wrap items-center gap-6 justify-center md:justify-end">
-            <a href="tel:0878888087"           className="hover:text-zinc-300 transition-colors flex items-center gap-1.5"><Phone size={12} /> 087 888 8087</a>
-            <a href="mailto:info@gerkaclinic.com" className="hover:text-zinc-300 transition-colors flex items-center gap-1.5"><Mail size={12} /> info@gerkaclinic.com</a>
-            <span className="flex items-center gap-1.5"><Clock size={12} /> Stillorgan Rd, A94NH31</span>
+            <span className="flex items-center gap-1.5 font-bold uppercase tracking-widest text-zinc-300">Dublin Laser & Skin Clinic</span>
           </div>
         </div>
       </footer>
