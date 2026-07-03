@@ -11,6 +11,7 @@ import Link from "next/link"
 import Image from "next/image"
 import emailjs from "emailjs-com"
 import { useRouter } from "next/navigation"
+import Head from "next/head"
 
 // ─── Components ─────────────────────────────────────────────────────────────
 
@@ -82,13 +83,18 @@ export default function IntimateHealthLandingPage() {
   }
 
   const procedures = [
-    { icon: Activity,  title: "Labiaplasty",    desc: "Surgical refinement of the labia minora for functional comfort and aesthetic symmetry.", image: "/labi2.avif" },
-    { icon: Zap,       title: "Non-Surgical",   desc: "Radiofrequency treatments to restore tissue tone and elasticity without clinical downtime.", image: "/ultra.webp" },
-    { icon: Droplets,  title: "Regenerative",   desc: "Advanced PRP and Cellular Matrix protocols to treat dryness, atrophy and lichen sclerosus.", image: "/oshot.jpg" },
-    { icon: Heart,     title: "GSM Support",    desc: "Comprehensive care for genitourinary symptoms of menopause and hormonal health.", image: "/4.webp" },
+    { icon: Zap,       title: "Emsella Pelvic Floor",         desc: "FDA-cleared BTL Emsella chair for bladder leakage, pelvic floor weakness and intimate wellness. No surgery, no downtime.", image: "/ultra.webp" },
+    { icon: Heart,     title: "Vaginal Dryness & Menopause",  desc: "Regenerative treatments for menopause-related dryness, discomfort and vaginal atrophy.", image: "/4.webp" },
+    { icon: Droplets,  title: "O-Shot / PRP",                desc: "Advanced PRP protocols to restore intimate sensitivity and treat dryness and atrophy.", image: "/oshot.jpg" },
+    { icon: Activity,  title: "Labiaplasty",                 desc: "Surgical refinement of the labia minora for functional comfort and aesthetic symmetry.", image: "/labi2.avif" },
   ]
 
   return (
+    <>
+    <Head>
+      <title>Emsella Pelvic Floor Treatment Dublin | Gerka Clinic Women&apos;s Health</title>
+      <meta name="description" content="Specialist women's health clinic in Dublin. Emsella pelvic floor treatment, vaginal dryness, O-Shot PRP & labiaplasty. Ireland's only Dr Runnels-certified clinic. Book free consultation." />
+    </Head>
     <main className="bg-white min-h-screen">
       <style jsx global>{`
         .intimate-input {
@@ -124,23 +130,31 @@ export default function IntimateHealthLandingPage() {
                 <Lock size={12} /> Confidential Specialist Care
               </Badge>
 
-              <h1 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[68px] font-light text-zinc-900 tracking-tighter leading-[1.1]">
-                Restoring Comfort.<br />
-                Enhancing <span className="italic font-serif text-zinc-400">Confidence.</span>
+              <h1 className="text-[32px] sm:text-[44px] md:text-[54px] lg:text-[62px] font-light text-zinc-900 tracking-tighter leading-[1.1]">
+                Emsella Pelvic Floor<br />
+                <span className="italic font-serif text-zinc-400">Treatment Dublin.</span>
               </h1>
 
               <p className="text-base md:text-lg lg:text-xl text-zinc-500 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Specialist-led intimate health clinic in Dublin. We provide surgical and regenerative solutions for Labiaplasty, menopause support, and functional wellness.
+                Certified BTL Emsella provider. Non-surgical treatment for bladder leakage, pelvic weakness &amp; intimate wellness. Results from session one.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link href="#consultation" className="w-full sm:w-auto bg-zinc-900 text-white px-8 md:px-10 py-4 rounded-2xl text-[11px] md:text-xs font-bold uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-zinc-200 text-center">
-                  Request Private Assessment
+                  Book Free Confidential Consultation
                 </Link>
-                <div className="flex items-center gap-3 px-6 py-4 bg-white border border-zinc-200 rounded-2xl w-full sm:w-auto justify-center">
-                  <Stethoscope size={20} className="text-zinc-400" />
-                  <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-zinc-900">Dr. Evelyn Alba · Gynaecologist</span>
-                </div>
+              </div>
+
+              <div className="flex flex-col items-center lg:items-start gap-1 pt-2">
+                <p className="text-[10px] md:text-[11px] text-zinc-500 font-light text-center lg:text-left">
+                  Ireland&apos;s Only Dr Runnels-Certified Women&apos;s Health Clinic
+                </p>
+                <p className="text-[10px] md:text-[11px] text-zinc-400 font-light text-center lg:text-left">
+                  Stillorgan Road, Dublin &middot; By Appointment
+                </p>
+                <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-zinc-500 text-center lg:text-left">
+                  SEGERF Board Registered Specialists
+                </p>
               </div>
             </div>
 
@@ -348,5 +362,6 @@ export default function IntimateHealthLandingPage() {
         </div>
       </footer>
     </main>
+    </>
   )
 }
