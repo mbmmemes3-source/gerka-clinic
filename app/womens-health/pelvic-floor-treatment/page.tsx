@@ -317,10 +317,12 @@ export default function PelvicFloorTreatmentDublin() {
                 <select className="clinical-input" value={formData.contact_method} onChange={e => setFormData({...formData, contact_method: e.target.value})}>
                   <option value="Phone">Prefer Phone</option>
                   <option value="Email">Prefer Email</option>
+                  <option value="Whatsapp">Prefer WhatsApp</option>
                 </select>
                 <select className="clinical-input" value={formData.language} onChange={e => setFormData({...formData, language: e.target.value})}>
                   <option value="English">English</option>
-                  <option value="Polish">Polish</option>
+                      <option value="Spanish">Spanish</option>
+                      <option value="Persian">Persian (فارسی)</option>
                 </select>
               </div>
 
