@@ -73,7 +73,7 @@ export default function FatReductionLanding() {
 
     if (result.text === "OK") {
       setStatus("success")
-      setTimeout(() => router.push("/body-contouring/thank-you"), 2000)
+      setTimeout(() => router.push("/fat-reduction/thank-you"), 2000)
     }
   } catch (error) {
     console.error("EmailJS Error:", error)
