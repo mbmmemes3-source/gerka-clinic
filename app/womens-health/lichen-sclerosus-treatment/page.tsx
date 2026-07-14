@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import {
   Check, Star, Lock, Phone, Mail, User, Clock,
   ChevronDown, Loader2, ShieldCheck, MapPin,
-  Sparkles, MessageCircle, Stethoscope, X, Send, ArrowRight,
-  Activity, Droplets, Info
+  Sparkles, MessageCircle, Stethoscope, Send, ArrowRight,
+  AlertCircle, Calendar, Users, Award
 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import emailjs from "emailjs-com"
@@ -24,9 +24,9 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
     name: "",
     phone: "",
     email: "",
-    concern: "General intimate wellness",
-    contact_method: "WhatsApp",
-    contact_time: "Morning"
+    duration: "Under 1 year",
+    contact_time: "Morning",
+    contact_method: "WhatsApp"
   })
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
@@ -43,9 +43,9 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
           email: formData.email,
           phone: formData.phone,
           contact_method: formData.contact_method,
-          treatment: `PRP / O-Shot - Concern: ${formData.concern}`,
+          treatment: `Lichen Sclerosus Treatment (Symptoms: ${formData.duration})`,
           language: "English",
-          message: `Preferred Contact Time: ${formData.contact_time}`,
+          message: `Preferred Contact Time: ${formData.contact_time}. Duration of symptoms: ${formData.duration}`,
           file_url: "",
           time: new Date().toLocaleString(),
         },
@@ -85,8 +85,8 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
           <motion.div key="form">
             <div className="mb-8 text-center">
               <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Judgement-Free & Confidential</span>
-              <h3 className="text-2xl font-light tracking-tight text-zinc-900 uppercase mt-1">Book A Confidential Consultation</h3>
-              <p className="mt-2 text-zinc-500 text-sm font-light">No obligation. Complete medical privacy guaranteed.</p>
+              <h3 className="text-2xl font-light tracking-tight text-zinc-900 uppercase mt-1">Book A Free Consultation</h3>
+              <p className="mt-2 text-zinc-500 text-sm font-light">No GP referral required. Complete medical privacy.</p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4" id={id}>
               <div className="input-wrap relative">
@@ -127,19 +127,16 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
               </div>
 
               <div className="input-wrap relative">
-                <Activity className="input-icon" size={16} />
+                <Clock className="input-icon" size={16} />
                 <select
-                  value={formData.concern}
-                  onChange={e => setFormData({ ...formData, concern: e.target.value })}
+                  value={formData.duration}
+                  onChange={e => setFormData({ ...formData, duration: e.target.value })}
                   className="landing-input landing-select"
                 >
-                  <option value="Reduced sensation">Main Concern: Reduced sensation</option>
-                  <option value="Vaginal dryness">Main Concern: Vaginal dryness</option>
-                  <option value="Difficulty with orgasm">Main Concern: Difficulty with orgasm</option>
-                  <option value="Post-menopausal changes">Main Concern: Post-menopausal changes</option>
-                  <option value="Post-pregnancy changes">Main Concern: Post-pregnancy changes</option>
-                  <option value="General intimate wellness">Main Concern: General intimate wellness</option>
-                  <option value="Other">Main Concern: Other</option>
+                  <option value="Under 1 year">Symptom Duration: Under 1 year</option>
+                  <option value="1–3 years">Symptom Duration: 1–3 years</option>
+                  <option value="3–5 years">Symptom Duration: 3–5 years</option>
+                  <option value="Over 5 years">Symptom Duration: Over 5 years</option>
                 </select>
                 <ChevronDown className="select-chevron" size={15} />
               </div>
@@ -179,7 +176,7 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
                 disabled={status === "loading"}
                 className="w-full flex items-center justify-center gap-2.5 py-4 bg-zinc-950 text-white rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-black transition-all disabled:opacity-70 shadow-lg"
               >
-                {status === "loading" ? <><Loader2 size={15} className="animate-spin" /> Submitting…</> : <><Send size={14} /> Book My Confidential Consultation</>}
+                {status === "loading" ? <><Loader2 size={15} className="animate-spin" /> Submitting…</> : <><Send size={14} /> Book My Free Consultation</>}
               </button>
               
               <div className="text-center space-y-1.5 pt-2">
@@ -187,7 +184,7 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
                   <Lock size={10} className="text-zinc-500" /> 100% confidential — GDPR secure
                 </p>
                 <p className="text-[10px] text-zinc-400">
-                  Your GP is never contacted without your consent.
+                  No GP referral needed · Your privacy is guaranteed.
                 </p>
               </div>
             </form>
@@ -224,14 +221,14 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   )
 }
 
-export default function OShotLandingPage() {
+export default function LichenSclerosusLandingPage() {
   const [showSticky, setShowSticky] = useState(false)
   
   useEffect(() => {
-    document.title = "O-Shot / PRP Treatment Dublin | Intimate Wellness | Gerka Clinic"
+    document.title = "Lichen Sclerosus Treatment Dublin | Advanced Care | Gerka Clinic"
     const metaDesc = document.querySelector('meta[name="description"]')
     if (metaDesc) {
-      metaDesc.setAttribute("content", "Restore sensitivity, pleasure, and treat vaginal dryness naturally with the O-Shot PRP treatment. Non-surgical, confidential medical clinic in Dublin.")
+      metaDesc.setAttribute("content", "Specialist gynaecologist-led treatment for Lichen Sclerosus at Gerka Clinic Dublin. Advanced CO2 laser and PRP therapies for long-term symptom control.")
     }
 
     const handleScroll = () => setShowSticky(window.scrollY > 500)
@@ -302,7 +299,7 @@ export default function OShotLandingPage() {
               href="#consultation-form"
               className="flex items-center justify-center gap-2 w-full bg-zinc-900 text-white py-4 rounded-2xl text-[11px] font-bold uppercase tracking-widest shadow-lg shadow-zinc-950/10"
             >
-              Book Confidential Consultation →
+              Book Free Consultation →
             </a>
           </motion.div>
         )}
@@ -319,7 +316,7 @@ export default function OShotLandingPage() {
         <MessageCircle size={26} fill="white" />
       </a>
 
-      {/* HEADER SECTION (Removed Main Nav, Single Logo) */}
+      {/* HEADER SECTION */}
       <header className="border-b border-zinc-100 bg-[#FAF9F6]/80 backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -346,7 +343,7 @@ export default function OShotLandingPage() {
       </header>
 
       {/* SECTION 1: HERO */}
-      <section className="relative pt-8 md:pt-0 pb-20 bg-gradient-to-b from-[#FAF9F6] to-white overflow-hidden">
+      <section className="relative pt-12 md:pt-20 pb-20 bg-gradient-to-b from-[#FAF9F6] to-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#18181b_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03]" />
         <div className="max-w-7xl mx-auto px-6 md:px-10 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -354,16 +351,16 @@ export default function OShotLandingPage() {
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
               <Badge>
-                Advanced Regenerative Women's Health
+                <Stethoscope size={12} className="text-zinc-900" /> Specialist Gynaecologist Care — No GP Referral Needed
               </Badge>
 
-              <h1 className="text-3xl sm:text-5xl md:text-5xl font-light text-zinc-900 tracking-tight leading-[1.1]">
-                O-Shot / PRP Treatment Dublin<br />
-                <span className="italic font-serif text-zinc-500 font-light block mt-1">Restore Sensitivity, Pleasure & Intimate Wellness</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-zinc-900 tracking-tight leading-[1.1]">
+                Lichen Sclerosus Treatment Dublin<br />
+                <span className="italic font-serif text-zinc-500 font-light block mt-1">Advanced Care Beyond Steroid Creams</span>
               </h1>
 
               <p className="text-lg md:text-xl text-zinc-600 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Platelet-rich plasma therapy to naturally restore intimate sensitivity, treat dryness and enhance sexual wellness. Medically administered at Gerka Clinic.
+                Specialist gynaecologist-led treatment for Lichen Sclerosus at Gerka Clinic Dublin. Clinically proven therapies for long-term symptom control and quality of life.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
@@ -371,17 +368,17 @@ export default function OShotLandingPage() {
                   href="#consultation-form"
                   className="inline-flex items-center justify-center gap-2 bg-zinc-950 text-white px-8 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-zinc-950/10"
                 >
-                  Book a Confidential Consultation <ArrowRight size={14} />
+                  Book a Free Confidential Consultation <ArrowRight size={14} />
                 </a>
               </div>
 
               {/* Trust Bar */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 px-6 py-4 bg-white border border-zinc-200 rounded-2xl mx-auto lg:mx-0 w-fit text-[10px] font-bold uppercase tracking-widest text-zinc-500 shadow-sm">
-                <span className="flex items-center gap-1"><span className="text-amber-400">★★★★★</span> Google Reviews</span>
+                <span className="flex items-center gap-1"><span className="text-amber-400">★★★★★</span></span>
                 <span className="text-zinc-200">|</span>
-                <span>SEGERF Board Registered</span>
+                <span>SEGERF Registered</span>
                 <span className="text-zinc-200">|</span>
-                <span className="flex items-center gap-1"><Lock size={10} className="text-zinc-900" /> 100% Confidential</span>
+                <span>No GP Referral Required</span>
                 <span className="text-zinc-200">|</span>
                 <span>Dublin Clinic</span>
               </div>
@@ -399,342 +396,322 @@ export default function OShotLandingPage() {
       {/* SECTION 2: PROBLEM */}
       <section className="py-20 md:py-28 bg-[#FAF9F6] relative border-y border-zinc-200/50">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-12">
-          <Badge className="bg-white">Restoring Vitality</Badge>
+          <Badge className="bg-white">They Feel Understood</Badge>
           <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight leading-tight">
-            When Intimacy No Longer <br className="hidden sm:inline" />
-            <span className="italic font-serif text-zinc-500 font-light">Feels Like It Used To</span>
+            "You've Been Told To Just Use Steroid Cream <br className="hidden sm:inline" />
+            <span className="italic font-serif text-zinc-500 font-light">— But It's Not Enough"</span>
           </h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-left max-w-4xl mx-auto pt-4">
-            {[
-              { label: "Dryness & Discomfort", desc: "Constant dryness and discomfort that will not resolve with temporary moisturisers." },
-              { label: "Reduced Sensation", desc: "Decreased sensitivity and tactile response during personal intimate moments." },
-              { label: "Difficulty with Orgasm", desc: "Finding it increasingly difficult or impossible to reach climax." },
-              { label: "Loss of Confidence", desc: "Feeling disconnected from your body and your intimate relationship." }
-            ].map((p, idx) => (
-              <div key={idx} className="bg-white border border-zinc-200 p-6 rounded-2xl shadow-sm space-y-3">
-                <span className="text-2xl">✨</span>
-                <h3 className="font-semibold text-sm text-zinc-900">{p.label}</h3>
-                <p className="text-xs text-zinc-500 font-light leading-relaxed">{p.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-3xl mx-auto pt-4">
+            <div className="space-y-4">
+              <div className="flex gap-3">
+                <span className="text-red-500 text-lg">✦</span>
+                <p className="text-zinc-600 font-light leading-relaxed">Constant itching, burning and physical discomfort.</p>
               </div>
-            ))}
-          </div>
+              <div className="flex gap-3">
+                <span className="text-red-500 text-lg">✦</span>
+                <p className="text-zinc-600 font-light leading-relaxed">White patches that won't go away.</p>
+              </div>
+              <div className="flex gap-3">
+                <span className="text-red-500 text-lg">✦</span>
+                <p className="text-zinc-600 font-light leading-relaxed">Pain during intercourse or skin that tears and bleeds.</p>
+              </div>
+            </div>
 
-          <div className="max-w-2xl mx-auto pt-6 space-y-6 text-zinc-600 font-light leading-relaxed">
-            <p>
-              These changes are more common than you think — and more treatable than most women realise.
-            </p>
-            <p>
-              Whether you're experiencing post-pregnancy changes, menopausal shifts, or simply want to restore how things felt before — the O-Shot offers a clinically proven, natural solution.
-            </p>
+            <div className="space-y-4">
+              <div className="flex gap-3">
+                <span className="text-zinc-400 text-lg">✦</span>
+                <p className="text-zinc-600 font-light leading-relaxed">You've been prescribed steroid creams that only help temporarily.</p>
+              </div>
+              <div className="flex gap-3">
+                <span className="text-zinc-400 text-lg">✦</span>
+                <p className="text-zinc-600 font-light leading-relaxed">You've Googled in frustration, wondering if anyone truly specialises in this.</p>
+              </div>
+              <div className="flex gap-3">
+                <span className="text-zinc-900 text-lg">✦</span>
+                <p className="text-zinc-800 font-medium leading-relaxed">At Gerka Clinic, we do.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: WHAT IS THE O-SHOT */}
+      {/* SECTION 3: WHAT IS LICHEN SCLEROSUS */}
       <section className="py-20 md:py-28 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
-          <div className="lg:col-span-5 space-y-6">
-            <Badge>Scientific Innovation</Badge>
+          <div className="lg:col-span-6 space-y-6">
+            <Badge>Medical Overview</Badge>
             <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight leading-tight">
-              What Is <br className="hidden sm:inline" />
-              <span className="italic font-serif text-zinc-500">The O-Shot?</span>
+              Understanding <br className="hidden sm:inline" />
+              <span className="italic font-serif text-zinc-500">Lichen Sclerosus</span>
             </h2>
             <p className="text-zinc-600 font-light leading-relaxed">
-              The O-Shot (Orgasm Shot) is an advanced PRP (Platelet-Rich Plasma) treatment that uses your own blood's growth factors to regenerate and rejuvenate intimate tissue.
+              A chronic autoimmune inflammatory condition affecting the vulva and anal area. Characterised by thin, fragile skin that is highly susceptible to discomfort and structural changes.
             </p>
-            <div className="bg-white border border-zinc-200 p-6 rounded-2xl text-sm font-light text-zinc-700 italic shadow-sm">
-              "Restored sensitivity, improved lubrication, enhanced pleasure and stronger sensation — using nothing but your own biology."
+            <div className="space-y-3 pt-2">
+              <p className="text-zinc-700 font-medium">Common Symptoms & Indicators:</p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-600">
+                <li className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-900" /> White, thin, fragile skin patches
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-900" /> Intense itching and burning
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-900" /> Pain or tearing during intercourse
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-900" /> Scarring if left untreated
+                </li>
+                <li className="flex items-center gap-2 col-span-1 sm:col-span-2 text-red-600 font-medium">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-600 inline-block mr-1" /> Increased risk of vulvar cancer without monitoring
+                </li>
+              </ul>
             </div>
+            <p className="text-zinc-500 font-light text-sm italic pt-4">
+              Most common in postmenopausal women — but can affect women of any age. Frequently misdiagnosed as thrush or eczema, and often undertreated with steroids alone.
+            </p>
           </div>
 
-          <div className="lg:col-span-7 space-y-6">
-            <div className="grid grid-cols-1 gap-4">
-              {[
-                { step: "Step 1 — Blood Draw", desc: "A small amount of blood is drawn — similar to a routine blood test.", icon: "🩸" },
-                { step: "Step 2 — PRP Preparation", desc: "Your blood is spun in a centrifuge to concentrate the platelet-rich plasma — your body's own natural growth factors.", icon: "⚗️" },
-                { step: "Step 3 — Precise Injection", desc: "PRP is carefully injected into specific intimate areas to stimulate tissue regeneration, nerve growth and natural lubrication.", icon: "💉" }
-              ].map((s, idx) => (
-                <div key={idx} className="flex items-center gap-5 bg-[#FAF9F6] border border-zinc-200 p-6 rounded-2xl">
-                  <div className="w-12 h-12 rounded-xl bg-white border border-zinc-200 flex items-center justify-center text-xl shrink-0 shadow-sm">
-                    {s.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-zinc-900 text-sm">{s.step}</h3>
-                    <p className="text-xs text-zinc-500 font-light leading-relaxed mt-1">{s.desc}</p>
-                  </div>
-                </div>
-              ))}
+          <div className="lg:col-span-6">
+            <div className="bg-[#FAF9F6] p-8 rounded-3xl border border-zinc-200 space-y-4 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-amber-500" />
+              <div className="flex items-center gap-3 text-amber-600">
+                <AlertCircle size={24} />
+                <h3 className="text-lg font-medium text-zinc-900">Important Box</h3>
+              </div>
+              <p className="text-sm text-zinc-700 font-light leading-relaxed">
+                "Lichen Sclerosus requires specialist monitoring. Long-term steroid use without specialist oversight can thin tissue further. Advanced treatment options exist beyond standard steroid protocols."
+              </p>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* SECTION 4: WHAT IT TREATS */}
+      {/* SECTION 4: OUR TREATMENT APPROACH */}
       <section className="py-20 md:py-28 bg-[#FAF9F6]/50 border-t border-zinc-200">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <Badge>Indication List</Badge>
+            <Badge>Advanced Treatment</Badge>
             <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight">
-              What the O-Shot <span className="italic font-serif text-zinc-500">Can Help With</span>
+              Advanced LS Treatment <br />
+              <span className="italic font-serif text-zinc-500">at Gerka Clinic</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            <div className="space-y-4 bg-white p-8 rounded-3xl border border-zinc-200 shadow-sm">
-              {[
-                "Reduced sexual sensitivity",
-                "Difficulty reaching orgasm",
-                "Vaginal dryness & atrophy",
-                "Stress urinary incontinence",
-                "Lichen sclerosus support"
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-900 shrink-0">
-                    <Check size={12} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Stethoscope,
+                title: "Specialist Assessment & Diagnosis",
+                desc: "Full gynaecological examination and personalised treatment plan. We assess severity, symptoms and history before recommending any treatment."
+              },
+              {
+                icon: ShieldCheck,
+                title: "Optimised Medical Management",
+                desc: "Expert steroid protocol management — correct application technique, dosing and frequency that many GPs don't have time to teach."
+              },
+              {
+                icon: Sparkles,
+                title: "Laser Therapy for LS",
+                desc: "CO2 fractional laser — stimulates collagen, removes damaged tissue, promotes healthy skin regeneration. Proven effective for treatment-resistant LS."
+              },
+              {
+                icon: MessageCircle,
+                title: "Regenerative PRP Therapy",
+                desc: "PRP accelerates healing, reduces inflammation and enhances tissue regeneration — used alongside laser for comprehensive results."
+              },
+              {
+                icon: Calendar,
+                title: "Long-Term Monitoring Plan",
+                desc: "LS requires ongoing surveillance due to skin cancer risk. We provide structured follow-up to protect your long-term health."
+              }
+            ].map((card, idx) => {
+              const Icon = card.icon
+              return (
+                <div key={idx} className="bg-white border border-zinc-200 p-8 rounded-3xl space-y-4 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                  <div className="space-y-4">
+                    <div className="w-12 h-12 rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center text-zinc-900">
+                      <Icon size={24} />
+                    </div>
+                    <h3 className="text-lg font-semibold text-zinc-900">{card.title}</h3>
+                    <p className="text-zinc-600 font-light text-sm leading-relaxed">
+                      {card.desc}
+                    </p>
                   </div>
-                  <span className="text-sm font-light text-zinc-700">{item}</span>
                 </div>
-              ))}
-            </div>
-
-            <div className="space-y-4 bg-white p-8 rounded-3xl border border-zinc-200 shadow-sm">
-              {[
-                "Post-menopausal changes",
-                "Post-pregnancy intimate changes",
-                "Reduced arousal",
-                "Painful intercourse (dyspareunia)",
-                "Overall intimate wellness"
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-900 shrink-0">
-                    <Check size={12} />
-                  </div>
-                  <span className="text-sm font-light text-zinc-700">{item}</span>
-                </div>
-              ))}
-            </div>
+              )
+            })}
           </div>
         </div>
       </section>
 
       {/* SECTION 5: BENEFITS */}
-      <section className="py-20 md:py-28 max-w-5xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="py-20 md:py-28 max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          
           <div className="lg:col-span-5 space-y-6">
-            <Badge>Treatment Advantages</Badge>
+            <Badge>Why Choose Us</Badge>
             <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight leading-tight">
-              Why Women Choose <br />
-              <span className="italic font-serif text-zinc-500">the O-Shot</span>
+              Our Core <br />
+              <span className="italic font-serif text-zinc-500 font-light">Benefits</span>
             </h2>
             <p className="text-zinc-600 font-light leading-relaxed">
-              We leverage your body's innate healing mechanisms. A completely natural alternative to surgical procedures and synthetic hormone supplements.
+              We provide specialised, clinical care specifically tailored for Lichen Sclerosus to restore comfort, confidence, and peace of mind.
             </p>
           </div>
 
           <div className="lg:col-span-7">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                "Uses your own PRP — no foreign substances",
-                "Natural regenerative process",
-                "Minimal discomfort — topical numbing used",
-                "No downtime — resume activities same day",
-                "Results improve progressively over 3 months",
-                "Single session with long-lasting results",
-                "Medically administered by specialists",
-                "Completely confidential"
-              ].map((b, idx) => (
-                <div key={idx} className="flex items-center gap-3 bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
-                  <div className="w-5 h-5 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-900 shrink-0">
+                "Specialist gynaecologist — not a GP or beauty clinic",
+                "Advanced treatments beyond steroid creams",
+                "Clinically proven laser & regenerative therapies",
+                "No GP referral required",
+                "Long-term monitoring for cancer risk",
+                "Judgement-free confidential care",
+                "SEGERF board registered clinicians",
+                "Serving Dublin, Kildare & Wicklow"
+              ].map((item, index) => (
+                <div key={index} className="flex items-start gap-3 bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                  <div className="w-5 h-5 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-900 shrink-0 mt-0.5">
                     <Check size={12} />
                   </div>
-                  <span className="text-xs font-medium text-zinc-700">{b}</span>
+                  <span className="text-sm font-light text-zinc-700">{item}</span>
                 </div>
               ))}
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* SECTION 6: RESULTS TIMELINE */}
-      <section className="py-20 md:py-28 bg-[#FAF9F6]/50 border-t border-zinc-200">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
-            <Badge>Expected Milestones</Badge>
-            <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight">
-              What to Expect — <span className="italic font-serif text-zinc-500">Your O-Shot Journey</span>
-            </h2>
-          </div>
-
-          <div className="relative border-l border-zinc-200 ml-4 md:ml-32 space-y-8">
-            {[
-              { time: "Day 1", desc: "Treatment session. Minimal discomfort. Resume normal activities same day." },
-              { time: "Week 1–2", desc: "Initial tissue response begins." },
-              { time: "Week 4–6", desc: "Noticeable improvement in sensitivity." },
-              { time: "Month 2–3", desc: "Progressive regeneration continues." },
-              { time: "Month 3", desc: "Full results — enhanced sensation, improved lubrication, stronger response." },
-              { time: "Longevity", desc: "Results typically last 12–18 months. Maintenance session recommended annually." }
-            ].map((milestone, idx) => (
-              <div key={idx} className="relative pl-8">
-                <div className="absolute -left-2.5 top-1.5 w-5 h-5 rounded-full bg-white border-2 border-zinc-500 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
-                </div>
-                <div className="md:absolute md:-left-32 md:top-1 md:w-24 text-left md:text-right text-xs font-bold uppercase tracking-wider text-zinc-800">
-                  {milestone.time}
-                </div>
-                <p className="text-sm font-light text-zinc-700 leading-relaxed">
-                  {milestone.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 7: O-SHOT VS ALTERNATIVES */}
-      <section className="py-20 md:py-28 max-w-5xl mx-auto px-6">
-        <div className="text-center mb-16 space-y-4">
-          <Badge>Comparison Guide</Badge>
-          <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight">
-            How Does the O-Shot <span className="italic font-serif text-zinc-500">Compare?</span>
-          </h2>
-        </div>
-
-        <div className="overflow-x-auto rounded-3xl border border-zinc-200 shadow-sm bg-white">
-          <table className="w-full text-left border-collapse text-xs md:text-sm">
-            <thead>
-              <tr className="bg-[#FAF9F6] border-b border-zinc-200">
-                <th className="p-4 md:p-6 font-semibold text-zinc-900">Feature</th>
-                <th className="p-4 md:p-6 font-bold text-zinc-900 bg-zinc-50">O-Shot</th>
-                <th className="p-4 md:p-6 font-semibold text-zinc-700">HRT</th>
-                <th className="p-4 md:p-6 font-semibold text-zinc-700">Lubricants</th>
-                <th className="p-4 md:p-6 font-semibold text-zinc-700">Surgery</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { label: "Uses own biology", oshot: "✅", hrt: "❌", lubes: "❌", surg: "❌" },
-                { label: "No hormones", oshot: "✅", hrt: "❌", lubes: "✅", surg: "✅" },
-                { label: "Treats root cause", oshot: "✅", hrt: "⚠️", lubes: "❌", surg: "⚠️" },
-                { label: "No downtime", oshot: "✅", hrt: "✅", lubes: "✅", surg: "❌" },
-                { label: "Long-lasting", oshot: "✅", hrt: "✅", lubes: "❌", surg: "✅" },
-                { label: "Improves sensitivity", oshot: "✅", hrt: "⚠️", lubes: "❌", surg: "❌" },
-                { label: "Available Dublin", oshot: "✅", hrt: "✅", lubes: "✅", surg: "✅" }
-              ].map((row, idx) => (
-                <tr key={idx} className="border-b border-zinc-100 hover:bg-zinc-50/50">
-                  <td className="p-4 md:p-6 font-medium text-zinc-800">{row.label}</td>
-                  <td className="p-4 md:p-6 text-center font-bold text-lg bg-zinc-50/50">{row.oshot}</td>
-                  <td className="p-4 md:p-6 text-center font-medium text-zinc-500">{row.hrt}</td>
-                  <td className="p-4 md:p-6 text-center font-medium text-zinc-500">{row.lubes}</td>
-                  <td className="p-4 md:p-6 text-center font-medium text-zinc-500">{row.surg}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* SECTION 8: SOCIAL PROOF */}
+      {/* SECTION 6: WHO THIS IS FOR */}
       <section className="py-20 md:py-28 bg-[#FAF9F6]/50 border-t border-zinc-200">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center space-y-4 mb-16">
-            <Badge>Real Patient Stories</Badge>
+          <div className="text-center mb-16 space-y-4">
+            <Badge>Is This For You?</Badge>
             <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight">
-              Real Women, <span className="italic font-serif text-zinc-500">Real Results</span>
+              "This Treatment Is For You If..."
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {[
-              {
-                text: "After menopause intimacy became uncomfortable and sensation was almost gone. The O-Shot restored things I thought were lost forever. I wish I'd known about this sooner.",
-                location: "Anonymous, Dublin"
-              },
-              {
-                text: "Post-pregnancy my body felt completely different in intimacy. The O-Shot gave me back confidence and sensation I hadn't felt in years.",
-                location: "Anonymous, Wicklow"
-              },
-              {
-                text: "Professional, discreet and genuinely effective. The team at Gerka Clinic made me feel completely at ease throughout. Results exceeded my expectations.",
-                location: "Anonymous, Kildare"
-              }
-            ].map((t, i) => (
-              <div key={i} className="bg-white border border-zinc-200 p-8 rounded-3xl space-y-4 shadow-sm">
-                <div className="flex text-amber-400">
-                  {[...Array(5)].map((_, idx) => <Star key={idx} size={16} className="fill-current" />)}
+              "You've been diagnosed with Lichen Sclerosus",
+              "Steroid creams are not giving lasting relief",
+              "Your symptoms are significantly affecting your quality of life or intimacy",
+              "You want specialist monitoring, not just repeat prescriptions",
+              "You've been struggling for months or years without real answers",
+              "You want to explore laser or regenerative treatment options"
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-start gap-3 bg-white p-5 rounded-2xl border border-zinc-200 shadow-sm">
+                <div className="w-6 h-6 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
+                  <Check size={14} />
                 </div>
-                <p className="text-sm font-light leading-relaxed text-zinc-700 italic">"{t.text}"</p>
-                <div className="text-xs font-semibold text-zinc-500 pt-2 border-t border-zinc-100">
-                  {t.location}
-                </div>
+                <span className="text-sm font-medium text-zinc-700">{item}</span>
               </div>
             ))}
           </div>
-
-          <p className="text-center text-[11px] text-zinc-400 font-light mt-8">
-            All testimonials shared with full patient consent. Names withheld to protect patient privacy.
-          </p>
         </div>
       </section>
 
-      {/* SECTION 9: FAQ */}
-      <section className="py-20 md:py-28 max-w-3xl mx-auto px-6">
+      {/* SECTION 7: SOCIAL PROOF */}
+      <section className="py-20 md:py-28 max-w-5xl mx-auto px-6">
         <div className="text-center space-y-4 mb-16">
-          <Badge>Common Questions</Badge>
+          <Badge>Real Experiences</Badge>
           <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight">
-            Frequently Asked <span className="italic font-serif text-zinc-500">Questions</span>
+            What Our Patients Say
           </h2>
         </div>
 
-        <div className="space-y-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              q: "Is the O-Shot painful?",
-              a: "Topical numbing cream is applied before treatment. Most patients report minimal discomfort. The procedure takes approximately 30 minutes."
+              text: "I had suffered with LS for 6 years using only steroid creams. Gerka Clinic was the first place that gave me a proper treatment plan and real improvement in symptoms. Life-changing.",
+              author: "Anonymous, Dublin"
             },
             {
-              q: "How quickly will I see results?",
-              a: "Some women notice improvement within weeks. Full results develop progressively over 3 months as tissue regeneration occurs."
+              text: "After years of misdiagnosis I finally got confirmed LS diagnosis and specialist treatment at Gerka. The laser treatment has made an enormous difference.",
+              author: "Anonymous, Kildare"
             },
             {
-              q: "How long do results last?",
-              a: "Typically 12–18 months. An annual maintenance session helps sustain results long-term."
-            },
-            {
-              q: "Is it safe?",
-              a: "Yes. PRP uses your own blood — there is no risk of allergic reaction or rejection. It is a well-established regenerative medicine technique."
-            },
-            {
-              q: "Do I need a GP referral?",
-              a: "No. You can book directly and confidentially. Your GP is never contacted without your consent."
-            },
-            {
-              q: "Can it be combined with other treatments?",
-              a: "Yes. The O-Shot is often combined with Emsella for pelvic floor strengthening or with treatment for vaginismus for comprehensive intimate wellness."
-            },
-            {
-              q: "How much does it cost?",
-              a: "Pricing is discussed at your free consultation. There is no obligation to proceed."
+              text: "Professional, compassionate and genuinely expert care. The monitoring programme gives me real peace of mind.",
+              author: "Anonymous, Wicklow"
             }
-          ].map((faq, index) => (
-            <FAQItem key={index} q={faq.q} a={faq.a} />
+          ].map((t, i) => (
+            <div key={i} className="bg-white border border-zinc-200 p-8 rounded-3xl space-y-4 shadow-sm">
+              <div className="flex text-amber-400">
+                {[...Array(5)].map((_, idx) => <Star key={idx} size={16} className="fill-current" />)}
+              </div>
+              <p className="text-sm font-light leading-relaxed text-zinc-700 italic">"{t.text}"</p>
+              <div className="text-xs font-semibold text-zinc-500 pt-2 border-t border-zinc-100">
+                — {t.author}
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* SECTION 10: FINAL CTA & FORM */}
+      {/* SECTION 8: FAQ */}
+      <section className="py-20 md:py-28 bg-[#FAF9F6]/50 border-t border-zinc-200">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center space-y-4 mb-16">
+            <Badge>FAQ</Badge>
+            <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="space-y-1">
+            {[
+              {
+                q: "Do I need a GP referral?",
+                a: "No. You can book directly and confidentially."
+              },
+              {
+                q: "How is this different from GP treatment?",
+                a: "GPs typically prescribe steroid creams. Our specialist gynaecologists offer full assessment, advanced laser therapy, regenerative treatments and structured long-term monitoring."
+              },
+              {
+                q: "Is laser treatment safe for LS?",
+                a: "Yes. CO2 fractional laser is clinically proven for LS treatment, stimulating collagen and healthy tissue regeneration."
+              },
+              {
+                q: "How many sessions will I need?",
+                a: "Typically 3–4 sessions spaced 4 weeks apart, followed by a monitoring plan. We'll advise at your free consultation."
+              },
+              {
+                q: "Does it hurt?",
+                a: "Topical anaesthetic is applied before treatment. Most patients report minimal discomfort."
+              },
+              {
+                q: "Can LS lead to cancer?",
+                a: "LS increases the risk of vulvar squamous cell carcinoma. This is why specialist long-term monitoring is essential — not just symptom management."
+              },
+              {
+                q: "How much does treatment cost?",
+                a: "Discussed transparently at your free consultation. No obligation to proceed."
+              }
+            ].map((faq, index) => (
+              <FAQItem key={index} q={faq.q} a={faq.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 9: FINAL CTA & FORM */}
       <section id="consultation-form" className="py-20 md:py-28 bg-[#FAF9F6]/50 border-t border-zinc-200 scroll-mt-10">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-12">
           <div className="space-y-4">
             <Badge>Your First Step</Badge>
             <h2 className="text-3xl md:text-5xl font-light text-zinc-900 tracking-tight leading-tight">
-              Reclaim Your Intimate Wellness — <br />
-              <span className="italic font-serif text-zinc-500">In Complete Confidence</span>
+              Take Back Control of Your Health
             </h2>
             <p className="text-zinc-600 font-light max-w-lg mx-auto">
-              Book a free, no-obligation consultation with our specialist team today.
+              You deserve specialist care, not just repeat prescriptions. Book a free consultation today.
             </p>
           </div>
 
@@ -743,9 +720,6 @@ export default function OShotLandingPage() {
           </div>
 
           <div className="space-y-4 text-zinc-500 text-xs font-light pt-6">
-            <p className="text-sm font-medium text-zinc-800">
-              Prefer to reach out directly?
-            </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm font-medium">
               <a href="tel:+353878888087" className="hover:text-zinc-950 flex items-center gap-1 bg-white px-4 py-2 rounded-full border border-zinc-200 shadow-sm">
                 📞 Call: +353 87 888 8087
@@ -755,13 +729,13 @@ export default function OShotLandingPage() {
               </a>
             </div>
             <p className="text-[11px] text-zinc-400">
-              We respond within 2 hours · Monday–Saturday by appointment
+              🔒 100% Confidential — GDPR Secure · No GP referral needed · We respond within 2 hours Mon–Sat
             </p>
           </div>
         </div>
       </section>
 
-      {/* SIMPLE DISCREET FOOTER (No nav routes) */}
+      {/* FOOTER */}
       <footer className="border-t border-zinc-200 bg-[#FAF9F6] py-8 text-center text-xs text-zinc-400">
         <div className="max-w-7xl mx-auto px-6 space-y-2">
           <p>© {new Date().getFullYear()} Gerka Clinic Dublin. All Rights Reserved.</p>
