@@ -37,9 +37,9 @@ const navLinks = {
 }
 
 const socialIcons = [
-  { Icon: Instagram, href: "#" },
-  { Icon: Facebook, href: "#" },
-  { Icon: Twitter, href: "#" },
+  { Icon: Instagram, href: "https://www.instagram.com/gerkaclinic" },
+  { Icon: Facebook, href: "https://www.facebook.com/gerkaclinic" },
+  { Icon: Twitter, href: "https://x.com/gerkaclinic" },
   { Icon: MessageCircle, href: "https://wa.me/919772187400" }, // WhatsApp Link
 ]
 

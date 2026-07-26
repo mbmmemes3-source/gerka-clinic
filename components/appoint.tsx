@@ -134,14 +134,14 @@ export default function AppointmentBooking() {
           >
             Clinical Access
           </motion.span>
-          <motion.h1 
+          <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-5xl lg:text-5xl font-light text-zinc-900 tracking-tight leading-tight"
           >
             Book Your <span className="italic font-serif text-zinc-500">Consultation.</span>
-          </motion.h1>
+          </motion.h2>
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

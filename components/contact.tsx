@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Send, Phone, Mail, MapPin, Loader2, ChevronDown, Upload, X } from "lucide-react"
 import emailjs from "emailjs-com"
@@ -9,6 +9,11 @@ import { CldUploadWidget } from 'next-cloudinary'
 export function ContactSection() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string>("")
+  const [email, setEmail] = useState("")
+
+  useEffect(() => {
+    setEmail(["info", "gerkaclinic.com"].join("@"))
+  }, [])
 
   const restoreScroll = () => {
     document.body.style.overflow = 'auto'
@@ -106,7 +111,7 @@ export function ContactSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 space-y-3 text-white">
               <div className="flex items-center gap-3"><Phone size={14} /> <span className="text-[11px] md:text-[13px] tracking-[0.2em] font-light">0878888087</span></div>
-              <div className="flex items-center gap-3"><Mail size={14} /> <span className="text-[11px] md:text-[13px] tracking-[0.2em] font-light truncate">info@gerkaclinic.com</span></div>
+              <div className="flex items-center gap-3"><Mail size={14} /> <a href={email ? `mailto:${email}` : "#"} className="text-[11px] md:text-[13px] tracking-[0.2em] font-light truncate hover:underline">{email || "info [at] gerkaclinic.com"}</a></div>
               <div className="flex items-center gap-3"><MapPin size={14} /> <span className="text-[11px] md:text-[13px] tracking-[0.2em] font-light uppercase">STILLORGAN RD, A94NH31</span></div>
             </div>
           </motion.div>

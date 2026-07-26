@@ -14,11 +14,11 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Gerka Clinic | Regenerative Aesthetic Gynaecology & Wellness Dublin',
+    default: 'Gerka Clinic | Aesthetic Gynaecology & Wellness',
     template: '%s | Gerka Clinic',
   },
   description:
-    'Gerka Clinic is a leading Dublin aesthetic clinic specialising in aesthetic treatments, regenerative medicine and women’s health, located on Stillorgan Road and serving Mount Merrion, Blackrock and South Dublin.',
+    'Gerka Clinic is a leading Dublin aesthetic clinic specialising in regenerative medicine, aesthetic treatments, and women’s health on Stillorgan Road.',
   keywords: [
     'Gerka Clinic Dublin',
     'Regenerative Aesthetic Gynaecology Ireland',

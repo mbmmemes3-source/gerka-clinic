@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   Sparkles, ArrowRight, Check, Star,
@@ -113,6 +113,11 @@ export default function FaceTreatmentsPage() {
   const [honeypot, setHoneypot] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [clinicEmail, setClinicEmail] = useState("")
+
+  useEffect(() => {
+    setClinicEmail(["info", "gerkaclinic.com"].join("@"))
+  }, [])
 
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -587,7 +592,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           <div>© {new Date().getFullYear()} Gerka Clinic Dublin · Face Treatments</div>
           <div className="flex flex-wrap items-center gap-6">
             <a href="tel:0878888087" className="hover:text-zinc-300 flex items-center gap-1.5"><Phone size={13} /> 087 888 8087</a>
-            <a href="mailto:info@gerkaclinic.com" className="hover:text-zinc-300 flex items-center gap-1.5"><Mail size={13} /> info@gerkaclinic.com</a>
+            <a href={clinicEmail ? `mailto:${clinicEmail}` : "#"} className="hover:text-zinc-300 flex items-center gap-1.5"><Mail size={13} /> {clinicEmail || "info [at] gerkaclinic.com"}</a>
             <span className="flex items-center gap-1.5"><Clock size={13} /> Stillorgan Rd, Dublin</span>
           </div>
         </div>

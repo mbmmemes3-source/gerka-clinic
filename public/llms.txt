@@ -1,0 +1,37 @@
+# Gerka Clinic
+
+Gerka Clinic is a premier medical aesthetics and intimate women's health clinic located in Dublin, Ireland.
+
+## Contact Information
+- **Phone**: +353 87 888 8087
+- **Email**: info [at] gerkaclinic.com
+- **Address**: 1 Priory Office Park, Stillorgan Road, Blackrock, Co. Dublin, A94NH31
+- **Opening Hours**: Monday to Saturday, by appointment only.
+
+## Core Treatments
+
+### Women's Intimate Health
+- **BTL Emsella**: Non-invasive treatment for urinary incontinence and pelvic floor strengthening.
+- **PRP O-Shot**: Platelet-Rich Plasma therapy for sexual rejuvenation and treatment of lichen sclerosus.
+- **Labiaplasty & Labia Rejuvenation**: Surgical and non-surgical aesthetic solutions.
+- **Vaginismus Treatment**: Expert-led clinical solutions for painful intimacy.
+- **Lichen Sclerosus Care**: Evidence-based treatments including PRP.
+
+### Facial Aesthetics & Skin Rejuvenation
+- **Profhilo**: Skin bio-remodeling treatment to improve elasticity and hydration.
+- **Polynucleotides**: Cellular-level skin regeneration.
+- **Sunekos**: Patented formula of hyaluronic acid and amino acids for collagen stimulation.
+- **Chemical Peels & HydraFacial**: Deep exfoliation and medical-grade skin nutrition.
+- **Acne & Skin Lesion Removal**: Precise treatments for clear skin.
+
+### Body Contouring & Wellness
+- **BTL Vanquish Me**: Non-invasive fat reduction and body contouring.
+- **Exilis Ultra 360**: Combined radiofrequency and ultrasound for skin tightening.
+- **Hair Loss Treatments**: PRP and scalp rejuvenation.
+- **Hand Rejuvenation**: Dermal fillers and hydration treatments.
+
+## Website Navigation
+- Homepage: `https://www.gerkaclinic.com/`
+- About Us: `https://www.gerkaclinic.com/about`
+- Shop & Gift Cards: `https://www.gerkaclinic.com/shop`
+- Booking Portal: `https://www.gerkaclinic.com/#booking`

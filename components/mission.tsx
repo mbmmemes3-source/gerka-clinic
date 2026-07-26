@@ -42,7 +42,7 @@ export function MissionSection() {
               transition={{ duration: 1.2 }}
               className="absolute top-0 left-4 sm:left-0 w-40 h-40 sm:w-64 sm:h-64 md:w-80 md:h-80 grayscale opacity-80 z-0"
             >
-              <img src="/floral.jpeg" alt="" className="w-full h-full object-cover rounded-2xl" />
+              <img src="/floral.jpeg" alt="Decorative grayscale floral background image" className="w-full h-full object-cover rounded-2xl" />
             </motion.div>
 
             {/* Background Image 2: Middle Left (Grayscale Floral) - Hidden on smallest phones to keep it clean */}
@@ -53,7 +53,7 @@ export function MissionSection() {
               transition={{ duration: 1.2, delay: 0.2 }}
               className="absolute bottom-10 -left-6 w-36 h-56 grayscale opacity-30 z-0 hidden sm:block md:w-48 md:h-72"
             >
-              <img src="/floral.jpeg" alt="" className="w-full h-full object-cover rounded-2xl" />
+              <img src="/floral.jpeg" alt="Grayscale floral background pattern" className="w-full h-full object-cover rounded-2xl" />
             </motion.div>
 
             {/* MAIN IMAGE: The Staff (Colored, Centered) */}

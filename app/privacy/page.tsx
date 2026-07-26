@@ -1,10 +1,15 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Home, ChevronRight, ShieldCheck, Lock, Eye, Scale, FileText, Share2, Database, Globe, Bell, Mail } from "lucide-react"
 import Link from "next/link"
 
 export default function PrivacyPolicyPage() {
+  const [email, setEmail] = useState("")
+  useEffect(() => {
+    setEmail(["info", "gerkaclinic.com"].join("@"))
+  }, [])
   return (
     <main className="bg-white min-h-screen">
       {/* --- HERO BANNER --- */}
@@ -69,7 +74,7 @@ export default function PrivacyPolicyPage() {
               <div className="p-8 rounded-[2rem] bg-[#F9F9F7] border border-zinc-100 text-zinc-600 font-light">
                 <p className="font-semibold text-zinc-900 mb-1">Gerka Clinic</p>
                 <p className="mb-4">Dublin, Ireland</p>
-                <p>Email: <a href="mailto:info@gerkaclinic.com" className="text-zinc-900 underline">info@gerkaclinic.com</a></p>
+                <p>Email: <a href={email ? `mailto:${email}` : "#"} className="text-zinc-900 underline">{email || "info [at] gerkaclinic.com"}</a></p>
                 <p>Phone: +353 087 888 8087</p>
               </div>
             </motion.section>
@@ -231,8 +236,8 @@ export default function PrivacyPolicyPage() {
               <div className="flex flex-col items-center space-y-2 text-zinc-900 font-light">
                 <p className="text-2xl italic font-serif text-zinc-500">Gerka Clinic</p>
                 <p>Dublin, Ireland</p>
-                <a href="mailto:info@gerkaclinic.com" className="flex items-center gap-2 hover:text-zinc-500 transition-colors">
-                  <Mail size={16} /> info@gerkaclinic.com
+                <a href={email ? `mailto:${email}` : "#"} className="flex items-center gap-2 hover:text-zinc-500 transition-colors">
+                  <Mail size={16} /> {email || "info [at] gerkaclinic.com"}
                 </a>
               </div>
             </motion.section>

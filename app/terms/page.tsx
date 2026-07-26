@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { 
   Home, 
@@ -19,6 +20,10 @@ import {
 import Link from "next/link"
 
 export default function TermsAndConditionsPage() {
+  const [email, setEmail] = useState("")
+  useEffect(() => {
+    setEmail(["info", "gerkaclinic.com"].join("@"))
+  }, [])
   return (
     <main className="bg-white min-h-screen">
       {/* --- HERO BANNER --- */}
@@ -219,8 +224,8 @@ export default function TermsAndConditionsPage() {
             >
               <p className="text-2xl italic font-serif text-zinc-500 mb-4">Gerka Clinic</p>
               <p className="text-sm text-zinc-400 uppercase tracking-[0.2em] mb-8">Dublin, Ireland</p>
-              <a href="mailto:info@gerkaclinic.com" className="bg-zinc-900 text-white px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-800 transition-all flex items-center gap-3 mx-auto w-fit">
-                <Mail size={16} /> info@gerkaclinic.com
+              <a href={email ? `mailto:${email}` : "#"} className="bg-zinc-900 text-white px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-800 transition-all flex items-center gap-3 mx-auto w-fit">
+                <Mail size={16} /> {email || "info [at] gerkaclinic.com"}
               </a>
             </motion.section>
 
