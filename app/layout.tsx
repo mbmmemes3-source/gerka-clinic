@@ -91,10 +91,10 @@ export default function RootLayout({
        {/* Google Ads Tag */}
 <Script
   src="https://www.googletagmanager.com/gtag/js?id=AW-18205338617"
-  strategy="afterInteractive"
+  strategy="lazyOnload"
 />
 
-<Script id="google-ads" strategy="afterInteractive">
+<Script id="google-ads" strategy="lazyOnload">
   {`
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -143,7 +143,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-white antialiased`}>
         <Script
           id="google-translate-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               function googleTranslateElementInit() {
@@ -160,7 +160,7 @@ export default function RootLayout({
 
         <Script
           src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         <CartProvider>
