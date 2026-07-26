@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Send, Phone, Mail, MapPin, Loader2, ChevronDown, Upload, X } from "lucide-react"
 import emailjs from "emailjs-com"
 import { CldUploadWidget } from 'next-cloudinary'
+import Image from "next/image"
 
 export function ContactSection() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
@@ -107,7 +108,7 @@ export function ContactSection() {
             viewport={{ once: true }}
             className="relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[4/3] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl group order-2 lg:order-1"
           >
-            <img src="/b2.webp" alt="Clinic Office" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+            <Image src="/b2.webp" alt="Clinic Office" fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 space-y-3 text-white">
               <div className="flex items-center gap-3"><Phone size={14} /> <span className="text-[11px] md:text-[13px] tracking-[0.2em] font-light">0878888087</span></div>

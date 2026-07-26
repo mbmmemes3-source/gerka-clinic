@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export function HeroSection() {
   return (
@@ -17,10 +18,12 @@ export function HeroSection() {
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         className="relative w-full lg:w-1/2 h-[55vh] sm:h-[50vh] lg:h-screen"
       >
-        <img 
+        <Image 
           src="/hero.png" 
           alt="Aesthetic Wellness" 
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          fill
+          priority
+          className="object-cover object-center"
         />
         {/* Subtle artistic overlay */}
         <div className="absolute inset-0 bg-zinc-900/10 mix-blend-multiply opacity-20" />
