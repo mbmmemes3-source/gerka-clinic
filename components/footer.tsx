@@ -121,8 +121,8 @@ export function Footer() {
                 <MapPin size={18} className="text-zinc-400 group-hover:text-zinc-800 transition-colors shrink-0 mt-0.5" />
                 <p className="text-xs md:text-sm tracking-widest leading-relaxed text-zinc-600 uppercase">
                   1 Priory Office Park<br />
-                  Stillorgan Rd.<br />
-                  A94NH31
+                  Stillorgan Rd, Blackrock<br />
+                  Dublin, A94NH31
                 </p>
               </a>
               {/* Added WhatsApp to Phone Click as well */}
@@ -177,7 +177,7 @@ export function Footer() {
         <div className="pt-8 md:pt-12 flex flex-col-reverse md:flex-row justify-between items-center gap-8 md:gap-6">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
             <p className="text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] uppercase text-zinc-400 font-medium text-center md:text-left">
-              © {new Date().getFullYear()} Gerka Clinic. All rights reserved.
+              © {new Date().getFullYear()} Gerka Clinic. All rights reserved. • Last Updated: July 26, 2026
             </p>
             <span className="hidden md:block text-zinc-300">|</span>
             <p className="text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] uppercase text-zinc-500 font-bold">

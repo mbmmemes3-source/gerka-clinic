@@ -112,7 +112,7 @@ export function ContactSection() {
             <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 space-y-3 text-white">
               <div className="flex items-center gap-3"><Phone size={14} /> <span className="text-[11px] md:text-[13px] tracking-[0.2em] font-light">0878888087</span></div>
               <div className="flex items-center gap-3"><Mail size={14} /> <a href={email ? `mailto:${email}` : "#"} className="text-[11px] md:text-[13px] tracking-[0.2em] font-light truncate hover:underline">{email || "info [at] gerkaclinic.com"}</a></div>
-              <div className="flex items-center gap-3"><MapPin size={14} /> <span className="text-[11px] md:text-[13px] tracking-[0.2em] font-light uppercase">STILLORGAN RD, A94NH31</span></div>
+              <div className="flex items-center gap-3"><MapPin size={14} /> <span className="text-[11px] md:text-[13px] tracking-[0.2em] font-light uppercase">1 PRIORY OFFICE PARK, STILLORGAN RD, DUBLIN, A94NH31</span></div>
             </div>
           </motion.div>
 

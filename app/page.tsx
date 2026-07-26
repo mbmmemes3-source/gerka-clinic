@@ -16,8 +16,8 @@ const AppointmentBooking = dynamic(
 )
 
 export const metadata: Metadata = {
-  title: "Gerka Clinic | Premier Women's Wellness & Aesthetics",
-  description: "Gerka Clinic offers advanced aesthetic treatments and intimate women's wellness solutions in Dublin.",
+  title: "Gerka Clinic | Aesthetic, Skin & Women's Health Dublin",
+  description: "Gerka Clinic is a leading Dublin aesthetic clinic specialising in regenerative medicine, skin rejuvenation, and intimate women's health on Stillorgan Road.",
   alternates: {
     canonical: "https://www.gerkaclinic.com",
   },

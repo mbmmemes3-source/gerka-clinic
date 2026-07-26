@@ -109,22 +109,21 @@ export function FAQSection() {
                 </div>
               </button>
 
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-                  >
-                    <div className="pt-4 md:pt-6 sm:pl-10">
-                      <div className="text-zinc-500 leading-relaxed text-sm sm:text-base md:text-lg font-light max-w-2xl">
-                        {faq.answer}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <motion.div
+                initial={false}
+                animate={{ 
+                  height: openIndex === index ? "auto" : 0, 
+                  opacity: openIndex === index ? 1 : 0 
+                }}
+                transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                className="overflow-hidden"
+              >
+                <div className="pt-4 md:pt-6 sm:pl-10">
+                  <div className="text-zinc-500 leading-relaxed text-sm sm:text-base md:text-lg font-light max-w-2xl">
+                    {faq.answer}
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
