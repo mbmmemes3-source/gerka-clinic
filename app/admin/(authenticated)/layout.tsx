@@ -8,7 +8,8 @@ import {
   Layers, 
   LogOut, 
   ArrowLeft, 
-  Truck
+  Truck,
+  FileText
 } from "lucide-react";
 
 export default async function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
@@ -26,6 +27,7 @@ export default async function AuthenticatedLayout({ children }: { children: Reac
     { name: "Categories", href: "/admin/shop/categories", icon: <Layers size={18} /> },
     { name: "Products", href: "/admin/shop/products", icon: <ShoppingBag size={18} /> },
     { name: "Orders", href: "/admin/shop/orders", icon: <Truck size={18} /> },
+    { name: "Blogs", href: "/admin/blogs", icon: <FileText size={18} /> },
   ];
 
   return (

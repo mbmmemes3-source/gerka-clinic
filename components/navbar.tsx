@@ -135,6 +135,7 @@ const navItems = [
     ]
   },
   { href: "/shop", label: "Shop" },
+  { href: "/blog", label: "Blog" },
   { href: "/clinical-outcomes", label: "Outcomes" },
 ]
 
