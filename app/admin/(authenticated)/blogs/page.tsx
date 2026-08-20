@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { 
   FileText, Plus, Trash2, 
   Loader2, X, Upload,
-  CheckCircle2, Info, Eye, Globe
+  CheckCircle2, Info, Eye, Globe, Edit2
 } from "lucide-react"
 import { CldUploadWidget } from 'next-cloudinary'
 
@@ -87,6 +87,8 @@ export default function AdminBlogsPage() {
   const [loading, setLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showForm, setShowForm] = useState(false)
+  const [editingBlogId, setEditingBlogId] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<"write" | "preview">("write")
 
   const [form, setForm] = useState({
     title: "", 
@@ -122,18 +124,22 @@ export default function AdminBlogsPage() {
     
     setIsSubmitting(true)
     try {
+      const method = editingBlogId ? "PUT" : "POST"
+      const body = editingBlogId ? { ...form, id: editingBlogId } : form
       const res = await fetch("/api/admin/blogs", {
-        method: "POST",
-        body: JSON.stringify(form),
+        method,
+        body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" }
       })
       if (res.ok) {
         setShowForm(false)
+        setEditingBlogId(null)
         setForm({ title: "", excerpt: "", content: "", image: "", published: true })
+        setActiveTab("write")
         fetchBlogs()
       } else {
         const errorData = await res.json()
-        alert(errorData.error || "Failed to create blog post.")
+        alert(errorData.error || `Failed to ${editingBlogId ? 'update' : 'create'} blog post.`)
       }
     } catch (err) {
       alert("Error saving blog post")
@@ -156,7 +162,21 @@ export default function AdminBlogsPage() {
     }
   }
 
-  const insertTag = (startTag: string, endTag: string) => {
+  const handleEdit = (blog: Blog) => {
+    setEditingBlogId(blog.id)
+    setForm({
+      title: blog.title,
+      excerpt: blog.excerpt,
+      content: blog.content,
+      image: blog.image,
+      published: blog.published
+    })
+    setShowForm(true)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const insertTag = (e: React.MouseEvent, startTag: string, endTag: string) => {
+    e.preventDefault();
     const textarea = document.getElementById("content-textarea") as HTMLTextAreaElement;
     if (!textarea) return;
 
@@ -171,7 +191,7 @@ export default function AdminBlogsPage() {
 
     // Refocus and select injected text
     setTimeout(() => {
-      textarea.focus();
+      textarea.focus({ preventScroll: true });
       textarea.setSelectionRange(start + startTag.length, start + startTag.length + selectedText.length);
     }, 0);
   };
@@ -185,11 +205,23 @@ export default function AdminBlogsPage() {
           <p className="text-zinc-500 text-sm font-light italic leading-relaxed text-zinc-400">Write articles, clinical guides, and updates for the Gerka Journal.</p>
         </div>
         <button 
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => {
+            if (showForm) {
+              setShowForm(false)
+              setEditingBlogId(null)
+              setForm({ title: "", excerpt: "", content: "", image: "", published: true })
+              setActiveTab("write")
+            } else {
+              setShowForm(true)
+              setEditingBlogId(null)
+              setForm({ title: "", excerpt: "", content: "", image: "", published: true })
+              setActiveTab("write")
+            }
+          }}
           className="bg-zinc-900 text-white px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] shadow-xl flex items-center gap-2 hover:bg-zinc-800 transition-all active:scale-95 animate-fade-in"
         >
           {showForm ? <X size={14} /> : <Plus size={14} />}
-          {showForm ? "Cancel Publication" : "Create Article"}
+          {showForm ? (editingBlogId ? "Cancel Edit" : "Cancel Publication") : "Create Article"}
         </button>
       </section>
 
@@ -205,6 +237,13 @@ export default function AdminBlogsPage() {
             <form onSubmit={handleSubmit} className="bg-white border border-zinc-200 rounded-[3rem] p-8 md:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-12">
                {/* Left Column */}
                <div className="space-y-8">
+                  {editingBlogId && (
+                    <div className="bg-zinc-50 border border-zinc-200 p-4 rounded-2xl flex items-center gap-2">
+                      <Info size={14} className="text-zinc-500 animate-pulse" />
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Editing Mode (ID: {editingBlogId.substring(0, 8)}...)</span>
+                    </div>
+                  )}
+                  
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">Cover Photography</label>
                     <ImageUpload 
@@ -240,27 +279,62 @@ export default function AdminBlogsPage() {
                {/* Right Column */}
                <div className="space-y-8 flex flex-col justify-between">
                   <div className="space-y-2 flex-1 flex flex-col">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center ml-1 mb-1 gap-2">
-                      <label className="text-[10px] font-bold uppercase text-zinc-400 tracking-widest flex items-center gap-2">
-                        <Info size={12}/> Blog Content
-                      </label>
-                      <div className="flex flex-wrap gap-1.5">
-                        <button type="button" onClick={() => insertTag("<h1>", "</h1>")} className="toolbar-btn" title="Heading 1">H1</button>
-                        <button type="button" onClick={() => insertTag("<h2>", "</h2>")} className="toolbar-btn" title="Heading 2">H2</button>
-                        <button type="button" onClick={() => insertTag("<strong>", "</strong>")} className="toolbar-btn font-bold" title="Bold">B</button>
-                        <button type="button" onClick={() => insertTag("<em>", "</em>")} className="toolbar-btn italic" title="Italic">I</button>
-                        <button type="button" onClick={() => insertTag("<ul>\n  <li>", "</li>\n</ul>")} className="toolbar-btn" title="Bullet List">List</button>
-                        <button type="button" onClick={() => insertTag('<a href="https://">', "</a>")} className="toolbar-btn" title="Link">Link</button>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center ml-1 mb-2 gap-2 border-b border-zinc-100 pb-2">
+                      <div className="flex items-center gap-4">
+                        <button 
+                          type="button" 
+                          onClick={() => setActiveTab("write")} 
+                          className={`text-[10px] font-bold uppercase tracking-widest pb-1 border-b-2 transition-all ${
+                            activeTab === "write" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-400 hover:text-zinc-600"
+                          }`}
+                        >
+                          Write Content
+                        </button>
+                        <button 
+                          type="button" 
+                          onClick={() => setActiveTab("preview")} 
+                          className={`text-[10px] font-bold uppercase tracking-widest pb-1 border-b-2 transition-all ${
+                            activeTab === "preview" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-400 hover:text-zinc-600"
+                          }`}
+                        >
+                          Live Preview
+                        </button>
                       </div>
+                      
+                      {activeTab === "write" && (
+                        <div className="flex flex-wrap gap-1.5 animate-fade-in">
+                          <button type="button" onClick={(e) => insertTag(e, "<h1>", "</h1>")} className="toolbar-btn" title="Heading 1">H1</button>
+                          <button type="button" onClick={(e) => insertTag(e, "<h2>", "</h2>")} className="toolbar-btn" title="Heading 2">H2</button>
+                          <button type="button" onClick={(e) => insertTag(e, "<p>", "</p>")} className="toolbar-btn" title="Paragraph">P</button>
+                          <button type="button" onClick={(e) => insertTag(e, "<strong>", "</strong>")} className="toolbar-btn font-bold" title="Bold">B</button>
+                          <button type="button" onClick={(e) => insertTag(e, "<em>", "</em>")} className="toolbar-btn italic" title="Italic">I</button>
+                          <button type="button" onClick={(e) => insertTag(e, "<ul>\n  <li>", "</li>\n</ul>")} className="toolbar-btn" title="Bullet List">List</button>
+                          <button type="button" onClick={(e) => insertTag(e, '<a href="https://">', "</a>")} className="toolbar-btn" title="Link">Link</button>
+                        </div>
+                      )}
                     </div>
-                    <textarea 
-                      id="content-textarea"
-                      required
-                      className="admin-input h-full min-h-[350px] pt-4 text-xs leading-relaxed flex-1 font-mono" 
-                      placeholder="Write your article here. Use the quick toolbar formatting options above to easily insert headers, lists, links, bold, and italic styling!" 
-                      value={form.content} 
-                      onChange={e => setForm({...form, content: e.target.value})} 
-                    />
+
+                    {activeTab === "write" ? (
+                      <textarea 
+                        id="content-textarea"
+                        required
+                        className="admin-input h-full min-h-[350px] pt-4 text-xs leading-relaxed flex-1 font-mono" 
+                        placeholder="Write your article here. Use the quick toolbar formatting options above to easily insert headers, lists, links, bold, and italic styling!" 
+                        value={form.content} 
+                        onChange={e => setForm({...form, content: e.target.value})} 
+                      />
+                    ) : (
+                      <div className="admin-input h-full min-h-[350px] overflow-y-auto pt-4 flex-1 bg-[#FAF9F6] border border-zinc-200 rounded-[1.25rem] p-6 shadow-inner">
+                        {form.content ? (
+                          <div 
+                            className="blog-content text-left" 
+                            dangerouslySetInnerHTML={{ __html: form.content }}
+                          />
+                        ) : (
+                          <p className="text-zinc-400 italic text-sm text-center pt-12 font-light">No content to preview yet. Start writing in the "Write Content" tab!</p>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* Toggle Publishing */}
@@ -283,7 +357,14 @@ export default function AdminBlogsPage() {
                        disabled={isSubmitting} 
                        className="w-full bg-zinc-900 text-white py-6 rounded-full font-bold uppercase tracking-[0.3em] text-[11px] shadow-2xl flex items-center justify-center gap-4 disabled:bg-zinc-300 transition-all active:scale-[0.99]"
                      >
-                       {isSubmitting ? <Loader2 className="animate-spin" /> : <><Globe size={18} /> Publish to Gerka Clinic Journal</>}
+                       {isSubmitting ? (
+                         <Loader2 className="animate-spin" />
+                       ) : (
+                         <>
+                           <Globe size={18} /> 
+                           {editingBlogId ? "Save Changes" : "Publish to Gerka Clinic Journal"}
+                         </>
+                       )}
                      </button>
                   </div>
                </div>
@@ -330,14 +411,22 @@ export default function AdminBlogsPage() {
 
                {/* ACTIONS */}
                <div className="mt-6 pt-4 border-t border-zinc-50 flex justify-between items-center">
-                  <a 
-                    href={`/blog/${blog.slug}`} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-[10px] font-bold text-zinc-500 hover:text-zinc-950 uppercase tracking-widest bg-zinc-50 hover:bg-zinc-100 px-4 py-2 rounded-full border border-zinc-100 transition-colors flex items-center gap-1.5"
-                  >
-                    <Eye size={12} /> View Page
-                  </a>
+                  <div className="flex gap-2">
+                    <a 
+                      href={`/blog/${blog.slug}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-[10px] font-bold text-zinc-500 hover:text-zinc-950 uppercase tracking-widest bg-zinc-50 hover:bg-zinc-100 px-4 py-2 rounded-full border border-zinc-100 transition-colors flex items-center gap-1.5"
+                    >
+                      <Eye size={12} /> View Page
+                    </a>
+                    <button 
+                      onClick={() => handleEdit(blog)}
+                      className="text-[10px] font-bold text-zinc-500 hover:text-zinc-950 uppercase tracking-widest bg-zinc-50 hover:bg-zinc-100 px-4 py-2 rounded-full border border-zinc-100 transition-colors flex items-center gap-1.5"
+                    >
+                      <Edit2 size={12} /> Edit
+                    </button>
+                  </div>
                   <button onClick={() => handleDelete(blog.id)} className="text-zinc-300 hover:text-red-500 transition-colors p-2 active:scale-90">
                     <Trash2 size={18}/>
                   </button>
@@ -381,6 +470,80 @@ export default function AdminBlogsPage() {
           background-color: #f4f4f5;
           color: #18181b;
           border-color: #d4d4d8;
+        }
+
+        /* BLOG PREVIEW STYLES */
+        .blog-content :global(p) {
+          margin-bottom: 1.25rem;
+          line-height: 1.6;
+          font-weight: 300;
+          font-size: 0.95rem;
+          color: #3f3f46;
+        }
+        .blog-content :global(h1) {
+          font-size: 1.75rem;
+          font-weight: 300;
+          color: #18181b;
+          letter-spacing: -0.02em;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+          font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        }
+        .blog-content :global(h2) {
+          font-size: 1.4rem;
+          font-weight: 400;
+          color: #18181b;
+          letter-spacing: -0.02em;
+          margin-top: 1.75rem;
+          margin-bottom: 0.75rem;
+          font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        }
+        .blog-content :global(h3) {
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: #18181b;
+          margin-top: 1.5rem;
+          margin-bottom: 0.75rem;
+          font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        }
+        .blog-content :global(ul) {
+          list-style-type: disc;
+          padding-left: 1.5rem;
+          margin-bottom: 1.25rem;
+        }
+        .blog-content :global(li) {
+          margin-bottom: 0.35rem;
+          font-weight: 300;
+          font-size: 0.9rem;
+          color: #3f3f46;
+        }
+        .blog-content :global(ol) {
+          list-style-type: decimal;
+          padding-left: 1.5rem;
+          margin-bottom: 1.25rem;
+        }
+        .blog-content :global(blockquote) {
+          border-left: 4px solid #e4e4e7;
+          padding-left: 1.25rem;
+          font-style: italic;
+          color: #71717a;
+          margin: 1.5rem 0;
+        }
+        .blog-content :global(strong) {
+          font-weight: 600;
+          color: #18181b;
+        }
+        .blog-content :global(em), .blog-content :global(i) {
+          font-style: italic;
+          color: #27272a;
+        }
+        .blog-content :global(a) {
+          color: #18181b;
+          text-decoration: underline;
+          font-weight: 400;
+        }
+        .blog-content :global(a:hover) {
+          color: #71717a;
         }
       `}</style>
     </div>

@@ -59,6 +59,52 @@ export async function POST(req: Request) {
   }
 }
 
+export async function PUT(req: Request) {
+  try {
+    const body = await req.json();
+    const { id, title, content, excerpt, image, published } = body;
+
+    if (!id || !title || !content || !excerpt || !image) {
+      return NextResponse.json({ error: "ID, Title, content, excerpt, and image are required" }, { status: 400 });
+    }
+
+    const existingBlog = await prisma.blog.findUnique({ where: { id } });
+    if (!existingBlog) {
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    }
+
+    // Only regenerate slug if title changed
+    let slug = existingBlog.slug;
+    if (existingBlog.title !== title) {
+      slug = generateSlug(title);
+      let existingSlugOwner = await prisma.blog.findUnique({ where: { slug } });
+      let counter = 1;
+      while (existingSlugOwner && existingSlugOwner.id !== id) {
+        slug = `${generateSlug(title)}-${counter}`;
+        existingSlugOwner = await prisma.blog.findUnique({ where: { slug } });
+        counter++;
+      }
+    }
+
+    const updatedBlog = await prisma.blog.update({
+      where: { id },
+      data: {
+        title,
+        slug,
+        content,
+        excerpt,
+        image,
+        published: published !== undefined ? published : true,
+      },
+    });
+
+    return NextResponse.json(updatedBlog);
+  } catch (error: any) {
+    console.error("PRISMA BLOG UPDATE ERROR:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
 export async function DELETE(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
