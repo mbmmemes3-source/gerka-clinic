@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Home, ChevronRight, BookOpen, Calendar, Clock, ArrowRight } from "lucide-react";
+import { Home, ChevronRight, BookOpen, Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 export const revalidate = 0; // Disable caching to ensure dynamic content is always up to date
@@ -106,7 +106,11 @@ export default async function BlogListingPage() {
               return (
                 <article 
                   key={blog.id} 
-                  className="group bg-white border border-zinc-100 rounded-[2.5rem] overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-200"
+                  className={`group bg-white overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border ${
+                    blog.featured 
+                      ? "border-zinc-900 shadow-md rounded-[2.5rem]" 
+                      : "border-zinc-100 rounded-[2.5rem]"
+                  }`}
                 >
                   <div className="space-y-6">
                     {/* Cover Image Container */}
@@ -117,6 +121,22 @@ export default async function BlogListingPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                         loading="lazy"
                       />
+                      
+                      {/* Category Badge */}
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 bg-white/95 backdrop-blur-md text-zinc-800 text-[9px] font-bold uppercase tracking-widest rounded-full shadow-sm border border-zinc-100">
+                          {blog.category || "General"}
+                        </span>
+                      </div>
+
+                      {/* Featured Badge */}
+                      {blog.featured && (
+                        <div className="absolute top-4 right-4">
+                          <span className="px-3 py-1 bg-zinc-900 text-white text-[9px] font-bold uppercase tracking-widest rounded-full shadow-sm flex items-center gap-1 border border-zinc-800">
+                            <Sparkles size={10} fill="currentColor" className="text-amber-400" /> Featured
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Metadata & Content Summary */}

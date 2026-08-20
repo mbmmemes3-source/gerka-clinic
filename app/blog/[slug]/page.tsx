@@ -155,37 +155,40 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .blog-content p {
-          margin-bottom: 1.75rem;
+          margin-bottom: 0.85rem;
           line-height: 1.8;
           font-weight: 300;
           font-size: 1.1rem;
           color: #3f3f46; /* zinc-700 */
         }
-        .blog-content h1 {
-          font-size: 2.25rem;
-          font-weight: 300;
-          color: #18181b; /* zinc-900 */
-          letter-spacing: -0.02em;
-          margin-top: 3rem;
-          margin-bottom: 1.5rem;
-          font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        .blog-content h1,
+        .blog-content h1 * {
+          font-size: 2.25rem !important;
+          font-weight: 600 !important;
+          color: #18181b !important;
+          letter-spacing: -0.02em !important;
+          margin-top: 1.75rem !important;
+          margin-bottom: 0.75rem !important;
+          font-family: Georgia, Cambria, "Times New Roman", Times, serif !important;
         }
-        .blog-content h2 {
-          font-size: 1.75rem;
-          font-weight: 400;
-          color: #18181b;
-          letter-spacing: -0.02em;
-          margin-top: 2.5rem;
-          margin-bottom: 1.25rem;
-          font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        .blog-content h2,
+        .blog-content h2 * {
+          font-size: 1.75rem !important;
+          font-weight: 600 !important;
+          color: #18181b !important;
+          letter-spacing: -0.02em !important;
+          margin-top: 1.5rem !important;
+          margin-bottom: 0.5rem !important;
+          font-family: Georgia, Cambria, "Times New Roman", Times, serif !important;
         }
-        .blog-content h3 {
-          font-size: 1.4rem;
-          font-weight: 400;
-          color: #18181b;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-          font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        .blog-content h3,
+        .blog-content h3 * {
+          font-size: 1.4rem !important;
+          font-weight: 600 !important;
+          color: #18181b !important;
+          margin-top: 1.25rem !important;
+          margin-bottom: 0.5rem !important;
+          font-family: Georgia, Cambria, "Times New Roman", Times, serif !important;
         }
         .blog-content ul {
           list-style-type: disc;

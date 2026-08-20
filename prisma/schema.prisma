@@ -66,6 +66,8 @@ model Blog {
   excerpt   String   @db.Text
   image     String   // Cover image URL
   published Boolean  @default(true)
+  category  String   @default("General")
+  featured  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

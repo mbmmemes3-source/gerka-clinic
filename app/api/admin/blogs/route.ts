@@ -25,7 +25,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { title, content, excerpt, image, published } = body;
+    const { title, content, excerpt, image, published, category, featured } = body;
 
     if (!title || !content || !excerpt || !image) {
       return NextResponse.json({ error: "Title, content, excerpt, and image are required" }, { status: 400 });
@@ -49,6 +49,8 @@ export async function POST(req: Request) {
         excerpt,
         image,
         published: published !== undefined ? published : true,
+        category: category || "General",
+        featured: featured !== undefined ? featured : false,
       },
     });
 
@@ -62,7 +64,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const { id, title, content, excerpt, image, published } = body;
+    const { id, title, content, excerpt, image, published, category, featured } = body;
 
     if (!id || !title || !content || !excerpt || !image) {
       return NextResponse.json({ error: "ID, Title, content, excerpt, and image are required" }, { status: 400 });
@@ -95,6 +97,8 @@ export async function PUT(req: Request) {
         excerpt,
         image,
         published: published !== undefined ? published : true,
+        category: category || "General",
+        featured: featured !== undefined ? featured : false,
       },
     });
 
