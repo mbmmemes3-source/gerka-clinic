@@ -60,12 +60,12 @@ export default async function BlogListingPage() {
           </p>
 
           {/* BREADCRUMB */}
-          <div className="bg-white/90 backdrop-blur-md border border-zinc-100 shadow-sm px-6 py-3 rounded-full flex items-center gap-3">
-            <Link href="/" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 flex items-center gap-2 transition-colors">
+          <div className="bg-white/90 backdrop-blur-md border border-zinc-100 shadow-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full flex items-center gap-2 sm:gap-3 max-w-full overflow-hidden">
+            <Link href="/" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 flex items-center gap-1.5 sm:gap-2 transition-colors shrink-0">
               <Home size={12} /> Home
             </Link>
-            <ChevronRight size={10} className="text-zinc-300" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-900">Journal</span>
+            <ChevronRight size={10} className="text-zinc-300 shrink-0" />
+            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-900 truncate">Journal</span>
           </div>
         </div>
       </section>

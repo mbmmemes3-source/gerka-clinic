@@ -46,12 +46,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   ];
 
   return (
-    <div className="bg-white min-h-screen pb-24">
+    <div className="bg-white min-h-screen pb-24 overflow-x-hidden">
       {/* --- HERO BANNER --- */}
-      <section className="relative w-full min-h-[50vh] flex flex-col items-center justify-center overflow-hidden bg-white pt-32 pb-12 lg:pt-40">
+      <section className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-white pt-28 sm:pt-32 pb-12 lg:pt-40 px-4 sm:px-6">
         {/* Background Image Collage */}
-        <div className="absolute inset-0 z-0">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 opacity-20 grayscale p-4">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 opacity-15 grayscale p-4">
             {backgroundImages.map((src, i) => (
               <div 
                 key={i} 
@@ -67,25 +67,26 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               </div>
             ))}
           </div>
+          {/* Subtle gradient overlay to ensure text contrast and legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/85 to-white" />
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 md:px-10 relative z-10 space-y-6 text-center flex flex-col items-center">
+        <div className="w-full max-w-5xl mx-auto px-2 sm:px-6 md:px-10 relative z-10 space-y-4 sm:space-y-6 text-center flex flex-col items-center">
           {/* Breadcrumbs */}
-          <div className="flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-widest bg-white/90 backdrop-blur-md border border-zinc-100 shadow-sm px-6 py-2.5 rounded-full">
-            <Link href="/" className="text-zinc-400 hover:text-zinc-900 flex items-center gap-2 transition-colors">
-              <Home size={12} /> Home
+          <div className="max-w-full flex items-center justify-center gap-1.5 sm:gap-3 text-[10px] font-bold uppercase tracking-widest bg-white/90 backdrop-blur-md border border-zinc-100 shadow-sm px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full overflow-hidden">
+            <Link href="/" className="text-zinc-400 hover:text-zinc-900 flex items-center gap-1.5 transition-colors shrink-0">
+              <Home size={12} /> <span className="inline">Home</span>
             </Link>
-            <ChevronRight size={10} className="text-zinc-300" />
-            <Link href="/blog" className="text-zinc-400 hover:text-zinc-900 transition-colors">
+            <ChevronRight size={10} className="text-zinc-300 shrink-0" />
+            <Link href="/blog" className="text-zinc-400 hover:text-zinc-900 transition-colors shrink-0">
               Journal
             </Link>
-            <ChevronRight size={10} className="text-zinc-300" />
-            <span className="text-zinc-900 truncate max-w-[200px] md:max-w-xs">{blog.title}</span>
+            <ChevronRight size={10} className="text-zinc-300 shrink-0" />
+            <span className="text-zinc-900 truncate max-w-[110px] xs:max-w-[160px] sm:max-w-[220px] md:max-w-xs">{blog.title}</span>
           </div>
 
           {/* Metadata */}
-          <div className="flex items-center justify-center gap-4 text-[10px] font-bold text-zinc-400 uppercase tracking-wider pt-2">
-
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] font-bold text-zinc-400 uppercase tracking-wider pt-1">
             <span className="flex items-center gap-1.5">
               <Calendar size={12} /> {formattedDate}
             </span>
@@ -96,12 +97,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-light text-zinc-900 tracking-tight leading-tight max-w-4xl mx-auto">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-zinc-900 tracking-tight leading-tight max-w-4xl mx-auto break-words w-full px-2">
             {blog.title}
           </h1>
 
           {/* Excerpt */}
-          <p className="text-zinc-500 font-light text-sm md:text-lg leading-relaxed max-w-2xl mx-auto italic">
+          <p className="text-zinc-500 font-light text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto italic px-2">
             {blog.excerpt}
           </p>
         </div>
