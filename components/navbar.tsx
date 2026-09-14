@@ -6,7 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, ChevronRight, ShoppingBag, Globe } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronRight, ShoppingBag, Globe, Phone, Calendar, MapPin } from "lucide-react"
 import { useCart } from "@/context/CartContext"
 
 function LanguageSwitcher() {
@@ -168,6 +168,60 @@ export function Navbar() {
     setIsOpen(false)
     setActiveDropdown(null)
   }, [pathname])
+
+  const isLandingPage = Boolean(
+    pathname && (
+      pathname.startsWith("/skin-peel-dublin") ||
+      pathname.startsWith("/skin-boosters-dublin") ||
+      pathname.startsWith("/regenerative-gynaecology-dublin")
+    )
+  )
+
+  if (isLandingPage) {
+    return (
+      <header className="fixed top-0 w-full z-[100] bg-white/95 backdrop-blur-md border-b border-zinc-100 py-3 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 group shrink-0">
+            <div className="relative w-8 h-8 md:w-9 md:h-9">
+              <Image src="/icon2.png" alt="Gerka Clinic Dublin" fill className="object-contain" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-base md:text-lg font-light tracking-wider text-zinc-900 uppercase leading-tight">
+                Gerka Clinic
+              </span>
+              <span className="text-[7px] md:text-[8px] tracking-[0.1em] text-zinc-500 uppercase font-medium">
+                Dublin • Aesthetic & Intimate Health
+              </span>
+            </div>
+          </Link>
+
+          <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-500 font-light border-x border-zinc-100 px-4 py-1">
+            <MapPin size={14} className="text-zinc-700 shrink-0" />
+            <span>1 Priory Office Park, Stillorgan Rd, Dublin</span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href="tel:+353878888087"
+              className="flex items-center gap-2 text-xs md:text-sm font-medium text-zinc-800 hover:text-zinc-900 border border-zinc-200 hover:border-zinc-400 bg-white px-3 md:px-4 py-2 rounded-full transition-all shadow-sm"
+            >
+              <Phone size={14} className="text-emerald-600 animate-pulse" />
+              <span className="hidden sm:inline">087 888 8087</span>
+              <span className="sm:hidden">Call</span>
+            </a>
+
+            <a
+              href="#lp-booking-form"
+              className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-wider text-white bg-zinc-900 hover:bg-black px-4 md:px-6 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg"
+            >
+              <Calendar size={14} />
+              Book Consultation
+            </a>
+          </div>
+        </div>
+      </header>
+    )
+  }
 
   return (
     <>
