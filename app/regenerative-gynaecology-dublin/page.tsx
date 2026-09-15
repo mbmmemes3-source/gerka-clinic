@@ -83,6 +83,57 @@ const faqs = [
   }
 ]
 
+const symptomMatrixData = [
+  {
+    id: "lichen",
+    label: "Lichen Sclerosus & Vulvar Dermatitis",
+    title: "Specialist Care for Lichen Sclerosus & Vulvar Dermatitis",
+    symptoms: "Persistent itching, white skin patches, vulvar skin tightness, tearing & painful intimacy.",
+    approach: "Doctor-led clinical assessment, topical anti-inflammatory barrier management, PRP autologous cellular tissue repair, and structured long-term monitoring.",
+    outcomes: [
+      "Relief from chronic itching, burning & inflammation",
+      "Support for skin elasticity & reduction in tearing",
+      "Long-term clinical monitoring to prevent disease progression"
+    ]
+  },
+  {
+    id: "infections",
+    label: "Recurrent Vaginal Infections (Thrush & BV)",
+    title: "Investigation & Management of Recurrent Infections",
+    symptoms: "Recurring burning sensation, abnormal discharge, persistent irritation, and microbiome imbalances resistant to OTC creams.",
+    approach: "Root-cause diagnostic investigation, microbiome & pH balance assessment, targeted anti-microbial protocols, and regenerative tissue support.",
+    outcomes: [
+      "Identification of root causes behind recurrent infections",
+      "Restoration of vaginal microbiome & healthy mucosal barrier",
+      "Long-term reduction in recurrence frequency"
+    ]
+  },
+  {
+    id: "menopause",
+    label: "Menopause & GSM (Genitourinary Syndrome)",
+    title: "Non-Surgical Care for Menopausal & GSM Symptoms",
+    symptoms: "Vulvovaginal dryness, loss of tissue elasticity, burning during daily activities, and post-menopausal mucosal thinning.",
+    approach: "Comprehensive evaluation, non-hormonal and supportive tissue hydration, autologous cellular restoration (PRP), and collagen bio-stimulation.",
+    outcomes: [
+      "Restored mucosal moisture & natural lubrication",
+      "Improved tissue thickness, elasticity & comfort",
+      "Relief from intimacy discomfort without sole reliance on synthetic hormones"
+    ]
+  },
+  {
+    id: "rejuvenation",
+    label: "Intimate Discomfort & Tissue Renewal",
+    title: "Genitourinary Rejuvenation & Structural Comfort",
+    symptoms: "Post-childbirth tissue changes, localized skin crepiness, friction irritation, and structural laxity.",
+    approach: "Non-surgical bio-stimulation, intimate dermal rejuvenation protocols, and personalized pelvic floor & tissue strengthening guidance.",
+    outcomes: [
+      "Enhanced tissue tone, firmness & natural resilience",
+      "Reduction in friction, irritation & intimacy discomfort",
+      "Increased personal confidence in intimate health"
+    ]
+  }
+]
+
 export default function RegenerativeGynaecologyDublinLandingPage() {
   const router = useRouter()
 
@@ -108,6 +159,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [openFaq, setOpenFaq] = useState<number | null>(0)
+  const [activeSymptomTab, setActiveSymptomTab] = useState("lichen")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -492,6 +544,116 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SECTION: INTERACTIVE SYMPTOM & SOLUTION MATRIX */}
+      <section className="py-16 bg-gradient-to-b from-white to-[#FAF9F6] border-b border-zinc-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-rose-900 bg-rose-50 px-3.5 py-1.5 rounded-full border border-rose-100 inline-block mb-3">
+              Interactive Symptom & Solution Finder
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-zinc-900">
+              Is Regenerative Gynaecology Right for You?
+            </h2>
+            <p className="text-sm md:text-base text-zinc-600 font-light mt-2">
+              Select your primary symptom concern below to see our clinical evaluation focus, root-cause investigation, and regenerative care options.
+            </p>
+          </div>
+
+          {/* TAB BUTTONS */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            {symptomMatrixData.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveSymptomTab(tab.id)}
+                className={`px-5 py-3 rounded-2xl text-xs md:text-sm font-medium transition-all duration-200 border ${
+                  activeSymptomTab === tab.id
+                    ? "bg-zinc-900 text-white border-zinc-900 shadow-md transform -translate-y-0.5"
+                    : "bg-white text-zinc-700 border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* TAB CONTENT DISPLAY */}
+          {(() => {
+            const currentTab = symptomMatrixData.find((t) => t.id === activeSymptomTab) || symptomMatrixData[0]
+            return (
+              <motion.div
+                key={currentTab.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/90 shadow-xl max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-7 space-y-6">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-rose-800 bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
+                      Confidential Clinical Care
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-light text-zinc-900 mt-2">
+                      {currentTab.title}
+                    </h3>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-rose-50/50 p-4 rounded-2xl border border-rose-100">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-rose-900 mb-1 flex items-center gap-1.5">
+                        <Activity size={15} className="text-rose-700 shrink-0" />
+                        <span>Common Symptoms & Experiences</span>
+                      </div>
+                      <div className="text-xs text-zinc-800 font-light leading-relaxed">
+                        {currentTab.symptoms}
+                      </div>
+                    </div>
+
+                    <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1 flex items-center gap-1.5">
+                        <Stethoscope size={15} className="text-zinc-700 shrink-0" />
+                        <span>Our Clinical & Diagnostic Approach</span>
+                      </div>
+                      <div className="text-xs text-zinc-800 font-light leading-relaxed">
+                        {currentTab.approach}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <a
+                      href="#lp-booking-form"
+                      className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-6 py-3.5 rounded-xl transition-all shadow-sm"
+                    >
+                      <span>BOOK CONFIDENTIAL CONSULTATION</span>
+                      <ArrowRight size={14} />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 bg-[#FAF9F6] p-6 rounded-2xl border border-zinc-200 space-y-4">
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-900 flex items-center gap-2">
+                    <ShieldCheck size={18} className="text-rose-700" />
+                    <span>Expected Clinical Outcomes</span>
+                  </h4>
+                  <ul className="space-y-3">
+                    {currentTab.outcomes.map((out, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-xs text-zinc-700 font-light leading-relaxed">
+                        <CheckCircle2 size={16} className="text-rose-700 shrink-0 mt-0.5" />
+                        <span>{out}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="pt-4 border-t border-zinc-200/80 text-[11px] text-zinc-500 font-light italic">
+                    All treatments are doctor-led, evidence-based, and personalized following a comprehensive, unhurried consultation.
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })()}
         </div>
       </section>
 

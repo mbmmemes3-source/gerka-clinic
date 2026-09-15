@@ -68,6 +68,73 @@ const faqs = [
   }
 ]
 
+const boosterComparisonData = [
+  {
+    id: "profhilo",
+    name: "PROFHILO®",
+    badge: "HA Bio-Remodelling",
+    bestFor: "Overall skin laxity, face/neck tightening & deep dermal hydration",
+    activeComp: "Ultra-pure HA (64mg/2ml high & low MW)",
+    targetAreas: "Full Face, Neck, Décolletage, Hands",
+    sessionsNeeded: "2 Sessions (spaced 4 weeks apart)",
+    resultsDuration: "6 - 9 Months",
+    downtime: "Mild localized bumps (absorbed in 24-48h)",
+    highlights: [
+      "Stimulates 4 types of collagen & elastin",
+      "Spreads naturally through tissue layers",
+      "No artificial volume or change to facial shape"
+    ]
+  },
+  {
+    id: "sunekos",
+    name: "SUNEKOS®",
+    badge: "Amino Acids + HA",
+    bestFor: "Delicate under-eye dark circles, tear troughs & fine peri-oral lines",
+    activeComp: "HA + 6 Patented Amino Acid Cluster (Glycine, L-Proline, L-Lysine)",
+    targetAreas: "Under-Eyes, Forehead, Mouth Area, Full Face",
+    sessionsNeeded: "3 - 4 Sessions (spaced 1-2 weeks apart)",
+    resultsDuration: "6 - 9 Months",
+    downtime: "Minimal redness/swelling (resolves in 24h)",
+    highlights: [
+      "Targeted repair for thin under-eye skin",
+      "Restores extracellular matrix elasticity",
+      "Reduces dark circle shadows and hollowness"
+    ]
+  },
+  {
+    id: "skinvive",
+    name: "SKINVIVE™",
+    badge: "Intradermal Micro-droplets",
+    bestFor: "Smooth cheek texture & long-lasting glass glow up to 6 months",
+    activeComp: "Cross-linked HA micro-droplets + Lidocaine for comfort",
+    targetAreas: "Cheeks, Mid-Face, Surface Skin Layer",
+    sessionsNeeded: "1 Session (6-month top-up optional)",
+    resultsDuration: "Up to 6 Months",
+    downtime: "Minimal micro-injection points (absorbs quickly)",
+    highlights: [
+      "FDA-approved intradermal micro-droplet hydration",
+      "Improves cheek smoothness & light reflection",
+      "Single-session convenience with lasting results"
+    ]
+  },
+  {
+    id: "jalupro",
+    name: "JALUPRO®",
+    badge: "Rich ECM Bio-Revitaliser",
+    bestFor: "Sun-damaged skin, deep cellular nourishment & dullness recovery",
+    activeComp: "High-concentration Amino Acids + Hyaluronic Acid",
+    targetAreas: "Full Face, Neck, Dehydrated Skin Zones",
+    sessionsNeeded: "2 - 3 Sessions (spaced 2-3 weeks apart)",
+    resultsDuration: "6 Months",
+    downtime: "Superficial papules (absorb in 24-48h)",
+    highlights: [
+      "Feeds fibroblast cells essential amino acids",
+      "Rejuvenates dull, tired or sun-damaged skin",
+      "Pairs exceptionally well with skin peels"
+    ]
+  }
+]
+
 export default function SkinBoostersDublinLandingPage() {
   const router = useRouter()
 
@@ -93,6 +160,7 @@ export default function SkinBoostersDublinLandingPage() {
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [openFaq, setOpenFaq] = useState<number | null>(0)
+  const [activeBoosterTab, setActiveBoosterTab] = useState("profhilo")
 
   // Campaign offer active state control
   const OFFER_EXPIRY = new Date("2026-10-31T23:59:59")
@@ -531,6 +599,149 @@ export default function SkinBoostersDublinLandingPage() {
         </div>
       </section>
 
+      {/* SECTION: INTERACTIVE SKIN BOOSTER COMPARISON MATRIX */}
+      <section className="py-16 bg-gradient-to-b from-white to-[#FAF9F6] border-b border-zinc-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-amber-800 bg-amber-50 px-3.5 py-1.5 rounded-full border border-amber-200/80 inline-block mb-3">
+              Interactive Booster Comparison
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-zinc-900">
+              Skin Booster Comparison Guide
+            </h2>
+            <p className="text-sm md:text-base text-zinc-600 font-light mt-2">
+              Compare formulations, treatment zones, required sessions, and clinical targets to find your ideal skin booster.
+            </p>
+          </div>
+
+          {/* TAB SWITCHER BUTTONS */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            {boosterComparisonData.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveBoosterTab(item.id)}
+                className={`px-5 py-3 rounded-2xl text-xs md:text-sm font-medium transition-all duration-200 border ${
+                  activeBoosterTab === item.id
+                    ? "bg-zinc-900 text-white border-zinc-900 shadow-md transform -translate-y-0.5"
+                    : "bg-white text-zinc-700 border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50"
+                }`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+
+          {/* TAB CONTENT DISPLAY */}
+          {(() => {
+            const currentBooster = boosterComparisonData.find((b) => b.id === activeBoosterTab) || boosterComparisonData[0]
+            return (
+              <motion.div
+                key={currentBooster.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200 shadow-xl max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-7 space-y-6">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
+                      {currentBooster.badge}
+                    </span>
+                    <h3 className="text-2xl font-light text-zinc-900 mt-2">
+                      {currentBooster.name} Protocol Details
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-600 font-light mt-1">
+                      {currentBooster.bestFor}
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                        Active Formulation & Ingredients
+                      </div>
+                      <div className="text-xs text-zinc-900 font-medium leading-relaxed">
+                        {currentBooster.activeComp}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                          Ideal Treatment Zones
+                        </div>
+                        <div className="text-xs text-zinc-800 font-light leading-relaxed">
+                          {currentBooster.targetAreas}
+                        </div>
+                      </div>
+
+                      <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                          Recommended Course
+                        </div>
+                        <div className="text-xs text-zinc-800 font-medium leading-relaxed flex items-center gap-1.5">
+                          <Calendar size={14} className="text-zinc-600" />
+                          <span>{currentBooster.sessionsNeeded}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                          Result Longevity
+                        </div>
+                        <div className="text-xs text-zinc-900 font-medium leading-relaxed">
+                          {currentBooster.resultsDuration}
+                        </div>
+                      </div>
+
+                      <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                          Post-Treatment Recovery
+                        </div>
+                        <div className="text-xs text-zinc-700 font-light leading-relaxed">
+                          {currentBooster.downtime}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <a
+                      href="#lp-booking-form"
+                      className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-6 py-3.5 rounded-xl transition-all shadow-sm"
+                    >
+                      <span>BOOK CONSULTATION FOR {currentBooster.name}</span>
+                      <ArrowRight size={14} />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 bg-[#FAF9F6] p-6 rounded-2xl border border-zinc-200 space-y-4">
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-900 flex items-center gap-2">
+                    <Sparkles size={18} className="text-amber-600" />
+                    <span>Key Clinical Benefits</span>
+                  </h4>
+                  <ul className="space-y-3">
+                    {currentBooster.highlights.map((h, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-xs text-zinc-700 font-light leading-relaxed">
+                        <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="pt-4 border-t border-zinc-200/80 text-[11px] text-zinc-500 font-light italic">
+                    Clinical suitability and precise injection protocol determined by qualified practitioners during your consultation.
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })()}
+        </div>
+      </section>
+
       {/* SECTION: WHICH SKIN BOOSTER IS RIGHT FOR ME */}
       <section className="py-16 bg-[#FAF9F6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -579,6 +790,106 @@ export default function SkinBoostersDublinLandingPage() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: REAL PATIENT RESULTS (SKIN BOOSTERS BEFORE & AFTER) */}
+      <section className="py-16 bg-white border-y border-zinc-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-amber-900 bg-amber-50 px-3.5 py-1.5 rounded-full border border-amber-200/80 inline-block mb-3">
+              Real Patient Clinical Case Study
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-zinc-900">
+              Visible Skin Hydration & Bio-Remodelling Results
+            </h2>
+            <p className="text-sm md:text-base text-zinc-600 font-light mt-2">
+              Transformative improvements in dermal hydration, skin elasticity, redness reduction, and natural glow after a skin booster course at Gerka Clinic Dublin.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-6xl mx-auto">
+            {/* BEFORE AFTER IMAGE CARD */}
+            <div className="lg:col-span-7">
+              <div className="relative rounded-3xl overflow-hidden border border-zinc-200/90 shadow-2xl bg-zinc-900 group">
+                <Image
+                  src="/skin-booster-before-after.png"
+                  alt="Real Patient Before and After Skin Booster Treatment Result at Gerka Clinic Dublin"
+                  width={800}
+                  height={800}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* CASE STUDY DETAILS */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                  Case Study Breakdown
+                </span>
+                <h3 className="text-xl sm:text-2xl font-light text-zinc-900">
+                  Full Face Bio-Remodelling & Glow
+                </h3>
+              </div>
+
+              <div className="space-y-3">
+                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                    Initial Patient Concern
+                  </div>
+                  <div className="text-xs md:text-sm text-zinc-800 font-light leading-relaxed">
+                    Dehydrated skin barrier, facial dullness, persistent redness across cheeks and forehead, and early loss of skin elasticity.
+                  </div>
+                </div>
+
+                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                    Treatment Protocol Delivered
+                  </div>
+                  <div className="text-xs md:text-sm text-zinc-800 font-medium text-amber-900 leading-relaxed">
+                    2 Sessions of PROFHILO® Hyaluronic Acid Bio-Remodelling (spaced 4 weeks apart)
+                  </div>
+                </div>
+
+                <div className="bg-amber-50/70 p-4 rounded-2xl border border-amber-200/60">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-amber-950 mb-1 flex items-center gap-1.5">
+                    <CheckCircle2 size={16} className="text-emerald-700" />
+                    <span>Clinical Outcomes Achieved</span>
+                  </div>
+                  <ul className="space-y-1.5 text-xs text-zinc-800 font-light">
+                    <li className="flex items-center gap-2">
+                      <Check size={14} className="text-emerald-700" />
+                      <span>Noticeable increase in deep dermal hydration & tissue firmness</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check size={14} className="text-emerald-700" />
+                      <span>Calmed facial redness and significantly more uniform skin tone</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check size={14} className="text-emerald-700" />
+                      <span>Softened fine surface lines with a radiant, natural glow</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <a
+                  href="#lp-booking-form"
+                  className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all w-full sm:w-auto"
+                >
+                  <span>START YOUR SKIN BOOSTER JOURNEY</span>
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+
+              <p className="text-[10px] text-zinc-600 font-light italic">
+                * Note: Individual patient results vary based on age, skin metabolism, baseline hydration levels, and post-treatment aftercare compliance.
+              </p>
+            </div>
           </div>
         </div>
       </section>
