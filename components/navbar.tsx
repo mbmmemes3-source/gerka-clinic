@@ -179,43 +179,48 @@ export function Navbar() {
 
   if (isLandingPage) {
     return (
-      <header className="fixed top-0 w-full z-[100] bg-white/95 backdrop-blur-md border-b border-zinc-100 py-3 shadow-sm transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group shrink-0">
-            <div className="relative w-8 h-8 md:w-9 md:h-9">
+      <header className="fixed top-0 w-full z-[100] bg-white/95 backdrop-blur-md border-b border-zinc-100 py-2.5 sm:py-3 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 flex items-center justify-between gap-2">
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 group shrink-0 min-w-0">
+            <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 shrink-0">
               <Image src="/icon2.png" alt="Gerka Clinic Dublin" fill className="object-contain" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-base md:text-lg font-light tracking-wider text-zinc-900 uppercase leading-tight">
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs sm:text-base md:text-lg font-light tracking-wider text-zinc-900 uppercase leading-tight truncate">
                 Gerka Clinic
               </span>
-              <span className="text-[7px] md:text-[8px] tracking-[0.1em] text-zinc-500 uppercase font-medium">
+              <span className="hidden sm:block text-[7px] md:text-[8px] tracking-[0.1em] text-zinc-500 uppercase font-medium truncate">
                 Dublin • Aesthetic & Intimate Health
+              </span>
+              <span className="sm:hidden text-[7px] tracking-[0.05em] text-zinc-500 uppercase font-medium">
+                Dublin
               </span>
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-500 font-light border-x border-zinc-100 px-4 py-1">
+          <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-500 font-light border-x border-zinc-100 px-4 py-1 shrink-0">
             <MapPin size={14} className="text-zinc-700 shrink-0" />
             <span>1 Priory Office Park, Stillorgan Rd, Dublin</span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <a
               href="tel:+353878888087"
-              className="flex items-center gap-2 text-xs md:text-sm font-medium text-zinc-800 hover:text-zinc-900 border border-zinc-200 hover:border-zinc-400 bg-white px-3 md:px-4 py-2 rounded-full transition-all shadow-sm"
+              className="flex items-center gap-1.5 text-xs md:text-sm font-medium text-zinc-800 hover:text-zinc-900 border border-zinc-200 hover:border-zinc-400 bg-white px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all shadow-xs"
+              title="Call Clinic"
             >
-              <Phone size={14} className="text-emerald-600 animate-pulse" />
+              <Phone size={13} className="text-emerald-600 animate-pulse shrink-0" />
               <span className="hidden sm:inline">087 888 8087</span>
-              <span className="sm:hidden">Call</span>
+              <span className="sm:hidden text-[11px]">Call</span>
             </a>
 
             <a
               href="#lp-booking-form"
-              className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-wider text-white bg-zinc-900 hover:bg-black px-4 md:px-6 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg"
+              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-wider text-white bg-zinc-900 hover:bg-black px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full transition-all shadow-md hover:shadow-lg shrink-0 whitespace-nowrap"
             >
-              <Calendar size={14} />
-              Book Consultation
+              <Calendar size={13} className="shrink-0" />
+              <span className="hidden sm:inline">Book Consultation</span>
+              <span className="sm:hidden">Book</span>
             </a>
           </div>
         </div>

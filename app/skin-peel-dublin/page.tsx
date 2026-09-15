@@ -267,43 +267,32 @@ export default function SkinPeelDublinLandingPage() {
           
           {/* LEFT HERO COLUMN */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 text-zinc-600 text-xs font-semibold uppercase tracking-widest shadow-sm">
+            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 text-zinc-600 text-xs font-semibold uppercase tracking-widest shadow-sm">
               <Sparkles size={14} className="text-amber-600" />
               <span>Personalised Skin Rejuvenation • Dublin</span>
-            </div>
+            </div> */}
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-zinc-900 leading-[1.15]">
+            <h1 className="text-xl sm:text-4xl lg:text-4xl font-light tracking-tight text-zinc-900 leading-[1.15]">
               PROFESSIONAL SKIN PEELS IN DUBLIN
             </h1>
 
-            <p className="text-lg md:text-xl font-light text-zinc-700 leading-relaxed">
-              Refresh dull, uneven or summer-stressed skin with a personalised professional skin peel.
-            </p>
-
-            <p className="text-sm md:text-base font-light text-zinc-600 leading-relaxed">
-              Gerka Clinic offers professional skin peel treatments selected according to your skin type, concerns and desired results. A professional skin assessment is included to help determine the most suitable approach.
-            </p>
-
-            {/* TRUST POINTS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              {[
-                "Personalised Clinical Assessment",
-                "Target Pigmentation & Sun Damage",
-                "Doctor-Led Dublin Clinic",
-                "Clear Aftercare & Realistic Plan"
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 bg-white/80 p-3 rounded-xl border border-zinc-100 shadow-sm">
-                  <CheckCircle2 size={18} className="text-emerald-700 shrink-0" />
-                  <span className="text-xs md:text-sm text-zinc-800 font-medium">{item}</span>
-                </div>
-              ))}
+            {/* BEFORE AFTER IMAGE */}
+            <div className="relative rounded-3xl overflow-hidden border border-zinc-200/90 shadow-2xl bg-zinc-900 group">
+              <Image
+                src="/peel-before-after.png"
+                alt="Real Patient Before and After Chemical Peel Result for Active Acne at Gerka Clinic Dublin"
+                width={800}
+                height={800}
+                className="w-full h-[280px] sm:h-[400px] lg:h-[570px] object-cover"
+                priority
+              />
             </div>
 
             {/* CTA BUTTONS & PHONE ACCESS */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
               <a
                 href="#lp-booking-form"
-                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5 w-full sm:w-auto text-center"
               >
                 <span>BOOK YOUR SKIN CONSULTATION</span>
                 <ArrowRight size={16} />
@@ -311,7 +300,7 @@ export default function SkinPeelDublinLandingPage() {
 
               <a
                 href="#lp-booking-form"
-                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-zinc-700 hover:text-zinc-900 border border-zinc-300 hover:border-zinc-500 bg-white px-6 py-4 rounded-2xl transition-all"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-zinc-700 hover:text-zinc-900 border border-zinc-300 hover:border-zinc-500 bg-white px-6 py-4 rounded-2xl transition-all w-full sm:w-auto text-center"
               >
                 <span>Check Availability</span>
               </a>
@@ -763,87 +752,70 @@ export default function SkinPeelDublinLandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-6xl mx-auto">
-            {/* BEFORE AFTER IMAGE CARD */}
-            <div className="lg:col-span-7">
-              <div className="relative rounded-3xl overflow-hidden border border-zinc-200/90 shadow-2xl bg-zinc-900 group">
-                <Image
-                  src="/peel-before-after.png"
-                  alt="Real Patient Before and After Chemical Peel Result for Active Acne at Gerka Clinic Dublin"
-                  width={800}
-                  height={800}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
+          <div className="max-w-3xl mx-auto bg-[#FAF9F6] p-6 sm:p-8 rounded-3xl border border-zinc-200 shadow-md space-y-6">
+            <div className="space-y-2 text-center sm:text-left">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                Case Study Breakdown
+              </span>
+              <h3 className="text-xl sm:text-2xl font-light text-zinc-900">
+                Active Acne & Redness Clearance
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-2xl border border-zinc-200/80">
+                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                  Initial Patient Concern
+                </div>
+                <div className="text-xs md:text-sm text-zinc-800 font-light leading-relaxed">
+                  Active facial breakouts, inflammatory red papules, congested cheek areas, and persistent post-inflammatory erythema (red marks).
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-2xl border border-zinc-200/80">
+                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                  Treatment Protocol Delivered
+                </div>
+                <div className="text-xs md:text-sm text-zinc-800 font-medium text-emerald-900 leading-relaxed">
+                  3 Custom Clinical Peel Sessions (Salicylic BHA & BioRePeel Protocol spaced 3 weeks apart)
+                </div>
+              </div>
+
+              <div className="bg-emerald-50/80 p-4.5 rounded-2xl border border-emerald-100">
+                <div className="text-xs font-semibold uppercase tracking-wider text-emerald-900 mb-2 flex items-center gap-1.5">
+                  <CheckCircle2 size={16} className="text-emerald-700" />
+                  <span>Clinical Outcomes Achieved</span>
+                </div>
+                <ul className="space-y-2 text-xs md:text-sm text-emerald-950 font-light">
+                  <li className="flex items-center gap-2">
+                    <Check size={14} className="text-emerald-700 shrink-0" />
+                    <span>Significant reduction in active acne lesions</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check size={14} className="text-emerald-700 shrink-0" />
+                    <span>Calmed facial inflammation & post-acne redness</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check size={14} className="text-emerald-700 shrink-0" />
+                    <span>Refined skin texture and restored natural glow</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
-            {/* CASE STUDY DETAILS */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                  Case Study Breakdown
-                </span>
-                <h3 className="text-xl sm:text-2xl font-light text-zinc-900">
-                  Active Acne & Redness Clearance
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
-                    Initial Patient Concern
-                  </div>
-                  <div className="text-xs md:text-sm text-zinc-800 font-light leading-relaxed">
-                    Active facial breakouts, inflammatory red papules, congested cheek areas, and persistent post-inflammatory erythema (red marks).
-                  </div>
-                </div>
-
-                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
-                    Treatment Protocol Delivered
-                  </div>
-                  <div className="text-xs md:text-sm text-zinc-800 font-medium text-emerald-900 leading-relaxed">
-                    3 Custom Clinical Peel Sessions (Salicylic BHA & BioRePeel Protocol spaced 3 weeks apart)
-                  </div>
-                </div>
-
-                <div className="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-100">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-emerald-900 mb-1 flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-emerald-700" />
-                    <span>Clinical Outcomes Achieved</span>
-                  </div>
-                  <ul className="space-y-1.5 text-xs text-emerald-950 font-light">
-                    <li className="flex items-center gap-2">
-                      <Check size={14} className="text-emerald-700" />
-                      <span>Significant reduction in active acne lesions</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check size={14} className="text-emerald-700" />
-                      <span>Calmed facial inflammation & post-acne redness</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check size={14} className="text-emerald-700" />
-                      <span>Refined skin texture and restored natural glow</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <a
-                  href="#lp-booking-form"
-                  className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all w-full sm:w-auto"
-                >
-                  <span>START YOUR SKIN TRANSFORMATION</span>
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-
-              <p className="text-[10px] text-zinc-600 font-light italic">
-                * Note: Individual patient results may vary based on skin type, breakout severity, barrier health, and post-peel home care compliance. Clinical assessment required prior to treatment.
-              </p>
+            <div className="pt-2 text-center sm:text-left">
+              <a
+                href="#lp-booking-form"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all w-full sm:w-auto"
+              >
+                <span>START YOUR SKIN TRANSFORMATION</span>
+                <ArrowRight size={16} />
+              </a>
             </div>
+
+            <p className="text-[10px] text-zinc-500 font-light italic text-center sm:text-left">
+              * Note: Individual patient results may vary based on skin type, breakout severity, barrier health, and post-peel home care compliance. Clinical assessment required prior to treatment.
+            </p>
           </div>
         </div>
       </section>

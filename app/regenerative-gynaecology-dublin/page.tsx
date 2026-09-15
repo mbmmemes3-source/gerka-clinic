@@ -249,7 +249,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAF9F6] text-zinc-900 pt-20 md:pt-10 pb-20 font-sans selection:bg-zinc-900 selection:text-white">
+    <main className="min-h-screen bg-[#FAF9F6] text-zinc-900 pt-10 md:pt-10 pb-20 font-sans selection:bg-zinc-900 selection:text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -265,43 +265,32 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
 
           {/* LEFT HERO COLUMN */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-200 text-rose-900 text-xs font-semibold uppercase tracking-widest shadow-xs">
-              <Shield size={14} className="text-rose-700" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-200 text-emerald-900 text-xs font-semibold uppercase tracking-widest shadow-xs">
+              <Shield size={14} className="text-emerald-700" />
               <span>Specialist Women’s Intimate Health • Dublin Since 2018</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-zinc-900 leading-[1.15]">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-tight text-zinc-900 leading-[1.15]">
               YOU DON’T HAVE TO NORMALISE INTIMATE DISCOMFORT.
             </h1>
 
-            <p className="text-lg md:text-xl font-light text-zinc-700 leading-relaxed">
-              Specialist women’s intimate health care in Dublin, with careful assessment and personalised treatment planning.
-            </p>
-
-            <p className="text-sm md:text-base font-light text-zinc-600 leading-relaxed">
-              Persistent itching, burning, recurrent infections or changes in intimate skin deserve proper assessment. Gerka Clinic’s Regenerative Gynaecology service offers doctor-led care provided in a calm, discreet environment since 2018.
-            </p>
-
-            {/* TRUST POINTS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              {[
-                "100% Confidential Medical Care",
-                "Lichen Sclerosus Assessment",
-                "Recurrent Infection Investigation",
-                "Doctor-Led Dublin Clinic"
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 bg-white/80 p-3 rounded-xl border border-zinc-100 shadow-sm">
-                  <CheckCircle2 size={18} className="text-rose-700 shrink-0" />
-                  <span className="text-xs md:text-sm text-zinc-800 font-medium">{item}</span>
-                </div>
-              ))}
+            {/* HERO IMAGE */}
+            <div className="relative rounded-3xl overflow-hidden border border-zinc-200/90 shadow-2xl bg-zinc-900 group">
+              <Image
+                src="/regenerative-hero.png"
+                alt="Specialist Women's Intimate Health & Regenerative Gynaecology Care at Gerka Clinic Dublin"
+                width={800}
+                height={800}
+                className="w-full h-[280px] sm:h-[400px] lg:h-[350px] object-cover"
+                priority
+              />
             </div>
 
             {/* CTA BUTTONS & PHONE */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
               <a
                 href="#lp-booking-form"
-                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5 w-full sm:w-auto text-center"
               >
                 <span>BOOK YOUR WOMEN’S HEALTH CONSULTATION</span>
                 <ArrowRight size={16} />
@@ -309,7 +298,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
 
               <a
                 href="tel:+353878888087"
-                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-zinc-700 hover:text-zinc-900 border border-zinc-300 hover:border-zinc-500 bg-white px-6 py-4 rounded-2xl transition-all"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-zinc-700 hover:text-zinc-900 border border-zinc-300 hover:border-zinc-500 bg-white px-6 py-4 rounded-2xl transition-all w-full sm:w-auto text-center"
               >
                 <Phone size={16} className="text-emerald-600" />
                 <span>087 888 8087</span>
@@ -325,10 +314,10 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
           {/* RIGHT CONFIDENTIAL LEAD FORM */}
           <div id="lp-booking-form" className="lg:col-span-5 scroll-mt-28">
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200 shadow-xl shadow-zinc-200/50 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-full blur-2xl pointer-events-none opacity-60" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full blur-2xl pointer-events-none opacity-60" />
 
               <div className="mb-6">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-rose-900 bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-900 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
                   Confidential Enquiry
                 </span>
                 <h2 className="text-xl sm:text-2xl font-light tracking-tight text-zinc-900 mt-2">
@@ -551,7 +540,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
       <section className="py-16 bg-gradient-to-b from-white to-[#FAF9F6] border-b border-zinc-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-rose-900 bg-rose-50 px-3.5 py-1.5 rounded-full border border-rose-100 inline-block mb-3">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-900 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-100 inline-block mb-3">
               Interactive Symptom & Solution Finder
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-zinc-900">
@@ -592,7 +581,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
               >
                 <div className="lg:col-span-7 space-y-6">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-rose-800 bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
                       Confidential Clinical Care
                     </span>
                     <h3 className="text-xl sm:text-2xl font-light text-zinc-900 mt-2">
@@ -601,9 +590,9 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="bg-rose-50/50 p-4 rounded-2xl border border-rose-100">
-                      <div className="text-xs font-semibold uppercase tracking-wider text-rose-900 mb-1 flex items-center gap-1.5">
-                        <Activity size={15} className="text-rose-700 shrink-0" />
+                    <div className="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-emerald-900 mb-1 flex items-center gap-1.5">
+                        <Activity size={15} className="text-emerald-700 shrink-0" />
                         <span>Common Symptoms & Experiences</span>
                       </div>
                       <div className="text-xs text-zinc-800 font-light leading-relaxed">
@@ -635,13 +624,13 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
 
                 <div className="lg:col-span-5 bg-[#FAF9F6] p-6 rounded-2xl border border-zinc-200 space-y-4">
                   <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-900 flex items-center gap-2">
-                    <ShieldCheck size={18} className="text-rose-700" />
+                    <ShieldCheck size={18} className="text-emerald-700" />
                     <span>Expected Clinical Outcomes</span>
                   </h4>
                   <ul className="space-y-3">
                     {currentTab.outcomes.map((out, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-xs text-zinc-700 font-light leading-relaxed">
-                        <CheckCircle2 size={16} className="text-rose-700 shrink-0 mt-0.5" />
+                        <CheckCircle2 size={16} className="text-emerald-700 shrink-0 mt-0.5" />
                         <span>{out}</span>
                       </li>
                     ))}
@@ -663,7 +652,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
           <div className="bg-white rounded-3xl border border-zinc-200 p-8 sm:p-12 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-7 space-y-4">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-rose-900 bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-900 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
                 Root-Cause Medical Approach
               </span>
               <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-zinc-900">
@@ -679,14 +668,14 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div className="p-4 bg-zinc-50 rounded-2xl border border-zinc-200">
                   <div className="flex items-center gap-2 text-zinc-900 font-medium text-sm mb-1">
-                    <Stethoscope size={16} className="text-rose-700" />
+                    <Stethoscope size={16} className="text-emerald-700" />
                     <span>Evidence-Based Diagnostics</span>
                   </div>
                   <span className="text-xs text-zinc-500 font-light">Accurate identification of vulvar and mucosal conditions.</span>
                 </div>
                 <div className="p-4 bg-zinc-50 rounded-2xl border border-zinc-200">
                   <div className="flex items-center gap-2 text-zinc-900 font-medium text-sm mb-1">
-                    <Heart size={16} className="text-rose-700" />
+                    <Heart size={16} className="text-emerald-700" />
                     <span>Supportive & Regenerative</span>
                   </div>
                   <span className="text-xs text-zinc-500 font-light">Combining medical therapy with tissue repair protocols.</span>
@@ -696,7 +685,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
 
             <div className="lg:col-span-5 flex justify-center">
               <div className="bg-zinc-900 text-white p-8 rounded-3xl space-y-4 text-center max-w-sm w-full shadow-xl">
-                <Shield size={36} className="mx-auto text-rose-400" />
+                <Shield size={36} className="mx-auto text-emerald-400" />
                 <h3 className="text-xl font-light tracking-tight">Confidential Consultation</h3>
                 <p className="text-xs text-zinc-400 font-light leading-relaxed">
                   Book a private appointment with our experienced clinical team in Dublin.
@@ -730,7 +719,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
             {journeySteps.map((step, idx) => (
               <div key={idx} className="bg-[#FAF9F6] p-6 rounded-2xl border border-zinc-200 flex flex-col justify-between">
                 <div>
-                  <div className="w-10 h-10 rounded-full bg-rose-100 text-rose-900 border border-rose-200 text-sm font-bold flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200 text-sm font-bold flex items-center justify-center mb-4">
                     {step.num}
                   </div>
                   <h3 className="text-base font-semibold text-zinc-900 mb-2">
@@ -804,7 +793,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
       {/* FINAL CTA BANNER */}
       <section className="py-16 bg-zinc-900 text-white relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-rose-400 bg-zinc-800 px-4 py-1.5 rounded-full border border-zinc-700">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 bg-zinc-800 px-4 py-1.5 rounded-full border border-zinc-700">
             Confidential Consultation
           </span>
           <h2 className="text-3xl sm:text-4xl font-light tracking-tight">
@@ -825,7 +814,7 @@ export default function RegenerativeGynaecologyDublinLandingPage() {
               href="tel:+353878888087"
               className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white border border-zinc-700 hover:border-zinc-500 bg-zinc-800 px-7 py-4 rounded-2xl transition-all"
             >
-              <Phone size={16} className="text-rose-400" />
+              <Phone size={16} className="text-emerald-400" />
               <span>Call 087 888 8087</span>
             </a>
           </div>

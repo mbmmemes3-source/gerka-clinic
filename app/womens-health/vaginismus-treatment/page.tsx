@@ -301,23 +301,23 @@ export default function VaginismusLandingPage() {
 
       {/* HEADER SECTION (Removed Main Nav, Single Logo) */}
       <header className="border-b border-zinc-100 bg-[#FAF9F6]/80 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-zinc-900 rounded-xl flex items-center justify-center shadow-md">
-              <Sparkles className="text-white" size={16} />
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-zinc-900 rounded-xl flex items-center justify-center shadow-md shrink-0">
+              <Sparkles className="text-white" size={15} />
             </div>
             <div>
-              <span className="font-semibold tracking-tight text-zinc-900 leading-none block">Gerka Clinic</span>
-              <span className="text-[9px] text-zinc-400 tracking-wider uppercase">Women's Health</span>
+              <span className="text-xs sm:text-sm font-semibold tracking-tight text-zinc-900 leading-none block">Gerka Clinic</span>
+              <span className="text-[8px] sm:text-[9px] text-zinc-400 tracking-wider uppercase">Women's Health</span>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-zinc-500 font-medium">
               <Lock size={12} className="text-zinc-500" /> 100% Confidential
             </span>
             <a
               href="#consultation-form"
-              className="text-[10px] md:text-xs font-bold uppercase tracking-widest px-5 py-2.5 bg-zinc-900 text-white rounded-full hover:bg-black transition-colors"
+              className="text-[10px] sm:text-xs font-bold uppercase tracking-widest px-3.5 sm:px-5 py-2 sm:py-2.5 bg-zinc-900 text-white rounded-full hover:bg-black transition-colors whitespace-nowrap"
             >
               Book Consultation
             </a>

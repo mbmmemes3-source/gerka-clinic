@@ -254,7 +254,7 @@ export default function SkinBoostersDublinLandingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAF9F6] text-zinc-900 pt-20 md:pt-10 pb-20 font-sans selection:bg-zinc-900 selection:text-white">
+    <main className="min-h-screen bg-[#FAF9F6] text-zinc-900 pt-10 md:pt-5 pb-20 font-sans selection:bg-zinc-900 selection:text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -269,48 +269,37 @@ export default function SkinBoostersDublinLandingPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
           {/* LEFT HERO COLUMN */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-3">
             
             {/* OFFER BADGE */}
             {isOfferActive && (
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-900 text-xs font-bold uppercase tracking-wider shadow-xs">
-                <Tag size={14} className="text-amber-600 animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-900 text-xs font-bold uppercase tracking-wider shadow-xs">
+                <Tag size={14} className="text-emerald-600 animate-pulse" />
                 <span>Special Event: 20% Off Selected Skin Boosters until 31 Oct 2026</span>
               </div>
             )}
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-zinc-900 leading-[1.15]">
-              SKIN BOOSTERS DUBLIN — <span className="font-normal text-amber-700">HYDRATE • REFRESH • GLOW</span>
+            <h1 className="text-2xl sm:text-2xl lg:text-2xl font-light tracking-tight text-zinc-900 leading-[1.15]">
+              SKIN BOOSTERS DUBLIN — <span className="font-normal text-emerald-700">HYDRATE • REFRESH • GLOW</span>
             </h1>
 
-            <p className="text-lg md:text-xl font-light text-zinc-700 leading-relaxed">
-              A personalised consultation to choose the most suitable skin booster for your skin.
-            </p>
-
-            <p className="text-sm md:text-base font-light text-zinc-600 leading-relaxed">
-              Explore selected skin booster treatments at Gerka Clinic, including Profhilo, Sunekos, Skinvive and Jalupro. Treatment selection follows consultation and clinical suitability assessment.
-            </p>
-
-            {/* TRUST POINTS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              {[
-                "Profhilo®, Sunekos®, Skinvive™ & Jalupro®",
-                "Personalised Clinical Selection",
-                "Deep Dermal Hydration & Elasticity",
-                "Doctor-Led Dublin Clinic"
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 bg-white/80 p-3 rounded-xl border border-zinc-100 shadow-sm">
-                  <CheckCircle2 size={18} className="text-emerald-700 shrink-0" />
-                  <span className="text-xs md:text-sm text-zinc-800 font-medium">{item}</span>
-                </div>
-              ))}
+            {/* BEFORE AFTER IMAGE */}
+            <div className="relative rounded-3xl overflow-hidden border border-zinc-200/90 shadow-2xl bg-zinc-900 group">
+              <Image
+                src="/skin-booster-before-after.png"
+                alt="Real Patient Before and After Skin Booster Treatment Result at Gerka Clinic Dublin"
+                width={800}
+                height={800}
+                className="w-full h-[280px] sm:h-[400px] lg:h-[570px] object-cover"
+                priority
+              />
             </div>
 
             {/* CTA BUTTONS & PHONE */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
               <a
                 href="#lp-booking-form"
-                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5 w-full sm:w-auto text-center"
               >
                 <span>BOOK A SKIN BOOSTER CONSULTATION</span>
                 <ArrowRight size={16} />
@@ -318,7 +307,7 @@ export default function SkinBoostersDublinLandingPage() {
 
               <a
                 href="tel:+353878888087"
-                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-zinc-700 hover:text-zinc-900 border border-zinc-300 hover:border-zinc-500 bg-white px-6 py-4 rounded-2xl transition-all"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-zinc-700 hover:text-zinc-900 border border-zinc-300 hover:border-zinc-500 bg-white px-6 py-4 rounded-2xl transition-all w-full sm:w-auto text-center"
               >
                 <Phone size={16} className="text-emerald-600" />
                 <span>087 888 8087</span>
@@ -336,7 +325,7 @@ export default function SkinBoostersDublinLandingPage() {
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200 shadow-xl shadow-zinc-200/50 relative overflow-hidden">
               
               <div className="mb-6">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-amber-800 bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-900 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
                   Skin Booster Consultation
                 </span>
                 <h2 className="text-xl sm:text-2xl font-light tracking-tight text-zinc-900 mt-2">
@@ -490,27 +479,27 @@ export default function SkinBoostersDublinLandingPage() {
 
       {/* LIMITED-TIME EVENT BANNER */}
       {isOfferActive && (
-        <section className="py-8 bg-gradient-to-r from-amber-900 via-zinc-900 to-amber-950 text-white border-y border-amber-800/40">
+        <section className="py-8 bg-gradient-to-r from-emerald-950 via-zinc-900 to-emerald-950 text-white border-y border-emerald-800/40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 shrink-0">
                 <Tag size={24} />
               </div>
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">
                   Limited-Time Skin Booster Event
                 </span>
                 <h2 className="text-xl sm:text-2xl font-light tracking-tight mt-0.5">
                   20% Off Selected Skin Boosters — Ends 31 October 2026
                 </h2>
-                <p className="text-xs text-amber-200/80 font-light mt-0.5">
+                <p className="text-xs text-emerald-200/80 font-light mt-0.5">
                   Book your consultation before 31 October 2026 to secure special event pricing on eligible booster courses.
                 </p>
               </div>
             </div>
             <a
               href="#lp-booking-form"
-              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest bg-amber-400 hover:bg-amber-300 text-zinc-950 px-6 py-3.5 rounded-xl shadow-lg transition-all shrink-0"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest bg-emerald-400 hover:bg-emerald-300 text-zinc-950 px-6 py-3.5 rounded-xl shadow-lg transition-all shrink-0"
             >
               <span>Claim Booster Offer</span>
               <ArrowRight size={14} />
@@ -556,7 +545,7 @@ export default function SkinBoostersDublinLandingPage() {
                   </div>
                   {isOfferActive && (
                     <div className="absolute top-4 right-4">
-                      <span className="bg-amber-500 text-zinc-950 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md">
+                      <span className="bg-emerald-500 text-zinc-950 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md">
                         20% OFF
                       </span>
                     </div>
@@ -603,7 +592,7 @@ export default function SkinBoostersDublinLandingPage() {
       <section className="py-16 bg-gradient-to-b from-white to-[#FAF9F6] border-b border-zinc-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-amber-800 bg-amber-50 px-3.5 py-1.5 rounded-full border border-amber-200/80 inline-block mb-3">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-900 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200/80 inline-block mb-3">
               Interactive Booster Comparison
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-zinc-900">
@@ -644,7 +633,7 @@ export default function SkinBoostersDublinLandingPage() {
               >
                 <div className="lg:col-span-7 space-y-6">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
                       {currentBooster.badge}
                     </span>
                     <h3 className="text-2xl font-light text-zinc-900 mt-2">
@@ -720,7 +709,7 @@ export default function SkinBoostersDublinLandingPage() {
 
                 <div className="lg:col-span-5 bg-[#FAF9F6] p-6 rounded-2xl border border-zinc-200 space-y-4">
                   <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-900 flex items-center gap-2">
-                    <Sparkles size={18} className="text-amber-600" />
+                    <Sparkles size={18} className="text-emerald-600" />
                     <span>Key Clinical Benefits</span>
                   </h4>
                   <ul className="space-y-3">
@@ -748,7 +737,7 @@ export default function SkinBoostersDublinLandingPage() {
           <div className="bg-white rounded-3xl border border-zinc-200 p-8 sm:p-12 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-7 space-y-4">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
                 Consultation-Led Approach
               </span>
               <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-zinc-900">
@@ -776,7 +765,7 @@ export default function SkinBoostersDublinLandingPage() {
 
             <div className="lg:col-span-5 flex justify-center">
               <div className="bg-zinc-900 text-white p-8 rounded-3xl space-y-4 text-center max-w-sm w-full shadow-xl">
-                <Stethoscope size={36} className="mx-auto text-amber-400" />
+                <Stethoscope size={36} className="mx-auto text-emerald-400" />
                 <h3 className="text-xl font-light tracking-tight">Personalised Skin Assessment</h3>
                 <p className="text-xs text-zinc-400 font-light leading-relaxed">
                   Book a consultation to evaluate your skin quality with our qualified clinicians.
@@ -798,7 +787,7 @@ export default function SkinBoostersDublinLandingPage() {
       <section className="py-16 bg-white border-y border-zinc-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-amber-900 bg-amber-50 px-3.5 py-1.5 rounded-full border border-amber-200/80 inline-block mb-3">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-900 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200/80 inline-block mb-3">
               Real Patient Clinical Case Study
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-zinc-900">
@@ -809,87 +798,70 @@ export default function SkinBoostersDublinLandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-6xl mx-auto">
-            {/* BEFORE AFTER IMAGE CARD */}
-            <div className="lg:col-span-7">
-              <div className="relative rounded-3xl overflow-hidden border border-zinc-200/90 shadow-2xl bg-zinc-900 group">
-                <Image
-                  src="/skin-booster-before-after.png"
-                  alt="Real Patient Before and After Skin Booster Treatment Result at Gerka Clinic Dublin"
-                  width={800}
-                  height={800}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
+          <div className="max-w-3xl mx-auto bg-[#FAF9F6] p-6 sm:p-8 rounded-3xl border border-zinc-200 shadow-md space-y-6">
+            <div className="space-y-2 text-center sm:text-left">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                Case Study Breakdown
+              </span>
+              <h3 className="text-xl sm:text-2xl font-light text-zinc-900">
+                Full Face Bio-Remodelling & Glow
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-2xl border border-zinc-200/80">
+                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                  Initial Patient Concern
+                </div>
+                <div className="text-xs md:text-sm text-zinc-800 font-light leading-relaxed">
+                  Dehydrated skin barrier, facial dullness, persistent redness across cheeks and forehead, and early loss of skin elasticity.
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-2xl border border-zinc-200/80">
+                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                  Treatment Protocol Delivered
+                </div>
+                <div className="text-xs md:text-sm text-zinc-800 font-medium text-emerald-900 leading-relaxed">
+                  2 Sessions of PROFHILO® Hyaluronic Acid Bio-Remodelling (spaced 4 weeks apart)
+                </div>
+              </div>
+
+              <div className="bg-emerald-50/70 p-4.5 rounded-2xl border border-emerald-200/60">
+                <div className="text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-2 flex items-center gap-1.5">
+                  <CheckCircle2 size={16} className="text-emerald-700" />
+                  <span>Clinical Outcomes Achieved</span>
+                </div>
+                <ul className="space-y-2 text-xs md:text-sm text-zinc-800 font-light">
+                  <li className="flex items-center gap-2">
+                    <Check size={14} className="text-emerald-700 shrink-0" />
+                    <span>Noticeable increase in deep dermal hydration & tissue firmness</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check size={14} className="text-emerald-700 shrink-0" />
+                    <span>Calmed facial redness and significantly more uniform skin tone</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check size={14} className="text-emerald-700 shrink-0" />
+                    <span>Softened fine surface lines with a radiant, natural glow</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
-            {/* CASE STUDY DETAILS */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                  Case Study Breakdown
-                </span>
-                <h3 className="text-xl sm:text-2xl font-light text-zinc-900">
-                  Full Face Bio-Remodelling & Glow
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
-                    Initial Patient Concern
-                  </div>
-                  <div className="text-xs md:text-sm text-zinc-800 font-light leading-relaxed">
-                    Dehydrated skin barrier, facial dullness, persistent redness across cheeks and forehead, and early loss of skin elasticity.
-                  </div>
-                </div>
-
-                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-zinc-200">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">
-                    Treatment Protocol Delivered
-                  </div>
-                  <div className="text-xs md:text-sm text-zinc-800 font-medium text-amber-900 leading-relaxed">
-                    2 Sessions of PROFHILO® Hyaluronic Acid Bio-Remodelling (spaced 4 weeks apart)
-                  </div>
-                </div>
-
-                <div className="bg-amber-50/70 p-4 rounded-2xl border border-amber-200/60">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-amber-950 mb-1 flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-emerald-700" />
-                    <span>Clinical Outcomes Achieved</span>
-                  </div>
-                  <ul className="space-y-1.5 text-xs text-zinc-800 font-light">
-                    <li className="flex items-center gap-2">
-                      <Check size={14} className="text-emerald-700" />
-                      <span>Noticeable increase in deep dermal hydration & tissue firmness</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check size={14} className="text-emerald-700" />
-                      <span>Calmed facial redness and significantly more uniform skin tone</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check size={14} className="text-emerald-700" />
-                      <span>Softened fine surface lines with a radiant, natural glow</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <a
-                  href="#lp-booking-form"
-                  className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all w-full sm:w-auto"
-                >
-                  <span>START YOUR SKIN BOOSTER JOURNEY</span>
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-
-              <p className="text-[10px] text-zinc-600 font-light italic">
-                * Note: Individual patient results vary based on age, skin metabolism, baseline hydration levels, and post-treatment aftercare compliance.
-              </p>
+            <div className="pt-2 text-center sm:text-left">
+              <a
+                href="#lp-booking-form"
+                className="inline-flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white bg-zinc-900 hover:bg-black px-7 py-4 rounded-2xl shadow-lg transition-all w-full sm:w-auto"
+              >
+                <span>START YOUR SKIN BOOSTER JOURNEY</span>
+                <ArrowRight size={16} />
+              </a>
             </div>
+
+            <p className="text-[10px] text-zinc-500 font-light italic text-center sm:text-left">
+              * Note: Individual patient results vary based on age, skin metabolism, baseline hydration levels, and post-treatment aftercare compliance.
+            </p>
           </div>
         </div>
       </section>
@@ -952,7 +924,7 @@ export default function SkinBoostersDublinLandingPage() {
       {/* FINAL CTA BANNER */}
       <section className="py-16 bg-zinc-900 text-white relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 bg-zinc-800 px-4 py-1.5 rounded-full border border-zinc-700">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 bg-zinc-800 px-4 py-1.5 rounded-full border border-zinc-700">
             Book Your Consultation
           </span>
           <h2 className="text-3xl sm:text-4xl font-light tracking-tight">
@@ -973,7 +945,7 @@ export default function SkinBoostersDublinLandingPage() {
               href="tel:+353878888087"
               className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-white border border-zinc-700 hover:border-zinc-500 bg-zinc-800 px-7 py-4 rounded-2xl transition-all"
             >
-              <Phone size={16} className="text-amber-400" />
+              <Phone size={16} className="text-emerald-400" />
               <span>Call 087 888 8087</span>
             </a>
           </div>
