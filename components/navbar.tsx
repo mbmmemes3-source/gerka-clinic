@@ -169,6 +169,10 @@ export function Navbar() {
     setActiveDropdown(null)
   }, [pathname])
 
+  if (pathname?.startsWith("/lichen-sclerosus-vulvar-health-dublin")) {
+    return null
+  }
+
   const isLandingPage = Boolean(
     pathname && (
       pathname.startsWith("/skin-peel-dublin") ||
