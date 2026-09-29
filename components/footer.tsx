@@ -41,7 +41,7 @@ const socialIcons = [
   { Icon: Instagram, href: "https://www.instagram.com/gerkaclinic" },
   { Icon: Facebook, href: "https://www.facebook.com/gerkaclinic" },
   { Icon: Twitter, href: "https://x.com/gerkaclinic" },
-  { Icon: MessageCircle, href: "https://wa.me/919772187400" }, // WhatsApp Link
+  { Icon: MessageCircle, href: "https://wa.me/353879256653" }, // WhatsApp Link
 ]
 
 export function Footer() {
@@ -127,7 +127,7 @@ export function Footer() {
                 </p>
               </a>
               {/* Added WhatsApp to Phone Click as well */}
-              <a href="https://wa.me/919772187400" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
+              <a href="https://wa.me/353879256653" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
                 <Phone size={18} className="text-zinc-400 group-hover:text-zinc-800 transition-colors flex-shrink-0" />
                 <p className="text-xs md:text-sm tracking-widest text-zinc-600">+353 87 888 8087</p>
               </a>
