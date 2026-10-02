@@ -214,7 +214,7 @@ export default function BodySkinLesionRemovalPage() {
                       Book Consultation
                     </button>
                  </Link>
-                 <a href="https://wa.me/0878888087" target="_blank" className="w-full sm:w-auto">
+                 <a href="https://wa.me/353899448000" target="_blank" className="w-full sm:w-auto">
                     <button className="w-full border border-white/20 text-white px-8 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all flex items-center justify-center gap-2">
                       <MessageCircle size={16} /> Photo Quote
                     </button>

@@ -307,7 +307,7 @@ export default function LichenSclerosusLandingPage() {
 
       {/* Sticky WhatsApp Floating Icon */}
       <a
-        href="https://wa.me/353878888087"
+        href="https://wa.me/353899448000"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-24 right-4 md:bottom-8 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
@@ -724,8 +724,8 @@ export default function LichenSclerosusLandingPage() {
               <a href="tel:+353878888087" className="hover:text-zinc-950 flex items-center gap-1 bg-white px-4 py-2 rounded-full border border-zinc-200 shadow-sm">
                 📞 Call: +353 87 888 8087
               </a>
-              <a href="https://wa.me/353878888087" className="hover:text-zinc-950 flex items-center gap-1 bg-white px-4 py-2 rounded-full border border-zinc-200 shadow-sm">
-                💬 WhatsApp: +353 87 888 8087
+              <a href="https://wa.me/353899448000" className="hover:text-zinc-950 flex items-center gap-1 bg-white px-4 py-2 rounded-full border border-zinc-200 shadow-sm">
+                💬 WhatsApp: +353 89 944 8000
               </a>
             </div>
             <p className="text-[11px] text-zinc-400">

@@ -103,7 +103,7 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
               </button>
               <div className="text-center space-y-1.5 pt-1">
                 <p className="text-[10px] text-zinc-400 flex items-center justify-center gap-1"><Lock size={10} /> 100% confidential — never shared.</p>
-                <p className="text-[10px] text-zinc-400">📞 <a href="tel:+353878888087" className="hover:text-zinc-700">+353 87 888 8087</a> &nbsp; 💬 <a href="https://wa.me/353878888087" className="hover:text-zinc-700">WhatsApp</a></p>
+                <p className="text-[10px] text-zinc-400">📞 <a href="tel:+353878888087" className="hover:text-zinc-700">+353 87 888 8087</a> &nbsp; 💬 <a href="https://wa.me/353899448000" className="hover:text-zinc-700">WhatsApp</a></p>
                 <p className="text-[10px] text-zinc-400">We respond within 2 hours · Mon–Sat 9am–7pm</p>
               </div>
             </form>
@@ -221,7 +221,7 @@ export default function DesoBodyBodyLandingPage() {
       </AnimatePresence>
 
       {/* WhatsApp */}
-      <a href="https://wa.me/353878888087" target="_blank" rel="noopener noreferrer" className="fixed bottom-24 right-4 md:bottom-8 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform" aria-label="WhatsApp">
+      <a href="https://wa.me/353899448000" target="_blank" rel="noopener noreferrer" className="fixed bottom-24 right-4 md:bottom-8 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform" aria-label="WhatsApp">
         <MessageCircle size={26} fill="white" />
       </a>
 
@@ -525,7 +525,7 @@ export default function DesoBodyBodyLandingPage() {
               <div className="space-y-3 text-sm text-zinc-400 font-light">
                 <p className="flex items-center gap-2 justify-center lg:justify-start"><Lock size={14} className="text-white" /> 100% confidential — your privacy is protected</p>
                 <p className="flex items-center gap-2 justify-center lg:justify-start"><Phone size={14} className="text-white" /><a href="tel:+353878888087" className="hover:text-white transition-colors">+353 87 888 8087</a></p>
-                <p className="flex items-center gap-2 justify-center lg:justify-start"><MessageCircle size={14} className="text-white" /><a href="https://wa.me/353878888087" className="hover:text-white transition-colors">WhatsApp: +353 87 888 8087</a></p>
+                <p className="flex items-center gap-2 justify-center lg:justify-start"><MessageCircle size={14} className="text-white" /><a href="https://wa.me/353899448000" className="hover:text-white transition-colors">WhatsApp: +353 89 944 8000</a></p>
                 <p className="text-zinc-500 text-xs">Mon–Sat 9am–7pm · Responding within 2 hours</p>
               </div>
             </div>
