@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { 
   Plus, 
   Check, 
@@ -14,6 +15,57 @@ import {
 import Link from "next/link";
 import AddToCartSection from "@/components/shop/AddToCartSection";
 
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { id: string } 
+}): Promise<Metadata> {
+  const product = await prisma.product.findUnique({
+    where: { id: params.id },
+    include: { category: true }
+  });
+
+  if (!product) {
+    return {
+      title: "Product Not Found | Gerka Clinic Shop",
+      robots: { index: false, follow: false }
+    };
+  }
+
+  const brand = product.brand || "Gerka Clinic";
+  const title = `${product.name} | ${brand}`;
+  const description = product.shortDesc || `Buy ${product.name} online from Gerka Clinic Dublin. Medical-grade skincare and clinical formulations.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://www.gerkaclinic.com/shop/${product.id}`,
+    },
+    openGraph: {
+      title: `${product.name} | Gerka Clinic`,
+      description,
+      url: `https://www.gerkaclinic.com/shop/${product.id}`,
+      siteName: "Gerka Clinic",
+      images: product.image
+        ? [
+            {
+              url: product.image,
+              alt: product.name,
+            },
+          ]
+        : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} | Gerka Clinic`,
+      description,
+      images: product.image ? [product.image] : [],
+    },
+  };
+}
+
 export default async function ProductDetailPage({ params }: { params: { id: string } }) {
   // 1. Fetch product from Neon
   const product = await prisma.product.findUnique({
@@ -25,8 +77,37 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: product.image ? [product.image] : [],
+    description: product.shortDesc || product.description || product.name,
+    sku: product.id,
+    brand: {
+      "@type": "Brand",
+      name: product.brand || "Gerka Clinic",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://www.gerkaclinic.com/shop/${product.id}`,
+      priceCurrency: "EUR",
+      price: product.price,
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@type": "MedicalClinic",
+        name: "Gerka Clinic",
+      },
+    },
+  };
+
   return (
     <main className="pt-28 pb-20 bg-white min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-7xl mx-auto px-6">
         
         {/* --- BREADCRUMBS --- */}
@@ -63,7 +144,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
             {/* Thumbnail Gallery (Placeholder) */}
             <div className="flex gap-4">
                <div className="w-24 h-24 bg-[#FAF9F6] border-2 border-[#002D40] rounded-2xl p-2 shadow-sm">
-                  <img src={product.image} className="w-full h-full object-contain" />
+                  <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
                </div>
             </div>
           </div>
