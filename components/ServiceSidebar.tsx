@@ -58,7 +58,7 @@ const womensHealthServices: ServiceSection[] = [
     items: [
       { name: "Emsella® Chair Pelvic Floor Treatment", href: "/womens-health/emsella" },
       { name: "Vaginal PRP Treatment", href: "/womens-health/prp" },
-      { name: "O-Shot® & P-Shot® (Sexual Wellness)", href: "/womens-health/oshot-pshot" }, // Added here
+      { name: "O-Shot® & G-Shot® (Sexual Wellness)", href: "/womens-health/oshot-pshot" },
       { name: "Vaginismus: Advanced Specialist Treatment", href: "/womens-health/vaginismus" },
       { name: "Fraxx™ Vaginal Rejuvenation", href: "/womens-health/fraxx-vaginal-rejuvenation" },
     ]

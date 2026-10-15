@@ -13,7 +13,7 @@ const clinicFeatures = [
   {
     icon: <Award className="text-zinc-400" size={20} />,
     title: "Exclusive Certification",
-    text: "The only clinic in Ireland certified by Dr. Charles Runnels, inventor of the O-Shot® and P-Shot®."
+    text: "The only clinic in Ireland certified by Dr. Charles Runnels, inventor of the O-Shot®."
   },
   {
     icon: <Zap className="text-zinc-400" size={20} />,
@@ -24,8 +24,8 @@ const clinicFeatures = [
 
 const servicesList = [
   "O-Shot® (Orgasm Shot) Dublin",
-  "P-Shot® (PRP for men) Dublin",
   "PRP for vaginal rejuvenation",
+  "Vulval lichen sclerosus treatments",
   "Vaginismus treatment with neurotoxins",
   "Pelvic floor strengthening (Emsella)",
   "Regenerative gynaecology treatments"
@@ -130,7 +130,7 @@ export default function ClinicIntro() {
         >
           <ShieldCheck className="text-zinc-300 mb-4" size={32} />
           <p className="text-center text-[11px] md:text-xs tracking-[0.15em] text-zinc-500 uppercase max-w-2xl leading-relaxed">
-            The only clinic in Ireland certified by <span className="text-zinc-900 font-bold">Dr. Charles Runnels</span>, providing trusted expertise in intimate regenerative treatments for both women and men.
+            The only clinic in Ireland certified by <span className="text-zinc-900 font-bold">Dr. Charles Runnels</span>, providing trusted expertise in intimate regenerative treatments for women.
           </p>
         </motion.div>
 

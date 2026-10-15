@@ -116,7 +116,7 @@ const navItems = [
         items: [
           { label: "Emsella® Chair", href: "/womens-health/emsella" },
           { label: "Vaginal PRP", href: "/womens-health/prp" },
-          { label: "O-Shot® & P-Shot®", href: "/womens-health/oshot-pshot" },
+          { label: "O-Shot® & G-Shot®", href: "/womens-health/oshot-pshot" },
           { label: "Vaginismus Treatment", href: "/womens-health/vaginismus" },
           { label: "Fraxx™ Rejuvenation", href: "/womens-health/fraxx-vaginal-rejuvenation" },
         ]

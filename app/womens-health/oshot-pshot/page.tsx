@@ -32,7 +32,7 @@ const trustFactors = [
   {
     icon: <Award className="text-zinc-900" size={20} />,
     title: "Certified by the Inventor",
-    desc: "First clinic in Ireland certified by Dr Charles Runels (inventor of O-Shot®/P-Shot®)."
+    desc: "First clinic in Ireland certified by Dr Charles Runels (inventor of O-Shot®)."
   },
   {
     icon: <Microscope className="text-zinc-900" size={20} />,
@@ -46,7 +46,7 @@ const trustFactors = [
   }
 ]
 
-export default function OShotPShotPage() {
+export default function OShotGShotPage() {
   return (
     <main className="bg-[#FAF9F6] min-h-screen pb-20">
       
@@ -63,7 +63,7 @@ export default function OShotPShotPage() {
           
           {/* 2. REUSABLE SIDEBAR */}
           <ServiceSidebar 
-            activeService="Vaginal PRP Treatment" 
+            activeService="O-Shot® & G-Shot® (Sexual Wellness)" 
             categoryTitle="Women's Health" 
           />
 
@@ -82,13 +82,13 @@ export default function OShotPShotPage() {
                     <ShieldCheck size={12} /> Ireland's First Certified Provider
                   </motion.div>
                   <h1 className="text-4xl md:text-6xl font-light text-zinc-900 tracking-tight leading-tight">
-                    O-Shot®, G-Shot® & P-Shot® <br />
+                    O-Shot® & G-Shot® <br />
                     <span className="italic font-serif text-zinc-500 font-light text-3xl md:text-5xl">Regenerative Intimate Wellness</span>
                   </h1>
                 </div>
 
                 {/* PRICING GRID */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-y border-zinc-200 py-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-y border-zinc-200 py-10">
                   <div className="space-y-2">
                     <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">O-Shot®</p>
                     <p className="text-xl font-bold text-zinc-900 flex items-center gap-2">
@@ -103,20 +103,13 @@ export default function OShotPShotPage() {
                     </p>
                     <p className="text-[10px] text-zinc-500 italic">Combined Protocol</p>
                   </div>
-                  <div className="space-y-2 border-l border-zinc-200 pl-6">
-                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">P-Shot® (Men)</p>
-                    <p className="text-xl font-bold text-zinc-900 flex items-center gap-2">
-                      <Euro size={16} className="text-zinc-400" /> €950
-                    </p>
-                    <p className="text-[10px] text-zinc-500 italic">Regen Lab® Certified</p>
-                  </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div className="space-y-6 text-zinc-600 font-light leading-relaxed text-[17px]">
                   <p>
-                    At Gerka Clinic, we offer advanced regenerative intimate treatments designed to support sexual wellness, tissue health and confidence in both women and men.
+                    At Gerka Clinic, we offer advanced regenerative intimate treatments designed to support sexual wellness, tissue health and confidence in women.
                   </p>
                   <p>
                     We are proud to be the <span className="text-zinc-900 font-medium italic underline decoration-zinc-200 underline-offset-4">first clinic in Ireland</span> certified to perform these procedures by their inventor, Dr Charles Runels, bringing internationally recognised expertise to our patients in Dublin.
