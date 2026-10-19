@@ -17,6 +17,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/peptide-skin-regeneration-therapy",
     "/skin-boosters-dublin",
     "/skin-peel-dublin",
+    "/exilis-tightening-dublin",
+    "/exilis-skin-tightening-dublin",
     "/lichen-sclerosus-vulvar-health-dublin",
     "/regenerative-gynaecology-dublin",
     "/nail",
