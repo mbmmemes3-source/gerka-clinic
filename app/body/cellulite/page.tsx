@@ -40,28 +40,38 @@ export default function CelluliteTreatmentPage() {
                   <span className="italic font-serif text-zinc-500 font-light">Subcision & Sunekos Cell 15</span>
                 </h1>
                 
-                <div className="flex flex-wrap gap-y-6 gap-x-8 border-b border-zinc-200 pb-10">
-                  <div className="flex flex-col gap-1.5">
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-nowrap">Sunekos Cell 15</span>
-                    <span className="text-sm font-bold text-zinc-900 flex items-center gap-2">
-                      <Euro size={14} className="text-zinc-400" /> €350 per session
-                    </span>
-                    <span className="text-xs font-medium text-zinc-500 italic">Package of 3: €900</span>
-                  </div>
-                  
-                  <div className="flex flex-col gap-1.5 border-l border-zinc-200 pl-8">
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-nowrap">Subcision</span>
-                    <span className="text-sm font-bold text-zinc-900 flex items-center gap-2">
-                      <Calendar size={14} className="text-zinc-400" /> Consultation Required
-                    </span>
-                    <span className="text-xs font-medium text-zinc-500 italic">Price on assessment</span>
+                <div className="space-y-6 border-b border-zinc-200 pb-10">
+                  <div className="flex flex-wrap gap-y-6 gap-x-8">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-nowrap">Sunekos Cell 15</span>
+                      <span className="text-sm font-bold text-zinc-900 flex items-center gap-2">
+                        <Euro size={14} className="text-zinc-400" /> €350 per session
+                      </span>
+                      <span className="text-xs font-medium text-zinc-500 italic">Package of 3: €900</span>
+                    </div>
+                    
+                    <div className="flex flex-col gap-1.5 border-l border-zinc-200 pl-8">
+                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-nowrap">Subcision</span>
+                      <span className="text-sm font-bold text-zinc-900 flex items-center gap-2">
+                        <Calendar size={14} className="text-zinc-400" /> Consultation Required
+                      </span>
+                      <span className="text-xs font-medium text-zinc-500 italic">Price on assessment</span>
+                    </div>
+
+                    <div className="flex flex-col gap-1.5 border-l border-zinc-200 pl-8">
+                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-nowrap">Clinic Location</span>
+                      <span className="text-sm font-bold text-zinc-900 flex items-center gap-2 italic">
+                        Gerka Clinic Dublin
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="flex flex-col gap-1.5 border-l border-zinc-200 pl-8">
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-nowrap">Clinic Location</span>
-                    <span className="text-sm font-bold text-zinc-900 flex items-center gap-2 italic">
-                      Gerka Clinic Dublin
-                    </span>
+                  {/* Clarification Note */}
+                  <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-zinc-200/80 shadow-sm max-w-2xl">
+                    <Info size={16} className="text-zinc-400 shrink-0 mt-0.5" />
+                    <p className="text-xs text-zinc-600 font-light leading-relaxed">
+                      <span className="font-semibold text-zinc-900">Please note:</span> The price quoted is for <span className="font-medium text-zinc-900">Sunekos Cell 15</span> only. The cost of <span className="font-medium text-zinc-900">Subcision</span> will depend on the size of the area to be treated and will require an in-person consultation for an accurate assessment.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -152,6 +162,9 @@ export default function CelluliteTreatmentPage() {
                       <h4 className="text-sm font-bold uppercase tracking-widest text-zinc-300">Clinical Pricing</h4>
                       <p className="text-2xl font-light">€350 <span className="text-xs uppercase tracking-widest text-zinc-500 ml-1">per session</span></p>
                       <p className="text-sm text-zinc-400 font-light">Package of 3 sessions: <strong>€900</strong></p>
+                      <p className="text-[11px] text-zinc-400 font-light pt-1 leading-relaxed">
+                        *Quoted price covers Sunekos Cell 15 only. Subcision is priced separately upon in-person assessment.
+                      </p>
                     </div>
                     <ul className="space-y-2 border-t border-white/10 pt-4">
                        {sunekosIdeal.map(item => (
