@@ -11,7 +11,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { sendNotificationEmail } from "@/lib/send-email";
 import { useRouter } from "next/navigation"
-import Head from "next/head"
 
 // ─── Components ─────────────────────────────────────────────────────────────
 
@@ -86,10 +85,6 @@ export default function IntimateHealthLandingPage() {
 
   return (
     <>
-    <Head>
-      <title>Emsella Pelvic Floor Treatment Dublin | Gerka Clinic Women&apos;s Health</title>
-      <meta name="description" content="Specialist women's health clinic in Dublin. Emsella pelvic floor treatment, vaginal dryness, O-Shot PRP & labiaplasty. Ireland's only Dr Runnels-certified clinic. Book free consultation." />
-    </Head>
     <main className="bg-white min-h-screen">
       <style jsx global>{`
         .intimate-input {
