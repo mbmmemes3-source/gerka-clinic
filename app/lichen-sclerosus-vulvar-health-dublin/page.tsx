@@ -10,7 +10,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import emailjs from "emailjs-com"
+import { sendNotificationEmail } from "@/lib/send-email";
 import { useRouter } from "next/navigation"
 import { sendGerkaInquiry } from "@/app/actions/sendEmail"
 
@@ -203,12 +203,7 @@ export default function LichenSclerosusVulvarHealthLandingPage() {
         time: new Date().toLocaleString(),
       }
 
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+      await sendNotificationEmail(templateParams)
 
       if (typeof window !== "undefined" && (window as any).gtag) {
         ;(window as any).gtag("event", "conversion", {

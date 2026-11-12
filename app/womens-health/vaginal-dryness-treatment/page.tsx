@@ -10,7 +10,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import emailjs from "@emailjs/browser"
+import { sendNotificationEmail } from "@/lib/send-email";
 import { useRouter } from "next/navigation"
 
 const Badge = ({ children }: { children: React.ReactNode }) => (
@@ -61,10 +61,7 @@ export default function VaginalDrynessLanding() {
     setStatus("loading")
 
     try {
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
+      const result = await sendNotificationEmail({
           name: formData.name || "No Name Provided",
           email: formData.email || "No Email Provided",
           phone: formData.phone || "No Phone Provided",
@@ -73,9 +70,7 @@ export default function VaginalDrynessLanding() {
           language: formData.language,
           message: formData.message || "Interested in vaginal dryness treatment. Please contact me for a confidential consultation.",
           time: new Date().toLocaleString(),
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+        })
 
       if (result.text === "OK") {
         setStatus("success")

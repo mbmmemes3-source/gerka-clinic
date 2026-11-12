@@ -11,7 +11,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import emailjs from "emailjs-com"
+import { sendNotificationEmail } from "@/lib/send-email"
 import { useRouter } from "next/navigation"
 import { sendGerkaInquiry } from "@/app/actions/sendEmail"
 
@@ -259,7 +259,7 @@ export default function ExilisVaginalTighteningLandingPage() {
         console.error("Server Action email send error:", err)
       }
 
-      // 2. Send via EmailJS matching existing clinic config
+      // 2. Send via Resend notification API
       const templateParams = {
         name: formData.name,
         email: formData.email,
@@ -268,14 +268,10 @@ export default function ExilisVaginalTighteningLandingPage() {
         treatment: `[Exilis Vaginal Tightening Dublin] ${formData.interested_in}`,
         message: formData.message || "Exilis Ultra Femme 360 Vaginal Tightening Consultation Request",
         time: new Date().toLocaleString(),
+        subject: `Exilis Vaginal Tightening Inquiry - ${formData.name}`,
       }
 
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+      await sendNotificationEmail(templateParams)
 
       if (typeof window !== "undefined" && (window as any).gtag) {
         ;(window as any).gtag("event", "conversion", {

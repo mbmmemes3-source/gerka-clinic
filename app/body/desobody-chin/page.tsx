@@ -7,7 +7,7 @@ import {
   Sparkles, MessageCircle, Stethoscope, X, Send, ArrowRight
 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import emailjs from "emailjs-com"
+import { sendNotificationEmail } from "@/lib/send-email"
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 const Badge = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -29,12 +29,12 @@ function ConsultationForm({ id = "form" }: { id?: string }) {
     if (status === "loading") return
     setStatus("loading")
     try {
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        { ...formData, subject: `DesoFace Chin Consultation`, time: new Date().toLocaleString(), message: `Heard from: ${formData.heard} | Time: ${formData.contact_time}` },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+      const result = await sendNotificationEmail({
+        ...formData,
+        subject: `DesoFace Chin Consultation`,
+        time: new Date().toLocaleString(),
+        message: `Heard from: ${formData.heard} | Time: ${formData.contact_time}`,
+      })
       if (result.text === "OK") { setStatus("success"); setTimeout(() => router.push("/thank-you"), 1500) }
     } catch { setStatus("error"); setTimeout(() => setStatus("idle"), 4000) }
   }

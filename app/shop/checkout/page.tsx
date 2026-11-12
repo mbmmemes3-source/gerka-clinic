@@ -5,12 +5,7 @@ import { useCart } from "@/context/CartContext"
 import { motion } from "framer-motion"
 import { ArrowLeft, ShieldCheck, Loader2, Lock } from "lucide-react"
 import Link from "next/link"
-import emailjs from "@emailjs/browser"
-
-// --- EMAILJS CONFIG ---
-const EMAILJS_SERVICE_ID = "service_b76ckpf"; 
-const EMAILJS_TEMPLATE_ID = "template_hz7w4le";
-const EMAILJS_PUBLIC_KEY = "Zy58hFATigNeLEvW-";
+import { sendNotificationEmail } from "@/lib/send-email"
 
 export default function CheckoutPage() {
   const { cart, cartCount } = useCart()
@@ -27,7 +22,7 @@ export default function CheckoutPage() {
     country: "Ireland"
   })
 
-  // ✅ Send Email Notification via EmailJS (Same template)
+  // ✅ Send Email Notification via Resend
   const sendEmailNotification = async () => {
     // Format cart items for email
     const itemsList = cart.map(item => 
@@ -37,26 +32,20 @@ export default function CheckoutPage() {
     const shippingAddress = `${formData.address}, ${formData.city}, ${formData.postcode}, ${formData.country}`;
 
     const templateParams = {
-      to_name: "Dr. Evelyn Alba",
       patient_name: formData.name,
       patient_email: formData.email,
       patient_phone: formData.phone,
-      service_requested: "Shop Order", // Using same field name
-      booking_fee: `€${subtotal.toFixed(2)}`, // Using same field name (Total Amount)
-      preferred_time: `Shipping Address: ${shippingAddress}\n\nItems:\n${itemsList}`, // Using same field name
+      service_requested: "Shop Order",
+      booking_fee: `€${subtotal.toFixed(2)}`,
+      preferred_time: `Shipping Address: ${shippingAddress}\n\nItems:\n${itemsList}`,
+      subject: `New Shop Order from ${formData.name} - €${subtotal.toFixed(2)}`,
     };
 
     try {
-      const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
-      console.log("Order confirmation email sent:", response.status, response.text);
+      const response = await sendNotificationEmail(templateParams);
       return response;
     } catch (error) {
-      console.error("EmailJS Error:", error);
+      console.error("Resend Error:", error);
       throw error;
     }
   };

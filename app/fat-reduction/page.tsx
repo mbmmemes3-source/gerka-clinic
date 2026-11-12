@@ -10,7 +10,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import emailjs from "@emailjs/browser"
+import { sendNotificationEmail } from "@/lib/send-email";
 import { useRouter } from "next/navigation"
 
 // ─── Shared Components ──────────────────────────────────────────────────────
@@ -54,10 +54,7 @@ export default function FatReductionLanding() {
   setStatus("loading")
 
   try {
-    const result = await emailjs.send(
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-      {
+    const result = await sendNotificationEmail({
         name: formData.name || "No Name Provided",
         email: formData.email || "No Email Provided",
         phone: formData.phone || "No Phone Provided",
@@ -67,9 +64,7 @@ export default function FatReductionLanding() {
         message: `Area of Concern: ${formData.area}\n\nRequesting fat reduction consultation.`,
         file_url: "",
         time: new Date().toLocaleString(),
-      },
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-    )
+      })
 
     if (result.text === "OK") {
       setStatus("success")

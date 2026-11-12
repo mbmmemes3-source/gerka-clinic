@@ -8,7 +8,7 @@ import {
   Syringe, Droplets, Heart, Leaf, CheckCircle2, Menu, X
 } from "lucide-react"
 import Image from "next/image"
-import emailjs from "emailjs-com"
+import { sendNotificationEmail } from "@/lib/send-email";
 import { useRouter } from "next/navigation" // Add this
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
@@ -128,10 +128,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     setStatus("loading")
 
     try {
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
+      const result = await sendNotificationEmail({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -141,9 +138,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           message: `Face Treatments enquiry. Preferred contact: ${formData.contact_method}`,
           file_url: "",
           time: new Date().toLocaleString(),
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+        })
 
       if (result.text === "OK") {
         // 1. Show success state in the UI

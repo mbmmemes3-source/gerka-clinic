@@ -9,7 +9,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import emailjs from "emailjs-com"
+import { sendNotificationEmail } from "@/lib/send-email";
 import { useRouter } from "next/navigation"
 import Head from "next/head"
 
@@ -61,16 +61,11 @@ export default function IntimateHealthLandingPage() {
     setStatus("loading")
 
     try {
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
+      const result = await sendNotificationEmail({
           ...formData,
           subject: `Intimate Health Inquiry: ${formData.concern}`,
           time: new Date().toLocaleString(),
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+        })
 
       if (result.text === "OK") {
         setStatus("success")

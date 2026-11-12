@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import emailjs from "@emailjs/browser"
+import { sendNotificationEmail } from "@/lib/send-email"
 import { 
   ChevronRight, 
   ChevronLeft, 
@@ -19,10 +19,6 @@ import {
 } from "lucide-react"
 
 // --- CONSTANTS ---
-const EMAILJS_SERVICE_ID = "service_b76ckpf"; 
-const EMAILJS_TEMPLATE_ID = "template_hz7w4le";
-const EMAILJS_PUBLIC_KEY = "Zy58hFATigNeLEvW-";
-
 const services = [
   { 
     id: "womens-health", 
@@ -73,24 +69,17 @@ export default function AppointmentBooking() {
   const handleNext = () => setStep(s => s + 1)
   const handleBack = () => setStep(s => s - 1)
 
-  // ✅ Send Email via EmailJS
+  // ✅ Send Email via Resend
   const sendEmailNotification = async () => {
-    const templateParams = {
-      to_name: "Dr. Evelyn Alba",
+    return sendNotificationEmail({
       patient_name: formData.name,
       patient_email: formData.email,
       patient_phone: formData.phone,
       service_requested: formData.service.title,
       booking_fee: `€${formData.service.fee}`,
       preferred_time: formData.message || "Not specified",
-    };
-
-    return emailjs.send(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      templateParams,
-      EMAILJS_PUBLIC_KEY
-    );
+      subject: `New Consultation Booking: ${formData.service.title} - ${formData.name}`,
+    });
   }
 
   const handleStripePayment = async () => {

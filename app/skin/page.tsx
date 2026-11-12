@@ -9,7 +9,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import emailjs from "emailjs-com"
+import { sendNotificationEmail } from "@/lib/send-email";
 import { useRouter } from "next/navigation"
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
@@ -101,10 +101,7 @@ export default function SkinScalpLandingPage() {
     setStatus("loading")
 
     try {
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
+      const result = await sendNotificationEmail({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -114,9 +111,7 @@ export default function SkinScalpLandingPage() {
           message: formData.message,
           file_url: "",
           time: new Date().toLocaleString(),
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+        })
 
       if (result.text === "OK") {
         setStatus("success")

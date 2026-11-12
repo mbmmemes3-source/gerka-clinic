@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Send, Phone, Mail, MapPin, Loader2, ChevronDown, Upload, X } from "lucide-react"
-import emailjs from "emailjs-com"
+import { sendNotificationEmail } from "@/lib/send-email"
 import { CldUploadWidget } from 'next-cloudinary'
 import Image from "next/image"
 
@@ -62,12 +62,10 @@ export function ContactSection() {
         time: new Date().toLocaleString(),
       }
 
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
+      const result = await sendNotificationEmail({
+        ...templateParams,
+        subject: `New Contact Inquiry: ${templateParams.treatment} - ${templateParams.name}`,
+      })
 
       if (result.text === "OK") {
         setStatus("success")
@@ -75,7 +73,7 @@ export function ContactSection() {
         setUploadedImageUrl("")
         setTimeout(() => setStatus("idle"), 3000)
       } else {
-        throw new Error("EmailJS failed")
+        throw new Error("Failed to send email")
       }
     } catch (err) {
       console.error("Submission error:", err)
