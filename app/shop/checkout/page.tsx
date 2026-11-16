@@ -32,8 +32,11 @@ export default function CheckoutPage() {
     country: "Ireland"
   })
 
-  // Determine if address is in Dublin based on city or postcode
-  const isDublin = 
+  // Determine if address has been entered yet
+  const hasEnteredAddress = formData.city.trim().length > 0 || formData.postcode.trim().length > 0
+
+  // Determine if address is in Dublin based on city or postcode (defaults to true if address not yet entered)
+  const isDublin = !hasEnteredAddress || 
     formData.city.trim().toLowerCase().includes("dublin") ||
     formData.postcode.trim().toUpperCase().startsWith("D") ||
     formData.postcode.trim().toUpperCase().startsWith("A94") || // Stillorgan/Blackrock area
@@ -42,7 +45,7 @@ export default function CheckoutPage() {
   // Shipping calculation:
   // - Gift cards only: €0
   // - Clinic pickup: €0 (Free)
-  // - Delivery in Dublin: €5.00
+  // - Delivery in Dublin (or before entering address): €5.00
   // - Delivery outside Dublin: €7.50
   const shippingCost = isOnlyGiftCards 
     ? 0 
@@ -195,7 +198,7 @@ export default function CheckoutPage() {
                         <span className="text-xs font-bold uppercase tracking-wider text-zinc-900">Delivery</span>
                       </div>
                       <span className="text-xs font-bold text-zinc-900">
-                        {isDublin ? "€5.00" : "€7.50"}
+                        {isDublin ? "From €5.00" : "€7.50"}
                       </span>
                     </div>
                     <p className="text-[11px] text-zinc-500 font-light leading-relaxed">
@@ -368,9 +371,11 @@ export default function CheckoutPage() {
                             ? "Digital Delivery" 
                             : deliveryMethod === "pickup" 
                               ? "Clinic Pickup" 
-                              : isDublin 
-                                ? "Dublin Delivery" 
-                                : "Delivery (Outside Dublin)"}
+                              : !hasEnteredAddress
+                                ? "Delivery (From €5 Dublin)"
+                                : isDublin 
+                                  ? "Dublin Delivery" 
+                                  : "Delivery (Outside Dublin)"}
                         </span>
                         <span className={shippingCost === 0 ? "text-emerald-600 font-bold uppercase text-[10px]" : "text-zinc-900 font-medium"}>
                           {shippingCost === 0 ? "FREE" : `€${shippingCost.toFixed(2)}`}
