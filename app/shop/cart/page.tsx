@@ -132,7 +132,7 @@ export default function CartPage() {
                       </div>
                       <div className="flex justify-between text-sm">
                          <span className="text-zinc-400 font-light">Shipping</span>
-                         <span className="text-zinc-900 font-medium italic text-xs">Calculated at next step</span>
+                         <span className="text-zinc-900 font-medium text-xs">Pickup Free · From €5 Delivery</span>
                       </div>
                       <div className="pt-4 border-t border-zinc-100 flex justify-between items-baseline">
                          <span className="text-sm font-bold uppercase tracking-widest text-zinc-900">Total</span>
