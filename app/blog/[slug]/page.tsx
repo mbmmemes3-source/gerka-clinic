@@ -230,6 +230,15 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         .blog-content a:hover {
           color: #71717a;
         }
+        .blog-content a.btn-cta,
+        .blog-content a[class*="bg-zinc-900"] {
+          color: #ffffff !important;
+          text-decoration: none !important;
+        }
+        .blog-content a.btn-cta:hover,
+        .blog-content a[class*="bg-zinc-900"]:hover {
+          color: #f4f4f5 !important;
+        }
       `}} />
     </div>
   );
