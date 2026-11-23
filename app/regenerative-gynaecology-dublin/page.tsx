@@ -24,7 +24,7 @@ const specialistCareList = [
   {
     title: "Recurrent Vaginal & Vulvar Infections",
     desc: "Investigation of persistent or recurring itching, burning, irritation, discharge, and discomfort, identifying root causes to create an effective treatment plan.",
-    image: "/infection1.jpg",
+    image: "/recurrent-std.webp",
     tags: ["Persistent Itching", "Recurrent Thrush/BV", "Root-Cause Investigation"]
   },
   {
