@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Home, ChevronRight, Calendar, Clock, ArrowLeft, Share2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { staticBlogs } from "@/lib/staticBlogs";
 
 export const revalidate = 0; // Ensure dynamic content is always up to date
 
@@ -14,10 +15,19 @@ interface BlogDetailPageProps {
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = params;
 
-  // Retrieve the blog post by its unique slug
-  const blog = await prisma.blog.findUnique({
-    where: { slug },
-  });
+  // Retrieve the blog post by its unique slug from DB or fallback staticBlogs
+  let blog: any = null;
+  try {
+    blog = await prisma.blog.findUnique({
+      where: { slug },
+    });
+  } catch (e) {
+    console.error("Error fetching blog from DB:", e);
+  }
+
+  if (!blog) {
+    blog = staticBlogs.find(b => b.slug === slug && b.published) || null;
+  }
 
   // If the article does not exist or is not published, return a 404 page
   if (!blog || !blog.published) {

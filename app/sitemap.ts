@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
+import { staticBlogs } from "@/lib/staticBlogs";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600; // revalidate at most once every hour
@@ -114,5 +115,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error("Failed to fetch blogs for sitemap:", error);
   }
 
-  return [...staticEntries, ...productEntries, ...blogEntries];
+  // Include static fallback blogs if not already present in blogEntries
+  const existingSlugs = new Set(blogEntries.map((b) => b.url.replace(`${baseUrl}/blog/`, "")));
+  const staticBlogEntries: MetadataRoute.Sitemap = staticBlogs
+    .filter((b) => b.published && !existingSlugs.has(b.slug))
+    .map((blog) => ({
+      url: `${baseUrl}/blog/${blog.slug}`,
+      lastModified: blog.updatedAt ? new Date(blog.updatedAt) : new Date(blog.createdAt),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
+
+  return [...staticEntries, ...productEntries, ...blogEntries, ...staticBlogEntries];
 }

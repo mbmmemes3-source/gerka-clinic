@@ -1,15 +1,28 @@
 import Link from "next/link";
 import { Home, ChevronRight, BookOpen, Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { staticBlogs } from "@/lib/staticBlogs";
 
 export const revalidate = 0; // Disable caching to ensure dynamic content is always up to date
 
 export default async function BlogListingPage() {
-  // Fetch only published articles, ordered by date
-  const blogs = await prisma.blog.findMany({
-    where: { published: true },
-    orderBy: { createdAt: "desc" },
-  });
+  // Fetch published articles from DB with fallback/merge of static blogs
+  let dbBlogs: any[] = [];
+  try {
+    dbBlogs = await prisma.blog.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (e) {
+    console.error("Error fetching db blogs:", e);
+  }
+
+  // Merge static blogs that aren't already present in DB
+  const existingSlugs = new Set(dbBlogs.map(b => b.slug));
+  const missingStatic = staticBlogs.filter(b => !existingSlugs.has(b.slug) && b.published);
+  const blogs = [...dbBlogs, ...missingStatic].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
 
   const backgroundImages = [
     "/emsella.jpeg",
